@@ -10,6 +10,10 @@ public class Grid
     
     public int Height { get; private set; }
     
+    public int[] RowConstraints { get; private set; }
+
+    public int[] ColumnConstraints { get; private set; }
+    
     public Grid(Puzzle puzzle)
     {
         Initialise(puzzle);
@@ -30,5 +34,9 @@ public class Grid
                 _pieces[x, y] = puzzle.Data.StartingGrid[y * Width + x];
             }
         }
+
+        RowConstraints = puzzle.Data.HorizontalClues;
+
+        ColumnConstraints = puzzle.Data.VerticalClues;
     }
 }
