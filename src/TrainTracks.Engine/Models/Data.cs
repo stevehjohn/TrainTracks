@@ -1,11 +1,12 @@
 using JetBrains.Annotations;
+using TrainTracks.Engine.Board;
 
 namespace TrainTracks.Engine.Models;
 
 [UsedImplicitly]
 public class Data
 {
-    public int[] StartingGrid { get; set; } = [];
+    public Piece[] StartingGrid { get; set; } = [];
 
     public int[] HorizontalClues { get; set; } = [];
 

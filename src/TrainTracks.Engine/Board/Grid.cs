@@ -13,7 +13,10 @@ public class Grid
     public Grid(Puzzle puzzle)
     {
         Initialise(puzzle);
+    }
 
+    private void Initialise(Puzzle puzzle)
+    {
         Width = puzzle.GridWidth;
 
         Height = puzzle.GridHeight;
@@ -24,11 +27,8 @@ public class Grid
         {
             for (var y = 0; y < Height; y++)
             {
+                _pieces[x, y] = puzzle.Data.StartingGrid[y * Width + x];
             }
         }
-    }
-
-    private void Initialise(Puzzle puzzle)
-    {
     }
 }
