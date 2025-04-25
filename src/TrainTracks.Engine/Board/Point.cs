@@ -2,9 +2,9 @@ namespace TrainTracks.Engine.Board;
 
 public class Point
 {
-    public int X { get; set; }
+    public int X { get; }
     
-    public int Y { get; set; }
+    public int Y { get; }
 
     public Point(int x, int y)
     {

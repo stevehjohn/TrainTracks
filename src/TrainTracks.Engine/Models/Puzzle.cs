@@ -1,5 +1,6 @@
-using JetBrains.Annotations;
+// ReSharper disable UnusedAutoPropertyAccessor.Global
 
+using JetBrains.Annotations;
 namespace TrainTracks.Engine.Models;
 
 [UsedImplicitly]
