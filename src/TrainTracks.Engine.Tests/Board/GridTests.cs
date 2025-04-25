@@ -6,8 +6,8 @@ public class GridTests
 {
     [Theory]
     [InlineData(0, 5, 0, 11, 10)]
-    [InlineData(1, 0, 9, 6, 10)]
-    //[InlineData(2, 5, 0, 11, 10)]
+    [InlineData(1, 6, 10, 0, 9)]
+    [InlineData(2, 9, 0, 10, 8)]
     public void IdentifiesEntryAndExitPoints(int puzzleIndex, int entryX, int entryY, int exitX, int exitY)
     {
         var puzzle = PuzzleManager.Instance.Puzzles[puzzleIndex];

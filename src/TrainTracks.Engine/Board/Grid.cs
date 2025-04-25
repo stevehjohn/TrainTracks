@@ -97,22 +97,22 @@ public class Grid
 
         var y = point.Y;
 
-        if (y == 0 && (piece == Piece.NorthEast || piece == Piece.NorthWest))
+        if (y == 0 && (piece == Piece.NorthEast || piece == Piece.NorthWest || piece == Piece.Vertical))
         {
             return true;
         }
 
-        if (y == Bottom && (piece == Piece.SouthEast || piece == Piece.SouthWest))
+        if (y == Bottom && (piece == Piece.SouthEast || piece == Piece.SouthWest || piece == Piece.Vertical))
         {
             return true;
         }
 
-        if (x == 0 && (piece == Piece.NorthWest || piece == Piece.SouthWest))
+        if (x == 0 && (piece == Piece.NorthWest || piece == Piece.SouthWest || piece == Piece.Horizontal))
         {
             return true;
         }
 
-        if (x == Right && (piece == Piece.NorthEast || piece == Piece.SouthEast))
+        if (x == Right && (piece == Piece.NorthEast || piece == Piece.SouthEast || piece == Piece.Horizontal))
         {
             return true;
         }
