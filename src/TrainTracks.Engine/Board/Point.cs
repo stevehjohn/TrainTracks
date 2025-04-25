@@ -12,4 +12,9 @@ public class Point
         
         Y = y;
     }
+
+    public override string ToString()
+    {
+        return $"({X}, {Y})";
+    }
 }
