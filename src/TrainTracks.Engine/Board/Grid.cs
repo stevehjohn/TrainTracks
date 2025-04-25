@@ -6,6 +6,12 @@ public class Grid
 {
     private Piece[,] _pieces;
 
+    public Piece this[int x, int y]
+    {
+        get => _pieces[x, y];
+        set => _pieces[x, y] = value;
+    }
+
     public int Width { get; private set; }
     
     public int Height { get; private set; }
@@ -25,11 +31,6 @@ public class Grid
     public Grid(Puzzle puzzle)
     {
         Initialise(puzzle);
-    }
-
-    public Piece GetPiece(Point point)
-    {
-        return _pieces[point.X, point.Y];
     }
 
     private void Initialise(Puzzle puzzle)
@@ -91,11 +92,11 @@ public class Grid
 
     private bool IsEndpoint(Point point)
     {
-        var piece = GetPiece(point);
-
         var x = point.X;
 
         var y = point.Y;
+
+        var piece = this[x, y];
 
         if (y == 0 && (piece == Piece.NorthEast || piece == Piece.NorthWest || piece == Piece.Vertical))
         {
