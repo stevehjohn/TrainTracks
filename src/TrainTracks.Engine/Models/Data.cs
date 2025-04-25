@@ -1,3 +1,5 @@
+// ReSharper disable AutoPropertyCanBeMadeGetOnly.Global
+
 using JetBrains.Annotations;
 using TrainTracks.Engine.Board;
 
