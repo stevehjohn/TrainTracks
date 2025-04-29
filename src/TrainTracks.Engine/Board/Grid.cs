@@ -13,21 +13,65 @@ public class Grid
     }
 
     public int Width { get; private set; }
-    
+
     public int Height { get; private set; }
 
     public int Bottom => Height - 1;
 
     public int Right => Width - 1;
-    
+
     public int[] RowConstraints { get; private set; }
 
     public int[] ColumnConstraints { get; private set; }
-    
+
     public Point Entry { get; private set; }
-    
+
     public Point Exit { get; private set; }
-    
+
+    public bool IsComplete
+    {
+        get
+        {
+            for (var x = 0; x < Width; x++)
+            {
+                var sum = 0;
+            
+                for (var y = 0; y < Height; y++)
+                {
+                    if (this[x, y] != Piece.Empty)
+                    {
+                        sum++;
+                    }
+                }
+
+                if (sum != ColumnConstraints[x])
+                {
+                    return false;
+                }
+            }
+
+            for (var y = 0; y < Height; y++)
+            {
+                var sum = 0;
+            
+                for (var x = 0; x < Width; x++)
+                {
+                    if (this[x, y] != Piece.Empty)
+                    {
+                        sum++;
+                    }
+                }
+
+                if (sum != RowConstraints[y])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+    }
+
     public Grid(Puzzle puzzle)
     {
         Initialise(puzzle);
@@ -76,7 +120,7 @@ public class Grid
     private void CheckForEndpoint(int x, int y)
     {
         var point = new Point(x, y);
-        
+
         if (IsEndpoint(point))
         {
             if (Entry == null)
