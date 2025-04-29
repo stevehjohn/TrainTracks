@@ -26,9 +26,14 @@ public class Solver
 
     private void PlaceNextMove()
     {
-        for (var piece = Piece.Horizontal; piece <= Piece.NorthWest; piece++)
+        var currentPiece = _grid[_position.X, _position.Y];
+
+        foreach (var direction in Connector.Directions)
         {
+            foreach (var nextPiece in Connector.GetConnections(currentPiece, 0, 0))
+            {
             
+            }
         }
     }
 }
