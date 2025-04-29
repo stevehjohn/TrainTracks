@@ -28,49 +28,7 @@ public class Grid
 
     public Point Exit { get; private set; }
 
-    public bool IsComplete
-    {
-        get
-        {
-            for (var x = 0; x < Width; x++)
-            {
-                var sum = 0;
-            
-                for (var y = 0; y < Height; y++)
-                {
-                    if (this[x, y] != Piece.Empty)
-                    {
-                        sum++;
-                    }
-                }
-
-                if (sum != ColumnConstraints[x])
-                {
-                    return false;
-                }
-            }
-
-            for (var y = 0; y < Height; y++)
-            {
-                var sum = 0;
-            
-                for (var x = 0; x < Width; x++)
-                {
-                    if (this[x, y] != Piece.Empty)
-                    {
-                        sum++;
-                    }
-                }
-
-                if (sum != RowConstraints[y])
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-    }
+    public bool IsComplete => ConstraintsAreMet() && IsContinuous();
 
     public Grid(Puzzle puzzle)
     {
@@ -163,5 +121,53 @@ public class Grid
         }
 
         return false;
+    }
+
+    private bool ConstraintsAreMet()
+    {
+        for (var x = 0; x < Width; x++)
+        {
+            var sum = 0;
+        
+            for (var y = 0; y < Height; y++)
+            {
+                if (this[x, y] != Piece.Empty)
+                {
+                    sum++;
+                }
+            }
+
+            if (sum != ColumnConstraints[x])
+            {
+                return false;
+            }
+        }
+
+        for (var y = 0; y < Height; y++)
+        {
+            var sum = 0;
+        
+            for (var x = 0; x < Width; x++)
+            {
+                if (this[x, y] != Piece.Empty)
+                {
+                    sum++;
+                }
+            }
+
+            if (sum != RowConstraints[y])
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private bool IsContinuous()
+    {
+        // TODO: Do.
+        
+        return true;
     }
 }
