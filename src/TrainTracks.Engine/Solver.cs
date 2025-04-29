@@ -17,5 +17,18 @@ public class Solver
         _position = _grid.Entry;
 
         _visited = [];
+
+        while (! _grid.IsComplete)
+        {
+            PlaceNextMove();
+        }
+    }
+
+    private void PlaceNextMove()
+    {
+        for (var piece = Piece.Horizontal; piece <= Piece.NorthWest; piece++)
+        {
+            
+        }
     }
 }
