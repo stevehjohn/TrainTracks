@@ -4,7 +4,7 @@ public static class Connector
 {
     private static readonly List<Piece> _connections = [];
     
-    public static List<(int Dx, int Dy)> Directions =
+    public static readonly List<(int Dx, int Dy)> Directions =
     [
         (0, -1),
         (1, 0),
