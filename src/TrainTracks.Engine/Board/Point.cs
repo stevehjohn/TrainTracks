@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace TrainTracks.Engine.Board;
 
 public class Point
@@ -13,6 +15,7 @@ public class Point
         Y = y;
     }
 
+    [ExcludeFromCodeCoverage]
     public override string ToString()
     {
         return $"({X}, {Y})";
