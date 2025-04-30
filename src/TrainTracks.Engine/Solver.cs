@@ -29,7 +29,7 @@ public class Solver
         {
             var mewPosition = new Point(_position.X + direction.Dx, _position.Y + direction.Dy);
             
-            foreach (var nextPiece in Connector.GetConnections(currentPiece, 0, 0))
+            foreach (var nextPiece in Connector.GetConnections(currentPiece, direction.Dx, direction.Dy))
             {
                 if (_visited.Add((mewPosition.X, mewPosition.Y, nextPiece)))
                 {
