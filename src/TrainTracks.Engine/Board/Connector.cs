@@ -131,13 +131,15 @@ public static class Connector
             case Piece.NorthWest:
                 switch (dX, dY)
                 {
-                    case (0, 1):
+                    case (-1, 0):
                         connections.Add(Piece.Horizontal);
+                        connections.Add(Piece.NorthWest);
                         connections.Add(Piece.SouthWest);
                         break;
-                    case (1, 0):
+                    case (0, -1):
                         connections.Add(Piece.Vertical);
-                        connections.Add(Piece.NorthEast);
+                        connections.Add(Piece.SouthEast);
+                        connections.Add(Piece.SouthWest);
                         break;
                 }
 
