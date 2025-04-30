@@ -11,6 +11,7 @@ public static class EntryPoint
         {
             StepCallback = VisualiseStep
         };
+        
     }
 
     private static void VisualiseStep(Grid grid)
