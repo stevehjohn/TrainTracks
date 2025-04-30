@@ -37,7 +37,6 @@ public class Grid
 
     public bool IsComplete => ConstraintsAreMet();
 
-    // TODO: Do.
     public bool IsValid => ConstraintsAreNotExceeded();
 
     public Grid(Puzzle puzzle)

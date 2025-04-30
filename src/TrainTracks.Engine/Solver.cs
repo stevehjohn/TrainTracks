@@ -4,7 +4,7 @@ namespace TrainTracks.Engine;
 
 public class Solver
 {
-    // TODO: Should return a copy.
+    // TODO: Should probably return a copy.
     public Grid Grid { get; private set; }
 
     public Action<Grid> StepCallback { get; init; }
