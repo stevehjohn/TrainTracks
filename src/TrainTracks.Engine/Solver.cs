@@ -13,7 +13,8 @@ public class Solver
     {
         Grid = grid;
         
-        // TODO: Maybe check for continuity when PlaceNextMove returns.
+        // Maybe check for continuity when PlaceNextMove returns,
+        // though in theory it sould not place unconnectable pieces together.
         
         return PlaceNextMove(Grid.Entry, null);
     }
@@ -75,6 +76,8 @@ public class Solver
                 }
 
                 Grid[newPosition] = Piece.Empty;
+
+                StepCallback?.Invoke(Grid);
             }
         }
 
