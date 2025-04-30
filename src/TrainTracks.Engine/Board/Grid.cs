@@ -138,7 +138,7 @@ public class Grid
         for (var x = 0; x < Width; x++)
         {
             var sum = 0;
-        
+
             for (var y = 0; y < Height; y++)
             {
                 if (this[x, y] != Piece.Empty)
@@ -156,7 +156,7 @@ public class Grid
         for (var y = 0; y < Height; y++)
         {
             var sum = 0;
-        
+
             for (var x = 0; x < Width; x++)
             {
                 if (this[x, y] != Piece.Empty)
@@ -179,7 +179,7 @@ public class Grid
         for (var x = 0; x < Width; x++)
         {
             var sum = 0;
-        
+
             for (var y = 0; y < Height; y++)
             {
                 if (this[x, y] != Piece.Empty)
@@ -197,7 +197,7 @@ public class Grid
         for (var y = 0; y < Height; y++)
         {
             var sum = 0;
-        
+
             for (var x = 0; x < Width; x++)
             {
                 if (this[x, y] != Piece.Empty)
@@ -218,37 +218,37 @@ public class Grid
     public override string ToString()
     {
         var builder = new StringBuilder();
-        
-        for (var x = 0; x < Width; x++)
+
+        for (var y = 0; y < Height; y++)
         {
-            for (var y = 0; y < Height; y++)
+            for (var x = 0; x < Width; x++)
             {
                 switch (_pieces[x, y])
                 {
                     case Piece.Horizontal:
                         builder.Append('─');
                         break;
-                    
+
                     case Piece.Vertical:
                         builder.Append('│');
                         break;
-                    
+
                     case Piece.NorthEast:
                         builder.Append('└');
                         break;
-                    
+
                     case Piece.SouthEast:
                         builder.Append('┌');
                         break;
-                    
+
                     case Piece.NorthWest:
                         builder.Append('┘');
                         break;
-                    
+
                     case Piece.SouthWest:
                         builder.Append('┐');
                         break;
-                    
+
                     case Piece.Empty:
                     default:
                         builder.Append(' ');

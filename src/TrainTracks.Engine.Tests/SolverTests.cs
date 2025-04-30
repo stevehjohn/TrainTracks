@@ -13,6 +13,16 @@ public class SolverTests
 
         var result = solver.Solve(puzzle);
         
+        // ReSharper disable Xunit.XunitTestWithConsoleOutput
+        // Will fix later.
+        Console.WriteLine();
+        
+        Console.WriteLine($"Solved: {result}.");
+
+        Console.WriteLine();
+        
         Console.WriteLine(solver.Grid.ToString());
+
+        Console.WriteLine();
     }
 }

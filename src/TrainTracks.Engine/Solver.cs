@@ -14,6 +14,7 @@ public class Solver
     public bool Solve(Grid grid)
     {
         _grid = grid;
+        
         _visited = [];
         
         // TODO: Maybe check for continuity when PlaceNextMove returns.
