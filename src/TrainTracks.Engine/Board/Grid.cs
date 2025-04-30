@@ -1,3 +1,4 @@
+using System.Text;
 using TrainTracks.Engine.Models;
 
 namespace TrainTracks.Engine.Board;
@@ -212,5 +213,52 @@ public class Grid
         }
 
         return true;
+    }
+
+    public override string ToString()
+    {
+        var builder = new StringBuilder();
+        
+        for (var x = 0; x < Width; x++)
+        {
+            for (var y = 0; y < Height; y++)
+            {
+                switch (_pieces[x, y])
+                {
+                    case Piece.Horizontal:
+                        builder.Append('─');
+                        break;
+                    
+                    case Piece.Vertical:
+                        builder.Append('│');
+                        break;
+                    
+                    case Piece.NorthEast:
+                        builder.Append('└');
+                        break;
+                    
+                    case Piece.SouthEast:
+                        builder.Append('┌');
+                        break;
+                    
+                    case Piece.NorthWest:
+                        builder.Append('┘');
+                        break;
+                    
+                    case Piece.SouthWest:
+                        builder.Append('┐');
+                        break;
+                    
+                    case Piece.Empty:
+                    default:
+                        builder.Append(' ');
+                        break;
+                }
+            }
+
+            builder.AppendLine();
+        }
+
+        return builder.ToString();
     }
 }
