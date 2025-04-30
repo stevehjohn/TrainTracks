@@ -2,8 +2,6 @@ namespace TrainTracks.Engine.Board;
 
 public static class Connector
 {
-    private static readonly List<Piece> _connections = [];
-
     public static readonly List<(int Dx, int Dy)> Directions =
     [
         (0, -1),
@@ -14,7 +12,7 @@ public static class Connector
 
     public static IReadOnlyList<Piece> GetConnections(Piece piece, int dX, int dY)
     {
-        _connections.Clear();
+        var connections = new List<Piece>();
 
         switch (piece)
         {
@@ -22,14 +20,14 @@ public static class Connector
                 switch (dX, dY)
                 {
                     case (1, 0):
-                        _connections.Add(Piece.Horizontal);
-                        _connections.Add(Piece.NorthWest);
-                        _connections.Add(Piece.SouthWest);
+                        connections.Add(Piece.Horizontal);
+                        connections.Add(Piece.NorthWest);
+                        connections.Add(Piece.SouthWest);
                         break;
                     case (-1, 0):
-                        _connections.Add(Piece.Horizontal);
-                        _connections.Add(Piece.NorthEast);
-                        _connections.Add(Piece.SouthEast);
+                        connections.Add(Piece.Horizontal);
+                        connections.Add(Piece.NorthEast);
+                        connections.Add(Piece.SouthEast);
                         break;
                 }
 
@@ -39,14 +37,14 @@ public static class Connector
                 switch (dX, dY)
                 {
                     case (0, -1):
-                        _connections.Add(Piece.Vertical);
-                        _connections.Add(Piece.SouthEast);
-                        _connections.Add(Piece.SouthWest);
+                        connections.Add(Piece.Vertical);
+                        connections.Add(Piece.SouthEast);
+                        connections.Add(Piece.SouthWest);
                         break;
                     case (0, 1):
-                        _connections.Add(Piece.Vertical);
-                        _connections.Add(Piece.NorthEast);
-                        _connections.Add(Piece.NorthWest);
+                        connections.Add(Piece.Vertical);
+                        connections.Add(Piece.NorthEast);
+                        connections.Add(Piece.NorthWest);
                         break;
                 }
 
@@ -56,12 +54,12 @@ public static class Connector
                 switch (dX, dY)
                 {
                     case (0, 1):
-                        _connections.Add(Piece.Horizontal);
-                        _connections.Add(Piece.SouthEast);
+                        connections.Add(Piece.Horizontal);
+                        connections.Add(Piece.SouthEast);
                         break;
                     case (-1, 0):
-                        _connections.Add(Piece.Vertical);
-                        _connections.Add(Piece.NorthWest);
+                        connections.Add(Piece.Vertical);
+                        connections.Add(Piece.NorthWest);
                         break;
                 }
 
@@ -71,12 +69,12 @@ public static class Connector
                 switch (dX, dY)
                 {
                     case (0, -1):
-                        _connections.Add(Piece.Horizontal);
-                        _connections.Add(Piece.NorthEast);
+                        connections.Add(Piece.Horizontal);
+                        connections.Add(Piece.NorthEast);
                         break;
                     case (-1, 0):
-                        _connections.Add(Piece.Vertical);
-                        _connections.Add(Piece.SouthWest);
+                        connections.Add(Piece.Vertical);
+                        connections.Add(Piece.SouthWest);
                         break;
                 }
 
@@ -86,12 +84,12 @@ public static class Connector
                 switch (dX, dY)
                 {
                     case (0, -1):
-                        _connections.Add(Piece.Horizontal);
-                        _connections.Add(Piece.NorthWest);
+                        connections.Add(Piece.Horizontal);
+                        connections.Add(Piece.NorthWest);
                         break;
                     case (1, 0):
-                        _connections.Add(Piece.Vertical);
-                        _connections.Add(Piece.SouthEast);
+                        connections.Add(Piece.Vertical);
+                        connections.Add(Piece.SouthEast);
                         break;
                 }
 
@@ -101,12 +99,12 @@ public static class Connector
                 switch (dX, dY)
                 {
                     case (0, 1):
-                        _connections.Add(Piece.Horizontal);
-                        _connections.Add(Piece.SouthWest);
+                        connections.Add(Piece.Horizontal);
+                        connections.Add(Piece.SouthWest);
                         break;
                     case (1, 0):
-                        _connections.Add(Piece.Vertical);
-                        _connections.Add(Piece.NorthEast);
+                        connections.Add(Piece.Vertical);
+                        connections.Add(Piece.NorthEast);
                         break;
                 }
 
@@ -117,6 +115,6 @@ public static class Connector
                 throw new ArgumentOutOfRangeException(nameof(piece), piece, null);
         }
 
-        return _connections;
+        return connections;
     }
 }

@@ -39,7 +39,9 @@ public class Solver
                 continue;
             }
 
-            foreach (var nextPiece in Connector.GetConnections(currentPiece, direction.Dx, direction.Dy))
+            var connections = Connector.GetConnections(currentPiece, direction.Dx, direction.Dy);
+            
+            foreach (var nextPiece in connections)
             {
                 if (_visited.Add((newPosition.X, newPosition.Y, nextPiece)))
                 {
