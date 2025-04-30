@@ -23,7 +23,7 @@ public static class EntryPoint
         
         VisualiseStep(puzzle);
 
-//        ReadKey();
+        // ReadKey();
         
         solver.Solve(puzzle);
         
@@ -38,13 +38,13 @@ public static class EntryPoint
 
         if (_count % 100 != 0)
         {
-            return;
+            // return;
         }
 
         CursorTop = 1;
         
         WriteLine(grid.ToString());
         
-//        ReadKey();
+        ReadKey();
     }
 }
