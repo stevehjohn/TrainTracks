@@ -40,7 +40,7 @@ public class Solver
 
             var connections = Connector.GetConnections(currentPiece, direction.Dx, direction.Dy);
 
-            var nextCell = Grid[newPosition.X, newPosition.Y];
+            var nextCell = Grid[newPosition];
             
             if (nextCell != Piece.Empty)
             {
@@ -56,8 +56,8 @@ public class Solver
                 {
                     return true;
                 }
-                
-                continue;
+
+                continue;                
             }
 
             foreach (var nextPiece in connections)

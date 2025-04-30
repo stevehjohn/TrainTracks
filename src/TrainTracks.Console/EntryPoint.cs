@@ -8,7 +8,7 @@ namespace TrainTracks.Console;
 
 public static class EntryPoint
 {
-    private static int _count = 0;
+    private static int _count = 99;
     
     public static void Main()
     {
@@ -22,6 +22,8 @@ public static class EntryPoint
         Clear();
         
         VisualiseStep(puzzle);
+
+//        ReadKey();
         
         solver.Solve(puzzle);
         
@@ -43,6 +45,6 @@ public static class EntryPoint
         
         WriteLine(grid.ToString());
         
-        //ReadKey();
+//        ReadKey();
     }
 }
