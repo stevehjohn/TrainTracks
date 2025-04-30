@@ -34,10 +34,10 @@ public class Grid
 
     public Point Exit { get; private set; }
 
-    public bool IsComplete => ConstraintsAreMet() && IsContinuous();
+    public bool IsComplete => ConstraintsAreMet();
 
     // TODO: Do.
-    public bool IsValid => false;
+    public bool IsValid => ConstraintsAreNotExceeded();
 
     public Grid(Puzzle puzzle)
     {
@@ -211,13 +211,6 @@ public class Grid
             }
         }
 
-        return true;
-    }
-
-    private static bool IsContinuous()
-    {
-        // TODO: Do. Maybe? In theory, solver should always produce connected pieces.
-        
         return true;
     }
 }
