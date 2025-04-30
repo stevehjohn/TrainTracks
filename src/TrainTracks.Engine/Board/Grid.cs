@@ -173,9 +173,9 @@ public class Grid
         return true;
     }
 
-    private bool IsContinuous()
+    private static bool IsContinuous()
     {
-        // TODO: Do.
+        // TODO: Do. Maybe? In theory, solver should always produce connected pieces.
         
         return true;
     }
