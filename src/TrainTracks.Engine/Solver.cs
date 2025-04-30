@@ -52,7 +52,10 @@ public class Solver
                     continue;
                 }
 
-                return PlaceNextMove(newPosition, (direction.Dx, direction.Dy));
+                if (PlaceNextMove(newPosition, (direction.Dx, direction.Dy)))
+                {
+                    return true;
+                }
             }
 
             foreach (var nextPiece in connections)

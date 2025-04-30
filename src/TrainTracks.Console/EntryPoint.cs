@@ -26,17 +26,15 @@ public static class EntryPoint
         solver.Solve(puzzle);
         
         VisualiseStep(solver.Grid);
+        
+        WriteLine(_count);
     }
 
     private static void VisualiseStep(Grid grid)
     {
         _count++;
 
-        if (_count == 100)
-        {
-            _count = 0;
-        }
-        else
+        if (_count % 100 != 0)
         {
             return;
         }
