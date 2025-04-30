@@ -31,14 +31,14 @@ public class Solver
                 continue;
             }
 
+            var connections = Connector.GetConnections(currentPiece, direction.Dx, direction.Dy);
+            
             if (Grid[newPosition.X, newPosition.Y] != Piece.Empty)
             {
                 // TODO: If the piece is a valid connection, pass through it and continue on.
                 continue;
             }
 
-            var connections = Connector.GetConnections(currentPiece, direction.Dx, direction.Dy);
-            
             foreach (var nextPiece in connections)
             {
                 Grid[newPosition] = nextPiece;
