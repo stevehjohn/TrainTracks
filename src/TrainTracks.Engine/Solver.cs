@@ -39,6 +39,7 @@ public class Solver
 
             if (_grid[newPosition.X, newPosition.Y] != Piece.Empty)
             {
+                // TODO: If the piece is a valid connection, pass through it and continue on.
                 continue;
             }
 
