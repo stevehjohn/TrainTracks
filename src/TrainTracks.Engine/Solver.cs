@@ -4,36 +4,34 @@ namespace TrainTracks.Engine;
 
 public class Solver
 {
-    private Grid _grid;
-    
     // TODO: Should return a copy.
-    public Grid Grid => _grid;
-    
+    public Grid Grid { get; private set; }
+
     public Action<Grid> StepCallback { get; init; }
     
     public bool Solve(Grid grid)
     {
-        _grid = grid;
+        Grid = grid;
         
         // TODO: Maybe check for continuity when PlaceNextMove returns.
         
-        return PlaceNextMove(_grid.Entry);
+        return PlaceNextMove(Grid.Entry);
     }
 
     private bool PlaceNextMove(Point position)
     {
-        var currentPiece = _grid[position];
+        var currentPiece = Grid[position];
 
         foreach (var direction in Connector.GetDirections(currentPiece))
         {
             var newPosition = new Point(position.X + direction.Dx, position.Y + direction.Dy);
 
-            if (newPosition.X < 0 || newPosition.X > _grid.Right || newPosition.Y < 0 || newPosition.Y > _grid.Bottom)
+            if (newPosition.X < 0 || newPosition.X > Grid.Right || newPosition.Y < 0 || newPosition.Y > Grid.Bottom)
             {
                 continue;
             }
 
-            if (_grid[newPosition.X, newPosition.Y] != Piece.Empty)
+            if (Grid[newPosition.X, newPosition.Y] != Piece.Empty)
             {
                 // TODO: If the piece is a valid connection, pass through it and continue on.
                 continue;
@@ -43,21 +41,21 @@ public class Solver
             
             foreach (var nextPiece in connections)
             {
-                _grid[newPosition] = nextPiece;
+                Grid[newPosition] = nextPiece;
 
-                StepCallback?.Invoke(_grid);
+                StepCallback?.Invoke(Grid);
 
-                if (_grid.IsComplete)
+                if (Grid.IsComplete)
                 {
                     return true;
                 }
 
-                if (_grid.IsValid && PlaceNextMove(newPosition))
+                if (Grid.IsValid && PlaceNextMove(newPosition))
                 {
                     return true;
                 }
 
-                _grid[newPosition] = Piece.Empty;
+                Grid[newPosition] = Piece.Empty;
             }
         }
 
