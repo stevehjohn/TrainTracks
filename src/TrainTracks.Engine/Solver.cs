@@ -18,7 +18,7 @@ public class Solver
         return PlaceNextMove(Grid.Entry, null);
     }
 
-    private bool PlaceNextMove(Point position, Point fromDirection)
+    private bool PlaceNextMove(Point position, (int Dx, int Dy)? fromDirection)
     {
         var currentPiece = Grid[position];
 
@@ -26,9 +26,7 @@ public class Solver
 
         if (fromDirection != null)
         {
-            var remove = new Point(-fromDirection.X, -fromDirection.Y);
-
-            directions.Remove((remove.X, remove.Y));
+            directions.Remove((-fromDirection.Value.Dx, -fromDirection.Value.Dy));
         }
 
         foreach (var direction in directions)
@@ -54,7 +52,7 @@ public class Solver
                     continue;
                 }
 
-                return PlaceNextMove(newPosition, new Point(direction.Dx, direction.Dy));
+                return PlaceNextMove(newPosition, (direction.Dx, direction.Dy));
             }
 
             foreach (var nextPiece in connections)
@@ -68,7 +66,7 @@ public class Solver
                     return true;
                 }
 
-                if (Grid.IsValid && PlaceNextMove(newPosition, new Point(direction.Dx, direction.Dy)))
+                if (Grid.IsValid && PlaceNextMove(newPosition, (direction.Dx, direction.Dy)))
                 {
                     return true;
                 }
