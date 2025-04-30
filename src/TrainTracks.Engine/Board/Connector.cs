@@ -9,6 +9,27 @@ public static class Connector
         (0, 1),
         (-1, 0)
     ];
+    
+    public static IReadOnlyList<(int Dx, int Dy)> GetDirections(Piece piece)
+    {
+        var directions = new List<(int Dx, int Dy)>();
+        
+        switch (piece)
+        {
+            case Piece.Horizontal:
+                directions.Add((-1, 0));
+                directions.Add((1, 0));
+                break;
+            
+            case Piece.Vertical:
+                directions.Add((0, -1));
+                directions.Add((0, 1));
+                break;
+            
+        }
+
+        return directions;
+    }
 
     public static IReadOnlyList<Piece> GetConnections(Piece piece, int dX, int dY)
     {
