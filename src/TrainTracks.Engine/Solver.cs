@@ -15,14 +15,23 @@ public class Solver
         
         // TODO: Maybe check for continuity when PlaceNextMove returns.
         
-        return PlaceNextMove(Grid.Entry);
+        return PlaceNextMove(Grid.Entry, null);
     }
 
-    private bool PlaceNextMove(Point position)
+    private bool PlaceNextMove(Point position, Point fromDirection)
     {
         var currentPiece = Grid[position];
 
-        foreach (var direction in Connector.GetDirections(currentPiece))
+        var directions = Connector.GetDirections(currentPiece);
+
+        if (fromDirection != null)
+        {
+            var remove = new Point(-fromDirection.X, -fromDirection.Y);
+
+            directions.Remove((remove.X, remove.Y));
+        }
+
+        foreach (var direction in directions)
         {
             var newPosition = new Point(position.X + direction.Dx, position.Y + direction.Dy);
 
@@ -32,11 +41,20 @@ public class Solver
             }
 
             var connections = Connector.GetConnections(currentPiece, direction.Dx, direction.Dy);
+
+            var nextCell = Grid[newPosition.X, newPosition.Y];
             
-            if (Grid[newPosition.X, newPosition.Y] != Piece.Empty)
+            if (nextCell != Piece.Empty)
             {
                 // TODO: If the piece is a valid connection, pass through it and continue on.
-                continue;
+                // This may not be the correct logic. Check it.
+
+                if (! connections.Contains(nextCell))
+                {
+                    continue;
+                }
+
+                return PlaceNextMove(newPosition, new Point(direction.Dx, direction.Dy));
             }
 
             foreach (var nextPiece in connections)
@@ -50,7 +68,7 @@ public class Solver
                     return true;
                 }
 
-                if (Grid.IsValid && PlaceNextMove(newPosition))
+                if (Grid.IsValid && PlaceNextMove(newPosition, new Point(direction.Dx, direction.Dy)))
                 {
                     return true;
                 }

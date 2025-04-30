@@ -2,7 +2,7 @@ namespace TrainTracks.Engine.Board;
 
 public static class Connector
 {
-    public static IReadOnlyList<(int Dx, int Dy)> GetDirections(Piece piece)
+    public static List<(int Dx, int Dy)> GetDirections(Piece piece)
     {
         var directions = new List<(int Dx, int Dy)>();
 

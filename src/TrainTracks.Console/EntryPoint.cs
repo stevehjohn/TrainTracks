@@ -8,6 +8,8 @@ namespace TrainTracks.Console;
 
 public static class EntryPoint
 {
+    private static int _count = 0;
+    
     public static void Main()
     {
         var solver = new Solver
@@ -22,14 +24,26 @@ public static class EntryPoint
         VisualiseStep(puzzle);
         
         solver.Solve(puzzle);
+        
+        VisualiseStep(solver.Grid);
     }
 
     private static void VisualiseStep(Grid grid)
     {
+        _count++;
+
+        if (_count == 100)
+        {
+            _count = 0;
+        }
+        else
+        {
+            return;
+        }
+
         CursorTop = 1;
         
         WriteLine(grid.ToString());
-
-        ReadKey();
+        // ReadKey();
     }
 }
