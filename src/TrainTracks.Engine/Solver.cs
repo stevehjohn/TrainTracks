@@ -44,9 +44,7 @@ public class Solver
             
             if (nextCell != Piece.Empty)
             {
-                // TODO: If the piece is a valid connection, pass through it and continue on.
                 // This may not be the correct logic. Check it.
-
                 if (! connections.Contains(nextCell))
                 {
                     continue;
