@@ -6,8 +6,6 @@ public class Solver
 {
     private Grid _grid;
     
-    private HashSet<(int X, int Y, Piece Piece)> _visited;
-
     // TODO: Should return a copy.
     public Grid Grid => _grid;
     
@@ -47,24 +45,21 @@ public class Solver
             
             foreach (var nextPiece in connections)
             {
-                if (_visited.Add((newPosition.X, newPosition.Y, nextPiece)))
+                _grid[newPosition] = nextPiece;
+
+                StepCallback?.Invoke(_grid);
+
+                if (_grid.IsComplete)
                 {
-                    _grid[newPosition] = nextPiece;
-
-                    StepCallback?.Invoke(_grid);
-
-                    if (_grid.IsComplete)
-                    {
-                        return true;
-                    }
-
-                    if (_grid.IsValid && PlaceNextMove(newPosition))
-                    {
-                        return true;
-                    }
-
-                    _grid[newPosition] = Piece.Empty;
+                    return true;
                 }
+
+                if (_grid.IsValid && PlaceNextMove(newPosition))
+                {
+                    return true;
+                }
+
+                _grid[newPosition] = Piece.Empty;
             }
         }
 

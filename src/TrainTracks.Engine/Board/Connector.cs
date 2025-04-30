@@ -123,7 +123,7 @@ public static class Connector
                     case (0, 1):
                         connections.Add(Piece.Vertical);
                         connections.Add(Piece.NorthWest);
-                        connections.Add(Piece.SouthEast);
+                        connections.Add(Piece.NorthEast);
                         break;
                     case (-1, 0):
                         connections.Add(Piece.Horizontal);
