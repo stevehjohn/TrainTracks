@@ -11,4 +11,10 @@
       <ProjectReference Include="..\TrainTracks.Engine\TrainTracks.Engine.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="Test Data\Puzzles.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>
