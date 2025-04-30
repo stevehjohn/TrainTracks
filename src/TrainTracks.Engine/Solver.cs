@@ -56,6 +56,8 @@ public class Solver
                 {
                     return true;
                 }
+                
+                continue;
             }
 
             foreach (var nextPiece in connections)
