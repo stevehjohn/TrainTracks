@@ -2,11 +2,13 @@ using System.Text.Json;
 using TrainTracks.Engine.Board;
 using TrainTracks.Engine.Models;
 
-namespace TrainTracks.Console.Infrastructure;
+namespace TrainTracks.Engine.Infrastructure;
 
 public class PuzzleManager
 {
     public IReadOnlyList<Grid> Puzzles { get; private set; }
+    
+    public static string Path { get; set; }
 
     private static readonly Lazy<PuzzleManager> Lazy = new(GetPuzzleManager);
 
@@ -18,7 +20,12 @@ public class PuzzleManager
 
     private static PuzzleManager GetPuzzleManager()
     {
-        var puzzleJson = File.ReadAllText("Data/Puzzles.json");
+        if (Path == null)
+        {
+            throw new InvalidOperationException("Please set the Path property before using the PuzzleManager.");
+        }
+
+        var puzzleJson = File.ReadAllText(Path);
 
         var puzzles = JsonSerializer.Deserialize<Puzzle[]>(puzzleJson, new JsonSerializerOptions
         {
@@ -40,5 +47,4 @@ public class PuzzleManager
         };
         
         return instance;
-    }
-}
+    }}

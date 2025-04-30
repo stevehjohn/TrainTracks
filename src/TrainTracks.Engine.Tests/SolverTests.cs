@@ -1,4 +1,4 @@
-using TrainTracks.Engine.Tests.Infrastructure;
+using TrainTracks.Engine.Infrastructure;
 
 namespace TrainTracks.Engine.Tests;
 
@@ -7,6 +7,8 @@ public class SolverTests
     [Fact]
     public void CanSolvePuzzle()
     {
+        PuzzleManager.Path = "Test Data/puzzles.json";
+        
         var puzzle = PuzzleManager.Instance.Puzzles[0];
 
         var solver = new Solver();

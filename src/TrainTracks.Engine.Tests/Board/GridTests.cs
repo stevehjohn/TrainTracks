@@ -1,4 +1,4 @@
-using TrainTracks.Engine.Tests.Infrastructure;
+using TrainTracks.Engine.Infrastructure;
 
 namespace TrainTracks.Engine.Tests.Board;
 
@@ -11,6 +11,8 @@ public class GridTests
     [InlineData(3, 4, 11, 0, 10)]
     public void IdentifiesEntryAndExitPoints(int puzzleIndex, int entryX, int entryY, int exitX, int exitY)
     {
+        PuzzleManager.Path = "Test Data/puzzles.json";
+        
         var puzzle = PuzzleManager.Instance.Puzzles[puzzleIndex];
         
         Assert.Equal(entryX, puzzle.Entry.X);

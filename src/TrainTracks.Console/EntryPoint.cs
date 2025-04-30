@@ -1,7 +1,6 @@
-﻿using TrainTracks.Console.Infrastructure;
-using TrainTracks.Engine;
+﻿using TrainTracks.Engine;
 using TrainTracks.Engine.Board;
-
+using TrainTracks.Engine.Infrastructure;
 using static System.Console;
 
 namespace TrainTracks.Console;
@@ -17,6 +16,8 @@ public static class EntryPoint
             StepCallback = VisualiseStep
         };
 
+        PuzzleManager.Path = "Data/puzzles.json";
+        
         var puzzle = PuzzleManager.Instance.Puzzles[0];
 
         Clear();
