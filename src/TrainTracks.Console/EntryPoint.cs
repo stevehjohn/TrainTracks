@@ -28,6 +28,6 @@ public static class EntryPoint
         
         WriteLine(grid.ToString());
 
-        System.Console.ReadKey();
+        ReadKey();
     }
 }
