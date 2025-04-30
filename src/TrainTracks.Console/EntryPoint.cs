@@ -27,5 +27,7 @@ public static class EntryPoint
         CursorTop = 1;
         
         WriteLine(grid.ToString());
+
+        System.Console.ReadKey();
     }
 }
