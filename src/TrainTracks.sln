@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{5E71
 		..\test.sh = ..\test.sh
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainTracks.Console", "TrainTracks.Console\TrainTracks.Console.csproj", "{99E57644-46EE-4237-AF24-6D08FDA54E6B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,5 +31,9 @@ Global
 		{B133602B-2FD1-4138-B6C1-BC793DF20E55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B133602B-2FD1-4138-B6C1-BC793DF20E55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B133602B-2FD1-4138-B6C1-BC793DF20E55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99E57644-46EE-4237-AF24-6D08FDA54E6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99E57644-46EE-4237-AF24-6D08FDA54E6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99E57644-46EE-4237-AF24-6D08FDA54E6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99E57644-46EE-4237-AF24-6D08FDA54E6B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

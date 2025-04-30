@@ -11,6 +11,8 @@ public class Solver
     // TODO: Should return a copy.
     public Grid Grid => _grid;
     
+    public Action<Grid> StepCallback { get; set; }
+    
     public bool Solve(Grid grid)
     {
         _grid = grid;
@@ -47,6 +49,8 @@ public class Solver
                 if (_visited.Add((newPosition.X, newPosition.Y, nextPiece)))
                 {
                     _grid[newPosition] = nextPiece;
+
+                    StepCallback?.Invoke(_grid);
 
                     if (_grid.IsComplete)
                     {
