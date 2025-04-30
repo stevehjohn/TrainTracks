@@ -12,6 +12,12 @@ public class Grid
         set => _pieces[x, y] = value;
     }
 
+    public Piece this[Point position]
+    {
+        get => _pieces[position.X, position.Y];
+        set => _pieces[position.X, position.Y] = value;
+    }
+
     public int Width { get; private set; }
 
     public int Height { get; private set; }

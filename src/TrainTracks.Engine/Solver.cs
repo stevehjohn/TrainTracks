@@ -6,44 +6,46 @@ public class Solver
 {
     private Grid _grid;
     
-    private Point _position;
-
     private HashSet<(int X, int Y, Piece Piece)> _visited;
     
     public bool Solve(Grid grid)
     {
         _grid = grid;
-
-        _position = _grid.Entry;
-
         _visited = [];
         
-        return PlaceNextMove();
+        return PlaceNextMove(_grid.Entry);
     }
 
-    private bool PlaceNextMove()
+    private bool PlaceNextMove(Point position)
     {
-        var currentPiece = _grid[_position.X, _position.Y];
+        var currentPiece = _grid[position];
 
         foreach (var direction in Connector.Directions)
         {
-            var mewPosition = new Point(_position.X + direction.Dx, _position.Y + direction.Dy);
-            
+            var newPosition = new Point(position.X + direction.Dx, position.Y + direction.Dy);
+
+            if (_grid[newPosition.X, newPosition.Y] != Piece.Empty)
+            {
+                continue;
+            }
+
             foreach (var nextPiece in Connector.GetConnections(currentPiece, direction.Dx, direction.Dy))
             {
-                if (_visited.Add((mewPosition.X, mewPosition.Y, nextPiece)))
+                if (_visited.Add((newPosition.X, newPosition.Y, nextPiece)))
                 {
-                    _grid[mewPosition.X, mewPosition.Y] = nextPiece;
+                    _grid[newPosition] = nextPiece;
 
                     if (_grid.IsComplete)
                     {
                         return true;
                     }
 
-                    if (_grid.IsValid)
+                    if (_grid.IsValid && PlaceNextMove(newPosition))
                     {
-                        PlaceNextMove();
+                        return true;
                     }
+
+                    _grid[newPosition] = Piece.Empty;
                 }
             }
         }
