@@ -11,7 +11,7 @@ public class Solver
     // TODO: Should return a copy.
     public Grid Grid => _grid;
     
-    public Action<Grid> StepCallback { get; set; }
+    public Action<Grid> StepCallback { get; init; }
     
     public bool Solve(Grid grid)
     {
