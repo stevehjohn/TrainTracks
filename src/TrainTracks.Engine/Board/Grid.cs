@@ -173,6 +173,47 @@ public class Grid
         return true;
     }
 
+    private bool ConstraintsAreNotExceeded()
+    {
+        for (var x = 0; x < Width; x++)
+        {
+            var sum = 0;
+        
+            for (var y = 0; y < Height; y++)
+            {
+                if (this[x, y] != Piece.Empty)
+                {
+                    sum++;
+                }
+            }
+
+            if (sum > ColumnConstraints[x])
+            {
+                return false;
+            }
+        }
+
+        for (var y = 0; y < Height; y++)
+        {
+            var sum = 0;
+        
+            for (var x = 0; x < Width; x++)
+            {
+                if (this[x, y] != Piece.Empty)
+                {
+                    sum++;
+                }
+            }
+
+            if (sum > RowConstraints[y])
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     private static bool IsContinuous()
     {
         // TODO: Do. Maybe? In theory, solver should always produce connected pieces.
