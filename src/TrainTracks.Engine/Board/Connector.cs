@@ -2,14 +2,6 @@ namespace TrainTracks.Engine.Board;
 
 public static class Connector
 {
-    public static readonly List<(int Dx, int Dy)> Directions =
-    [
-        (0, -1),
-        (1, 0),
-        (0, 1),
-        (-1, 0)
-    ];
-
     public static IReadOnlyList<(int Dx, int Dy)> GetDirections(Piece piece)
     {
         var directions = new List<(int Dx, int Dy)>();
@@ -28,7 +20,7 @@ public static class Connector
 
             case Piece.NorthEast:
                 directions.Add((-1, 0));
-                directions.Add((0, 11));
+                directions.Add((0, 1));
                 break;
 
 
