@@ -30,6 +30,9 @@ public class Grid
 
     public bool IsComplete => ConstraintsAreMet() && IsContinuous();
 
+    // TODO: Do.
+    public bool IsValid => false;
+
     public Grid(Puzzle puzzle)
     {
         Initialise(puzzle);

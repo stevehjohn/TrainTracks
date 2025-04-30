@@ -10,30 +10,44 @@ public class Solver
 
     private HashSet<(int X, int Y, Piece Piece)> _visited;
     
-    public void Solve(Grid grid)
+    public bool Solve(Grid grid)
     {
         _grid = grid;
 
         _position = _grid.Entry;
 
         _visited = [];
-
-        while (! _grid.IsComplete)
-        {
-            PlaceNextMove();
-        }
+        
+        return PlaceNextMove();
     }
 
-    private void PlaceNextMove()
+    private bool PlaceNextMove()
     {
         var currentPiece = _grid[_position.X, _position.Y];
 
         foreach (var direction in Connector.Directions)
         {
+            var mewPosition = new Point(_position.X + direction.Dx, _position.Y + direction.Dy);
+            
             foreach (var nextPiece in Connector.GetConnections(currentPiece, 0, 0))
             {
-            
+                if (_visited.Add((mewPosition.X, mewPosition.Y, nextPiece)))
+                {
+                    _grid[mewPosition.X, mewPosition.Y] = nextPiece;
+
+                    if (_grid.IsComplete)
+                    {
+                        return true;
+                    }
+
+                    if (_grid.IsValid)
+                    {
+                        PlaceNextMove();
+                    }
+                }
             }
         }
+
+        return false;
     }
 }
