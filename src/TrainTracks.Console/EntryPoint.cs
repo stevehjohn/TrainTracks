@@ -19,6 +19,8 @@ public static class EntryPoint
 
         Clear();
         
+        VisualiseStep(puzzle);
+        
         solver.Solve(puzzle);
     }
 
