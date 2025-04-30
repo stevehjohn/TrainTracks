@@ -7,6 +7,9 @@ public class Solver
     private Grid _grid;
     
     private HashSet<(int X, int Y, Piece Piece)> _visited;
+
+    // TODO: Should return a copy.
+    public Grid Grid => _grid;
     
     public bool Solve(Grid grid)
     {
@@ -25,6 +28,11 @@ public class Solver
         foreach (var direction in Connector.Directions)
         {
             var newPosition = new Point(position.X + direction.Dx, position.Y + direction.Dy);
+
+            if (newPosition.X < 0 || newPosition.X > _grid.Right || newPosition.Y < 0 || newPosition.Y > _grid.Bottom)
+            {
+                continue;
+            }
 
             if (_grid[newPosition.X, newPosition.Y] != Piece.Empty)
             {
