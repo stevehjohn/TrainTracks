@@ -15,8 +15,6 @@ public class Solver
     {
         _grid = grid;
         
-        _visited = [];
-        
         // TODO: Maybe check for continuity when PlaceNextMove returns.
         
         return PlaceNextMove(_grid.Entry);
