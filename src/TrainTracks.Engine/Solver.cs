@@ -28,7 +28,7 @@ public class Solver
     {
         var currentPiece = _grid[position];
 
-        foreach (var direction in Connector.Directions)
+        foreach (var direction in Connector.GetDirections(currentPiece))
         {
             var newPosition = new Point(position.X + direction.Dx, position.Y + direction.Dy);
 
