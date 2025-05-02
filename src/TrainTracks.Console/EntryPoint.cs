@@ -39,7 +39,7 @@ public static class EntryPoint
 
         if (_count % 1000 != 0)
         {
-            return;
+            //return;
         }
 
         CursorTop = 1;
@@ -48,6 +48,6 @@ public static class EntryPoint
         
         WriteLine(_count);
         
-        //ReadKey();
+        ReadKey();
     }
 }
