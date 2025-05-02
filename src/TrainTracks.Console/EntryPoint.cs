@@ -18,7 +18,7 @@ public static class EntryPoint
 
         PuzzleManager.Path = "Data/puzzles.json";
         
-        var puzzle = PuzzleManager.Instance.Puzzles[4];
+        var puzzle = PuzzleManager.Instance.Puzzles[5];
 
         Clear();
         
@@ -48,6 +48,6 @@ public static class EntryPoint
         
         WriteLine(_count);
         
-        //ReadKey();
+        // ReadKey();
     }
 }

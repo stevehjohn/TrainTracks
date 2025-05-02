@@ -30,7 +30,7 @@ public static class Connector
                 break;
 
             case Piece.SouthWest:
-                directions.Add((1, 0));
+                directions.Add((-1, 0));
                 directions.Add((0, -1));
                 break;
             

@@ -43,5 +43,14 @@
       "horizontalClues": [ 2, 5, 2, 6, 2, 1 ],
       "verticalClues": [ 3, 4, 3, 3, 3, 2 ]
     }
+  },
+  {
+    "gridWidth": 6,
+    "gridHeight": 6,
+    "data": {
+      "startingGrid": [ 0, 0, 0, 0, 4, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 4, 0, 0 ],
+      "horizontalClues": [ 1, 5, 5, 2, 3, 1 ],
+      "verticalClues": [ 2, 2, 2, 4, 5, 2 ]
+    }
   }
 ]
