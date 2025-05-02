@@ -37,7 +37,7 @@ public static class EntryPoint
     {
         _count++;
 
-        if (_count % 100 != 0)
+        if (_count % 1000 != 0)
         {
             return;
         }
@@ -45,6 +45,8 @@ public static class EntryPoint
         CursorTop = 1;
         
         WriteLine(grid.ToString());
+        
+        WriteLine(_count);
         
         //ReadKey();
     }

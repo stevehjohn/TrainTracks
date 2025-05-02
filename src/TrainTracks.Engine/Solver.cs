@@ -35,30 +35,30 @@ public class Solver
                 continue;
             }
 
-            var nextCell = Grid[newPosition];
-            
-            if (nextCell != Piece.Empty)
-            {
-                var backConnections = Connector.GetConnections(nextCell, -direction.Dx, -direction.Dy);
-                
-                // TODO: This may not be the correct logic. Check it.
-                if (! backConnections.Contains(nextCell))
-                {
-                    continue;
-                }
-
-                if (PlaceNextMove(newPosition, (direction.Dx, direction.Dy)))
-                {
-                    return true;
-                }
-
-                continue;                
-            }
-
             var connections = Connector.GetConnections(currentPiece, direction.Dx, direction.Dy);
 
             foreach (var nextPiece in connections)
             {
+                var nextCell = Grid[newPosition];
+            
+                if (nextCell != Piece.Empty)
+                {
+                    var backConnections = Connector.GetConnections(currentPiece, -direction.Dx, -direction.Dy);
+                
+                    // TODO: This may not be the correct logic. Check it.
+                    if (! backConnections.Contains(nextCell))
+                    {
+                        continue;
+                    }
+
+                    if (PlaceNextMove(newPosition, (direction.Dx, direction.Dy)))
+                    {
+                        return true;
+                    }
+
+                    continue;                
+                }
+
                 Grid[newPosition] = nextPiece;
 
                 StepCallback?.Invoke(Grid);
