@@ -19,8 +19,8 @@ public static class Connector
                 break;
 
             case Piece.NorthEast:
-                directions.Add((-1, 0));
-                directions.Add((0, 1));
+                directions.Add((1, 0));
+                directions.Add((0, -1));
                 break;
 
 
