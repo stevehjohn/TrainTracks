@@ -14,7 +14,7 @@ public class Solver
         Grid = grid;
         
         // Maybe check for continuity when PlaceNextMove returns,
-        // though in theory it sould not place unconnectable pieces together.
+        // though in theory it should not place unconnectable pieces together.
         
         return PlaceNextMove(Grid.Entry, null);
     }
@@ -39,14 +39,14 @@ public class Solver
                 continue;
             }
 
-            var connections = Connector.GetConnections(currentPiece, direction.Dx, direction.Dy);
-
             var nextCell = Grid[newPosition];
             
             if (nextCell != Piece.Empty)
             {
-                // This may not be the correct logic. Check it.
-                if (! connections.Contains(nextCell))
+                var backConnections = Connector.GetConnections(nextCell, -direction.Dx, -direction.Dy);
+                
+                // TODO: This may not be the correct logic. Check it.
+                if (! backConnections.Contains(nextCell))
                 {
                     continue;
                 }
@@ -58,6 +58,8 @@ public class Solver
 
                 continue;                
             }
+
+            var connections = Connector.GetConnections(currentPiece, direction.Dx, direction.Dy);
 
             foreach (var nextPiece in connections)
             {
