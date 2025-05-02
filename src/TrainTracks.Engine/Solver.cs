@@ -43,10 +43,10 @@ public class Solver
             
                 if (nextCell != Piece.Empty)
                 {
-                    var backConnections = Connector.GetConnections(currentPiece, -direction.Dx, -direction.Dy);
+                    var backConnections = Connector.GetConnections(nextCell, -direction.Dx, -direction.Dy);
                 
                     // TODO: This may not be the correct logic. Check it.
-                    if (! backConnections.Contains(nextCell))
+                    if (! backConnections.Contains(nextPiece))
                     {
                         continue;
                     }
