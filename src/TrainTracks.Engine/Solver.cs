@@ -4,7 +4,6 @@ namespace TrainTracks.Engine;
 
 public class Solver
 {
-    // TODO: Should probably return a copy.
     public Grid Grid { get; private set; }
 
     public Action<Grid> StepCallback { get; init; }
@@ -12,9 +11,6 @@ public class Solver
     public bool Solve(Grid grid)
     {
         Grid = grid;
-        
-        // Maybe check for continuity when PlaceNextMove returns,
-        // though in theory it should not place unconnectable pieces together.
         
         return PlaceNextMove(Grid.Entry, null);
     }
