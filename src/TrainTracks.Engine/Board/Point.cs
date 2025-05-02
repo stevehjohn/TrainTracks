@@ -20,4 +20,12 @@ public class Point
     {
         return $"({X}, {Y})";
     }
+
+    public override bool Equals(object? obj)
+    {
+        if (obj is not Point other)
+            return false;
+
+        return X == other.X && Y == other.Y;
+    }
 }
