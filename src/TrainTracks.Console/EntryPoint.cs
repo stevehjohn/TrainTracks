@@ -22,13 +22,13 @@ public static class EntryPoint
 
         Clear();
         
-        VisualiseStep(puzzle);
+        WriteLine(puzzle.ToString());
 
         // ReadKey();
         
         solver.Solve(puzzle);
         
-        VisualiseStep(solver.Grid);
+        WriteLine(puzzle.ToString());
         
         WriteLine(_count);
     }
@@ -39,7 +39,7 @@ public static class EntryPoint
 
         if (_count % 1000 != 0)
         {
-            // return;
+            return;
         }
 
         CursorTop = 1;
