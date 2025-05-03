@@ -9,7 +9,7 @@ public class SolverTests
     {
         PuzzleManager.Path = "Test Data/puzzles.json";
         
-        var puzzle = PuzzleManager.Instance.Puzzles[0];
+        var puzzle = PuzzleManager.Instance.Puzzles[4];
 
         var solver = new Solver();
 
