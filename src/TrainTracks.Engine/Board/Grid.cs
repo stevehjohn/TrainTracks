@@ -6,7 +6,7 @@ namespace TrainTracks.Engine.Board;
 public class Grid
 {
     private Piece[,] _pieces;
-    
+
     private int _pieceCount;
 
     public Piece this[int x, int y]
@@ -37,7 +37,7 @@ public class Grid
 
     public Point Exit { get; private set; }
 
-    public bool IsComplete => ConstraintsAreMet() && PathIsContinuous();
+    public bool IsComplete => ConstraintsAreMet() && PathIsContinuous(Entry, null);
 
     public bool IsValid => ConstraintsAreNotExceeded();
 
@@ -59,15 +59,16 @@ public class Grid
         };
 
         Array.Copy(RowConstraints, copy.RowConstraints, RowConstraints.Length);
-        
-        Array.Copy(ColumnConstraints, copy.ColumnConstraints, ColumnConstraints.Length);;
-        
+
+        Array.Copy(ColumnConstraints, copy.ColumnConstraints, ColumnConstraints.Length);
+        ;
+
         copy._pieces = new Piece[Width, Height];
-        
+
         Array.Copy(_pieces, copy._pieces, Width * Height);
 
         copy._pieceCount = _pieceCount;
-        
+
         return copy;
     }
 
@@ -84,13 +85,13 @@ public class Grid
         _pieces = new Piece[Width, Height];
 
         _pieceCount = 0;
-        
+
         for (var x = 0; x < Width; x++)
         {
             for (var y = 0; y < Height; y++)
             {
                 _pieces[x, y] = puzzle.Data.StartingGrid[y * Width + x];
-                
+
                 if (_pieces[x, y] != Piece.Empty)
                 {
                     _pieceCount++;
@@ -211,16 +212,45 @@ public class Grid
         return true;
     }
 
-    private bool PathIsContinuous()
+    private bool PathIsContinuous(Point position, (int Dx, int Dy)? fromDirection)
     {
-        var visited = 0;
+        var directions = Connector.GetDirections(this[position]);
 
-        var position = Entry;
-
-        while (true)
+        if (fromDirection != null)
         {
-            
+            directions.Remove((-fromDirection.Value.Dx, -fromDirection.Value.Dy));
         }
+
+        foreach (var direction in directions)
+        {
+            var nextPosition = new Point(position.X + direction.Dx, position.Y + direction.Dy);
+            
+            if (nextPosition.X < 0 || nextPosition.X > Right || nextPosition.Y < 0 || nextPosition.Y > Bottom)
+            {
+                continue;
+            }
+            
+            var nextPiece = this[nextPosition];
+
+            if (nextPiece == Piece.Empty)
+            {
+                continue;
+            }
+            
+            var connections = Connector.GetConnections(this[position], direction.Dx, direction.Dy);
+
+            if (! connections.Contains(nextPiece))
+            {
+                continue;
+            }
+
+            if (PathIsContinuous(nextPosition, direction))
+            {
+                return true;
+            }
+        }
+        
+        return position.X == Exit.X && position.Y == Exit.Y;
     }
 
     private bool ConstraintsAreNotExceeded()
