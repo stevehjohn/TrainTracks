@@ -49,10 +49,6 @@ public static class EntryPoint
 
         Clear();
                 
-        WriteLine($"Puzzle number: {puzzleNumber}");
-        
-        WriteLine();
-        
         WriteLine($"Puzzle number: {puzzleNumber} ({puzzle.Width}x{puzzle.Height})");
         
         WriteLine();
