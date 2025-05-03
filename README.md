@@ -20,4 +20,4 @@ An engine based around the Train Track puzzle games.
 
 ## Notes
 
-3 probably fails due to following the path but not visiting all placed pieces.
+Three probably fails due to following the path but not visiting all placed pieces.
