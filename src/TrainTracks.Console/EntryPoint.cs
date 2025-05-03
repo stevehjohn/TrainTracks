@@ -26,12 +26,11 @@ public static class EntryPoint
 
         // ReadKey();
         
-        var solved = solver.Solve(puzzle);
+        solver.Solve(puzzle);
         
         VisualiseStep(solver.Grid);
         
         WriteLine(_count);
-        WriteLine($"Solved: {solved}.");
     }
 
     private static void VisualiseStep(Grid grid)
