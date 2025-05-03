@@ -7,7 +7,7 @@ namespace TrainTracks.Console;
 
 public static class EntryPoint
 {
-    private static int _count = 99;
+    private static int _count = -1;
     
     public static void Main()
     {
@@ -18,7 +18,7 @@ public static class EntryPoint
 
         PuzzleManager.Path = "Data/puzzles.json";
         
-        var puzzle = PuzzleManager.Instance.Puzzles[5];
+        var puzzle = PuzzleManager.Instance.Puzzles[6];
 
         Clear();
         
@@ -26,18 +26,20 @@ public static class EntryPoint
 
         // ReadKey();
         
-        solver.Solve(puzzle);
+        var result = solver.Solve(puzzle);
         
         WriteLine(puzzle.ToString());
         
-        WriteLine(_count);
+        WriteLine($"Solve state: {result}");
+        
+        WriteLine($"Steps: {_count + 1}");
     }
 
     private static void VisualiseStep(Grid grid)
     {
         _count++;
 
-        if (_count % 1000 != 0)
+        if (_count % 100_000 != 0)
         {
             return;
         }
