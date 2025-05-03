@@ -23,7 +23,7 @@ public static class EntryPoint
             }
         }
         
-        WriteLine($"Puzzle number: {arguments.Length}");
+        WriteLine($"Puzzle number: {puzzleNumber}");
         
         WriteLine();
 
