@@ -7,7 +7,7 @@ An engine based around the Train Track puzzle games.
 0 (12x12): 
 1 (12x11): 
 2 (11x11): 
-3 (11x12): 9m,     bugs.
+3 (11x12): ~9m 10s,     bugs.
 4 (6x6):   <0.01s, solved.
 5 (6x6):   <0.01s, solved.
 6 (9x9):   ~3s,    solved.
