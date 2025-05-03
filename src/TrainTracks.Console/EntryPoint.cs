@@ -1,4 +1,5 @@
-﻿using TrainTracks.Engine;
+﻿using System.Diagnostics;
+using TrainTracks.Engine;
 using TrainTracks.Engine.Board;
 using TrainTracks.Engine.Infrastructure;
 using static System.Console;
@@ -8,6 +9,8 @@ namespace TrainTracks.Console;
 public static class EntryPoint
 {
     private static int _count;
+
+    private static Stopwatch _stopwatch;
     
     public static void Main(string[] arguments)
     {
@@ -40,6 +43,8 @@ public static class EntryPoint
 
         // ReadKey();
         
+        _stopwatch = Stopwatch.StartNew();
+        
         var result = solver.Solve(puzzle);
 
         Clear();
@@ -57,7 +62,9 @@ public static class EntryPoint
         WriteLine($"Solve state: {result}");
         
         WriteLine($"Steps:       {_count:N0}");
-        
+                
+        WriteLine($"Elapsed:     {_stopwatch.Elapsed:c}");
+
         WriteLine();
     }
 
@@ -74,7 +81,9 @@ public static class EntryPoint
         
         WriteLine(grid.ToString());
         
-        WriteLine($"Steps: {_count:N0}");
+        WriteLine($"Steps:       {_count:N0}");
+        
+        WriteLine($"Elapsed:     {_stopwatch.Elapsed:c}");
         
         // ReadKey();
     }
