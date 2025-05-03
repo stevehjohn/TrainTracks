@@ -2,7 +2,7 @@ namespace TrainTracks.Engine.Board;
 
 public static class Connector
 {
-    public static List<(int Dx, int Dy)> GetDirections(Piece piece)
+    public static List<(int Dx, int Dy)> Directions(Piece piece)
     {
         var directions = new List<(int Dx, int Dy)>();
 
@@ -43,7 +43,7 @@ public static class Connector
         return directions;
     }
 
-    public static IReadOnlyList<Piece> GetConnections(Piece piece, int dX, int dY)
+    public static IReadOnlyList<Piece> Connections(Piece piece, int dX, int dY)
     {
         var connections = new List<Piece>();
 

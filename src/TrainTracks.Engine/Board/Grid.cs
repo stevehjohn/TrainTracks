@@ -202,7 +202,7 @@ public class Grid
 
     private bool PathIsContinuous(Point position, (int Dx, int Dy)? fromDirection)
     {
-        var directions = Connector.GetDirections(this[position]);
+        var directions = Connector.Directions(this[position]);
 
         if (fromDirection != null)
         {
@@ -225,7 +225,7 @@ public class Grid
                 continue;
             }
             
-            var connections = Connector.GetConnections(this[position], direction.Dx, direction.Dy);
+            var connections = Connector.Connections(this[position], direction.Dx, direction.Dy);
 
             if (! connections.Contains(nextPiece))
             {

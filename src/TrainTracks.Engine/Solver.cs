@@ -19,7 +19,7 @@ public class Solver
     {
         var currentPiece = Grid[position];
 
-        var directions = Connector.GetDirections(currentPiece);
+        var directions = Connector.Directions(currentPiece);
 
         if (fromDirection != null)
         {
@@ -35,7 +35,7 @@ public class Solver
                 continue;
             }
 
-            var connections = Connector.GetConnections(currentPiece, direction.Dx, direction.Dy);
+            var connections = Connector.Connections(currentPiece, direction.Dx, direction.Dy);
 
             foreach (var nextPiece in connections)
             {
@@ -43,7 +43,7 @@ public class Solver
             
                 if (nextCell != Piece.Empty)
                 {
-                    var backConnections = Connector.GetConnections(nextCell, -direction.Dx, -direction.Dy);
+                    var backConnections = Connector.Connections(nextCell, -direction.Dx, -direction.Dy);
                 
                     if (! backConnections.Contains(nextPiece))
                     {
