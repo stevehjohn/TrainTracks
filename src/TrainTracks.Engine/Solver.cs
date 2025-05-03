@@ -62,15 +62,6 @@ public class Solver
 
                 StepCallback?.Invoke(Grid);
 
-                if (Grid.RowCounts[newPosition.Y] > Grid.RowConstraints[newPosition.Y] || Grid.ColumnCounts[newPosition.X] > Grid.ColumnConstraints[newPosition.X])
-                {
-                    Grid[newPosition] = Piece.Empty;
-
-                    StepCallback?.Invoke(Grid);
-                    
-                    continue;
-                }
-
                 if (Grid.IsComplete)
                 {
                     return true;

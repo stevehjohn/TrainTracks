@@ -7,10 +7,6 @@ public class Grid
 {
     private Piece[,] _pieces;
 
-    public int[] RowCounts;
-    
-    public int[] ColumnCounts;
-
     public Piece this[int x, int y]
     {
         get => _pieces[x, y];
@@ -20,24 +16,7 @@ public class Grid
     public Piece this[Point position]
     {
         get => _pieces[position.X, position.Y];
-        set
-        {
-            if (_pieces[position.X, position.Y] != Piece.Empty && value != Piece.Empty)
-            {
-                RowCounts[position.Y]++;
-                
-                ColumnCounts[position.X]++;
-            }
-
-            if (_pieces[position.X, position.Y] != Piece.Empty && value == Piece.Empty)
-            {
-                RowCounts[position.Y]--;
-                
-                ColumnCounts[position.X]--;
-            }
-
-            _pieces[position.X, position.Y] = value;
-        }
+        set => _pieces[position.X, position.Y] = value;
     }
 
     public int Width { get; private set; }
@@ -85,14 +64,6 @@ public class Grid
 
         Array.Copy(_pieces, copy._pieces, Width * Height);
         
-        copy.RowCounts = new int[Height];
-        
-        copy.ColumnCounts = new int[Width];
-
-        Array.Copy(RowCounts, copy.RowCounts, Height);
-        
-        Array.Copy(ColumnCounts, copy.ColumnCounts, Width);;
-        
         return copy;
     }
 
@@ -108,22 +79,11 @@ public class Grid
 
         _pieces = new Piece[Width, Height];
         
-        RowCounts = new int[Height];
-
-        ColumnCounts = new int[Width];
-        
         for (var x = 0; x < Width; x++)
         {
             for (var y = 0; y < Height; y++)
             {
                 _pieces[x, y] = puzzle.Data.StartingGrid[y * Width + x];
-
-                if (_pieces[x, y] != Piece.Empty)
-                {
-                    RowCounts[y]++;
-                    
-                    ColumnCounts[x]++;
-                }
             }
         }
 
