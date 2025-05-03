@@ -6,8 +6,10 @@ namespace TrainTracks.Engine.Infrastructure;
 
 public class PuzzleManager
 {
-    public IReadOnlyList<Grid> Puzzles { get; private set; }
-    
+    private List<Grid> _puzzles;
+
+    public Grid GetPuzzle(int puzzleNumber) => _puzzles[puzzleNumber].Clone();
+        
     public static string Path { get; set; }
 
     private static readonly Lazy<PuzzleManager> Lazy = new(GetPuzzleManager);
@@ -43,8 +45,9 @@ public class PuzzleManager
         
         var instance = new PuzzleManager
         {
-            Puzzles = grids
+            _puzzles = grids
         };
         
         return instance;
-    }}
+    }
+}

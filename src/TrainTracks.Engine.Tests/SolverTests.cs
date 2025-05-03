@@ -8,8 +8,8 @@ public class SolverTests
     public void CanSolvePuzzle()
     {
         PuzzleManager.Path = "Test Data/puzzles.json";
-        
-        var puzzle = PuzzleManager.Instance.Puzzles[4];
+
+        var puzzle = PuzzleManager.Instance.GetPuzzle(4);
 
         var solver = new Solver();
 

@@ -15,6 +15,13 @@ public class Point
         Y = y;
     }
 
+    public Point(Point point)
+    {
+        X = point.X;
+        
+        Y = point.Y;
+    }
+
     [ExcludeFromCodeCoverage]
     public override string ToString()
     {

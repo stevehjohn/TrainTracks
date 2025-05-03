@@ -13,7 +13,7 @@ public class GridTests
     {
         PuzzleManager.Path = "Test Data/puzzles.json";
         
-        var puzzle = PuzzleManager.Instance.Puzzles[puzzleIndex];
+        var puzzle = PuzzleManager.Instance.GetPuzzle(puzzleIndex);
         
         Assert.Equal(entryX, puzzle.Entry.X);
         

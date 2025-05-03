@@ -44,6 +44,33 @@ public class Grid
         Initialise(puzzle);
     }
 
+    public Grid Clone()
+    {
+        var copy = new Grid
+        {
+            Width = Width,
+            Height = Height,
+            Entry = new Point(Entry),
+            Exit = new Point(Exit),
+            RowConstraints = new int[RowConstraints.Length],
+            ColumnConstraints = new int[ColumnConstraints.Length]
+        };
+
+        Array.Copy(RowConstraints, copy.RowConstraints, RowConstraints.Length);
+        
+        Array.Copy(ColumnConstraints, copy.ColumnConstraints, ColumnConstraints.Length);;
+        
+        copy._pieces = new Piece[Width, Height];
+        
+        Array.Copy(_pieces, copy._pieces, Width * Height);
+        
+        return copy;
+    }
+
+    private Grid()
+    {
+    }
+
     private void Initialise(Puzzle puzzle)
     {
         Width = puzzle.GridWidth;

@@ -34,7 +34,7 @@ public static class EntryPoint
 
         PuzzleManager.Path = "Data/puzzles.json";
         
-        var puzzle = PuzzleManager.Instance.Puzzles[puzzleNumber];
+        var puzzle = PuzzleManager.Instance.GetPuzzle(puzzleNumber);
         
         WriteLine(puzzle.ToString());
 
@@ -48,7 +48,7 @@ public static class EntryPoint
         
         WriteLine();
         
-        WriteLine(PuzzleManager.Instance.Puzzles[puzzleNumber]);
+        WriteLine(PuzzleManager.Instance.GetPuzzle(puzzleNumber));
         
         WriteLine();
         
