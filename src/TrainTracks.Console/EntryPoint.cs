@@ -44,7 +44,7 @@ public static class EntryPoint
 
         Clear();
                 
-        WriteLine($"Puzzle number: {arguments.Length}");
+        WriteLine($"Puzzle number: {puzzleNumber}");
         
         WriteLine();
         
