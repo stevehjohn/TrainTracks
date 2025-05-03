@@ -8,7 +8,7 @@ namespace TrainTracks.Console;
 
 public static class EntryPoint
 {
-    private static int _count;
+    private static long _count;
 
     private static Stopwatch _stopwatch;
     
