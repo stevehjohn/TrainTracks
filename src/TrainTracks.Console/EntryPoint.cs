@@ -11,6 +11,8 @@ public static class EntryPoint
     
     public static void Main(string[] arguments)
     {
+        Clear();
+        
         var puzzleNumber = 6;
 
         if (arguments.Length > 0)
@@ -20,6 +22,10 @@ public static class EntryPoint
                 puzzleNumber = 6;
             }
         }
+        
+        WriteLine($"Puzzle number: {arguments.Length}");
+        
+        WriteLine();
 
         var solver = new Solver
         {
@@ -29,20 +35,30 @@ public static class EntryPoint
         PuzzleManager.Path = "Data/puzzles.json";
         
         var puzzle = PuzzleManager.Instance.Puzzles[puzzleNumber];
-
-        Clear();
         
         WriteLine(puzzle.ToString());
 
         // ReadKey();
         
         var result = solver.Solve(puzzle);
+
+        Clear();
+                
+        WriteLine($"Puzzle number: {arguments.Length}");
+        
+        WriteLine();
+        
+        WriteLine(PuzzleManager.Instance.Puzzles[puzzleNumber]);
+        
+        WriteLine();
         
         WriteLine(puzzle.ToString());
         
         WriteLine($"Solve state: {result}");
         
-        WriteLine($"Steps: {_count + 1}");
+        WriteLine($"Steps:       {_count + 1:N0}");
+        
+        WriteLine();
     }
 
     private static void VisualiseStep(Grid grid)
@@ -54,11 +70,11 @@ public static class EntryPoint
             return;
         }
 
-        CursorTop = 1;
+        CursorTop = 2;
         
         WriteLine(grid.ToString());
         
-        WriteLine(_count);
+        WriteLine($"Steps: {_count + 1:N0}");
         
         // ReadKey();
     }
