@@ -1,7 +1,3 @@
 # Train Tracks
 
 An engine based around the Train Track puzzle games.
-
-# To Do:
-
-- Seems to be phantom collisions.
