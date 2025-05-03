@@ -23,10 +23,6 @@ public static class EntryPoint
             }
         }
         
-        WriteLine($"Puzzle number: {puzzleNumber}");
-        
-        WriteLine();
-
         var solver = new Solver
         {
             StepCallback = VisualiseStep
@@ -36,6 +32,10 @@ public static class EntryPoint
         
         var puzzle = PuzzleManager.Instance.GetPuzzle(puzzleNumber);
         
+        WriteLine($"Puzzle number: {puzzleNumber} ({puzzle.Width}x{puzzle.Height})");
+        
+        WriteLine();
+
         WriteLine(puzzle.ToString());
 
         // ReadKey();
@@ -48,7 +48,7 @@ public static class EntryPoint
         
         WriteLine();
         
-        WriteLine(PuzzleManager.Instance.GetPuzzle(puzzleNumber));
+        WriteLine($"Puzzle number: {puzzleNumber} ({puzzle.Width}x{puzzle.Height})");
         
         WriteLine();
         
