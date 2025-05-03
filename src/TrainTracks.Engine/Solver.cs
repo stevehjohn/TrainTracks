@@ -45,7 +45,6 @@ public class Solver
                 {
                     var backConnections = Connector.GetConnections(nextCell, -direction.Dx, -direction.Dy);
                 
-                    // TODO: This may not be the correct logic. Check it.
                     if (! backConnections.Contains(nextPiece))
                     {
                         continue;
