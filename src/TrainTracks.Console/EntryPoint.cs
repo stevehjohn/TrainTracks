@@ -7,7 +7,7 @@ namespace TrainTracks.Console;
 
 public static class EntryPoint
 {
-    private static int _count = -1;
+    private static int _count;
     
     public static void Main(string[] arguments)
     {
@@ -56,7 +56,7 @@ public static class EntryPoint
         
         WriteLine($"Solve state: {result}");
         
-        WriteLine($"Steps:       {_count + 1:N0}");
+        WriteLine($"Steps:       {_count:N0}");
         
         WriteLine();
     }
@@ -74,7 +74,7 @@ public static class EntryPoint
         
         WriteLine(grid.ToString());
         
-        WriteLine($"Steps: {_count + 1:N0}");
+        WriteLine($"Steps: {_count:N0}");
         
         // ReadKey();
     }
