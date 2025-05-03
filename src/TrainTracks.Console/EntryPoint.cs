@@ -9,8 +9,18 @@ public static class EntryPoint
 {
     private static int _count = -1;
     
-    public static void Main()
+    public static void Main(string[] arguments)
     {
+        var puzzleNumber = 6;
+
+        if (arguments.Length > 0)
+        {
+            if (! int.TryParse(arguments[0], out puzzleNumber))
+            {
+                puzzleNumber = 6;
+            }
+        }
+
         var solver = new Solver
         {
             StepCallback = VisualiseStep
@@ -18,7 +28,7 @@ public static class EntryPoint
 
         PuzzleManager.Path = "Data/puzzles.json";
         
-        var puzzle = PuzzleManager.Instance.Puzzles[2];
+        var puzzle = PuzzleManager.Instance.Puzzles[puzzleNumber];
 
         Clear();
         
