@@ -18,7 +18,7 @@ public static class EntryPoint
 
         PuzzleManager.Path = "Data/puzzles.json";
         
-        var puzzle = PuzzleManager.Instance.Puzzles[8];
+        var puzzle = PuzzleManager.Instance.Puzzles[2];
 
         Clear();
         
