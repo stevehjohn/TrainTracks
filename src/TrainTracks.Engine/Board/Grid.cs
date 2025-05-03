@@ -7,8 +7,6 @@ public class Grid
 {
     private Piece[,] _pieces;
 
-    private int _pieceCount;
-
     public Piece this[int x, int y]
     {
         get => _pieces[x, y];
@@ -67,8 +65,6 @@ public class Grid
 
         Array.Copy(_pieces, copy._pieces, Width * Height);
 
-        copy._pieceCount = _pieceCount;
-
         return copy;
     }
 
@@ -84,18 +80,11 @@ public class Grid
 
         _pieces = new Piece[Width, Height];
 
-        _pieceCount = 0;
-
         for (var x = 0; x < Width; x++)
         {
             for (var y = 0; y < Height; y++)
             {
                 _pieces[x, y] = puzzle.Data.StartingGrid[y * Width + x];
-
-                if (_pieces[x, y] != Piece.Empty)
-                {
-                    _pieceCount++;
-                }
             }
         }
 
