@@ -3,6 +3,7 @@ namespace TrainTracks.Engine.Board;
 public enum Piece
 {
     Empty = 0,
+    Cross = 1,
     Horizontal = 3,
     Vertical = 4,
     NorthEast = 5,
