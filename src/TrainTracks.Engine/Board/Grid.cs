@@ -26,7 +26,7 @@ public class Grid
     public int Bottom => Height - 1;
 
     public int Right => Width - 1;
-    
+
     public int TotalPieces { get; private set; }
 
     public int[] RowConstraints { get; private set; }
@@ -36,7 +36,7 @@ public class Grid
     public Point Entry { get; private set; }
 
     public Point Exit { get; private set; }
-    
+
     public bool IsComplete => ConstraintsAreMet() && PathIsContinuous();
 
     public bool IsValid => ConstraintsAreNotExceeded();
@@ -65,7 +65,7 @@ public class Grid
         copy._pieces = new Piece[Width, Height];
 
         Array.Copy(_pieces, copy._pieces, Width * Height);
-        
+
         return copy;
     }
 
@@ -80,7 +80,7 @@ public class Grid
         Height = puzzle.GridHeight;
 
         _pieces = new Piece[Width, Height];
-        
+
         for (var x = 0; x < Width; x++)
         {
             for (var y = 0; y < Height; y++)
@@ -94,7 +94,7 @@ public class Grid
         ColumnConstraints = puzzle.Data.VerticalClues;
 
         TotalPieces = 0;
-        
+
         for (var x = 0; x < Width; x++)
         {
             TotalPieces += ColumnConstraints[x];
@@ -208,13 +208,13 @@ public class Grid
 
         return true;
     }
-    
+
     private bool PathIsContinuous()
     {
         var visited = new HashSet<Point>();
 
         Traverse(Entry, visited, null);
-        
+
         return visited.Contains(Exit) && visited.Count == TotalPieces;
     }
 
@@ -235,22 +235,29 @@ public class Grid
         foreach (var direction in directions)
         {
             var nextPosition = new Point(position.X + direction.Dx, position.Y + direction.Dy);
-            
+
             if (nextPosition.X < 0 || nextPosition.X > Right || nextPosition.Y < 0 || nextPosition.Y > Bottom)
             {
                 continue;
             }
-            
+
             var nextPiece = this[nextPosition];
 
             if (nextPiece == Piece.Empty)
             {
                 continue;
             }
-            
+
             var connections = Connector.Connections(this[position], direction.Dx, direction.Dy);
 
             if (! connections.Contains(nextPiece))
+            {
+                continue;
+            }
+
+            var backConnections = Connector.Connections(nextPiece, -direction.Dx, -direction.Dy);
+            
+            if (! backConnections.Contains(this[position]))
             {
                 continue;
             }
