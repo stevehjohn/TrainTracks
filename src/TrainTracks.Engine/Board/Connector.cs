@@ -128,10 +128,8 @@ public static class Connector
                 }
 
                 break;
-
-            case Piece.Empty:
-            default:
-                throw new ArgumentOutOfRangeException(nameof(piece), piece, null);
         }
+
+        throw new ArgumentOutOfRangeException(nameof(piece), piece, null);
     }
 }
