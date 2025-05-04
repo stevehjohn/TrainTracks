@@ -2,46 +2,15 @@ namespace TrainTracks.Engine.Board;
 
 public static class Connector
 {
-    public static List<(int Dx, int Dy)> Directions(Piece piece)
+    public static readonly Dictionary<Piece, (int Dx, int Dy)[]> Directions = new()
     {
-        var directions = new List<(int Dx, int Dy)>();
-
-        switch (piece)
-        {
-            case Piece.Horizontal:
-                directions.Add((-1, 0));
-                directions.Add((1, 0));
-                break;
-
-            case Piece.Vertical:
-                directions.Add((0, -1));
-                directions.Add((0, 1));
-                break;
-
-            case Piece.NorthEast:
-                directions.Add((1, 0));
-                directions.Add((0, -1));
-                break;
-
-
-            case Piece.SouthEast:
-                directions.Add((1, 0));
-                directions.Add((0, 1));
-                break;
-
-            case Piece.SouthWest:
-                directions.Add((-1, 0));
-                directions.Add((0, 1));
-                break;
-            
-            case Piece.NorthWest:
-                directions.Add((-1, 0));
-                directions.Add((0, -1));
-                break;
-        }
-
-        return directions;
-    }
+        { Piece.Horizontal, [(-1, 0), (1, 0)] },
+        { Piece.Vertical, [(0, -1), (0, 1)] },
+        { Piece.NorthEast, [(1, 0), (0, -1)] },
+        { Piece.SouthEast, [(1, 0), (0, 1)] },
+        { Piece.SouthWest, [(-1, 0), (0, 1)] },
+        { Piece.NorthWest, [(-1, 0), (0, -1)] }
+    };
 
     private static readonly Dictionary<int, Piece[]> Connections = new()
     {

@@ -256,15 +256,15 @@ public class Grid
             return;
         }
 
-        var directions = Connector.Directions(this[position]);
-
-        if (fromDirection != null)
-        {
-            directions.Remove((-fromDirection.Value.Dx, -fromDirection.Value.Dy));
-        }
+        var directions = Connector.Directions[this[position]];
 
         foreach (var direction in directions)
         {
+            if (fromDirection != null && direction.Dx == -fromDirection.Value.Dx && direction.Dy == -fromDirection.Value.Dy)
+            {
+                continue;
+            }
+
             var nextPosition = new Point(position.X + direction.Dx, position.Y + direction.Dy);
 
             if (nextPosition.X < 0 || nextPosition.X > Right || nextPosition.Y < 0 || nextPosition.Y > Bottom)

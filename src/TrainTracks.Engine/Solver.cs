@@ -19,15 +19,15 @@ public class Solver
     {
         var currentPiece = Grid[position];
 
-        var directions = Connector.Directions(currentPiece);
-
-        if (fromDirection != null)
-        {
-            directions.Remove((-fromDirection.Value.Dx, -fromDirection.Value.Dy));
-        }
+        var directions = Connector.Directions[currentPiece];
 
         foreach (var direction in directions)
         {
+            if (fromDirection != null && direction.Dx == -fromDirection.Value.Dx && direction.Dy == -fromDirection.Value.Dy)
+            {
+                continue;
+            }
+
             var newPosition = new Point(position.X + direction.Dx, position.Y + direction.Dy);
 
             if (newPosition.X < 0 || newPosition.X > Grid.Right || newPosition.Y < 0 || newPosition.Y > Grid.Bottom)
