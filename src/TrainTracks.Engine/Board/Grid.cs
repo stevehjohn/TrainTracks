@@ -209,7 +209,7 @@ public class Grid
         return true;
     }
 
-    private bool PathIsContinuous(Point position, (int Dx, int Dy)? fromDirection)
+    private bool PathIsContinuous(Point position, (int Dx, int Dy)? fromDirection, int count = 0)
     {
         var directions = Connector.Directions(this[position]);
 
@@ -241,13 +241,13 @@ public class Grid
                 continue;
             }
 
-            if (PathIsContinuous(nextPosition, direction))
+            if (PathIsContinuous(nextPosition, direction, count + 1))
             {
                 return true;
             }
         }
         
-        return position.X == Exit.X && position.Y == Exit.Y;
+        return position.X == Exit.X && position.Y == Exit.Y && TotalPieces == count;
     }
 
     private bool ConstraintsAreNotExceeded()
