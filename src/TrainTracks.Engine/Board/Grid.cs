@@ -10,17 +10,34 @@ public class Grid
     private int[] _rowCounts;
     
     private int[] _columnCounts;
-    
+
     public Piece this[int x, int y]
     {
         get => _pieces[x, y];
-        set => _pieces[x, y] = value;
+        set 
+        {
+            if (value != Piece.Empty && value != Piece.Cross && _pieces[x, y] == Piece.Empty)
+            {
+                _columnCounts[x]++;
+                
+                _rowCounts[y]++;
+            }
+            
+            if ((value == Piece.Empty || value != Piece.Cross) && _pieces[x, y] != Piece.Empty)
+            {
+                _columnCounts[x]--;
+                
+                _rowCounts[y]--;
+            }
+            
+            _pieces [x, y] = value;
+        }
     }
 
     public Piece this[Point position]
     {
-        get => _pieces[position.X, position.Y];
-        set => _pieces[position.X, position.Y] = value;
+        get => this[position.X, position.Y];
+        set => this[position.X, position.Y] = value;
     }
 
     public int Width { get; private set; }
@@ -70,6 +87,14 @@ public class Grid
         copy._pieces = new Piece[Width, Height];
 
         Array.Copy(_pieces, copy._pieces, Width * Height);
+        
+        copy._rowCounts = new int[Height];
+        
+        Array.Copy(_rowCounts, copy._rowCounts, Height);
+        
+        copy._columnCounts = new int[Width];
+        
+        Array.Copy(_columnCounts, copy._columnCounts, Width);;
 
         return copy;
     }
@@ -188,40 +213,20 @@ public class Grid
     {
         for (var x = 0; x < Width; x++)
         {
-            var sum = 0;
-
-            for (var y = 0; y < Height; y++)
-            {
-                if (this[x, y] != Piece.Empty)
-                {
-                    sum++;
-                }
-            }
-
-            if (sum != ColumnConstraints[x])
+            if (_columnCounts[x] != ColumnConstraints[x])
             {
                 return false;
             }
         }
-
+        
         for (var y = 0; y < Height; y++)
         {
-            var sum = 0;
-
-            for (var x = 0; x < Width; x++)
-            {
-                if (this[x, y] != Piece.Empty)
-                {
-                    sum++;
-                }
-            }
-
-            if (sum != RowConstraints[y])
+            if (_rowCounts[y] != RowConstraints[y])
             {
                 return false;
             }
         }
-
+        
         return true;
     }
 
