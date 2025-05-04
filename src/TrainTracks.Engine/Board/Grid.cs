@@ -44,9 +44,9 @@ public class Grid
 
     public int Height { get; private set; }
 
-    public int Bottom => Height - 1;
+    public int Bottom { get; private set; }
 
-    public int Right => Width - 1;
+    public int Right { get; private set; }
 
     public int TotalPieces { get; private set; }
 
@@ -73,6 +73,8 @@ public class Grid
         {
             Width = Width,
             Height = Height,
+            Right = Right,
+            Bottom = Bottom,
             Entry = new Point(Entry),
             Exit = new Point(Exit),
             RowConstraints = new int[Height],
@@ -112,6 +114,10 @@ public class Grid
         Width = puzzle.GridWidth;
 
         Height = puzzle.GridHeight;
+        
+        Right = Width - 1;
+        
+        Bottom = Height - 1;
 
         _pieces = new Piece[Width, Height];
         
