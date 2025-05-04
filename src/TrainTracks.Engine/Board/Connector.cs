@@ -61,8 +61,6 @@ public static class Connector
     
     public static IReadOnlyList<Piece> GetConnections(Piece piece, int dX, int dY)
     {
-        var connections = new List<Piece>();
-
         switch (piece)
         {
             case Piece.Horizontal:
@@ -135,7 +133,5 @@ public static class Connector
             default:
                 throw new ArgumentOutOfRangeException(nameof(piece), piece, null);
         }
-
-        return connections;
     }
 }
