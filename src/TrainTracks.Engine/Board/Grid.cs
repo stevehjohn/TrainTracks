@@ -279,14 +279,14 @@ public class Grid
                 continue;
             }
 
-            var connections = Connector.Connections(this[position], direction.Dx, direction.Dy);
+            var connections = Connector.GetConnections(this[position], direction.Dx, direction.Dy);
 
             if (! connections.Contains(nextPiece))
             {
                 continue;
             }
 
-            var backConnections = Connector.Connections(nextPiece, -direction.Dx, -direction.Dy);
+            var backConnections = Connector.GetConnections(nextPiece, -direction.Dx, -direction.Dy);
             
             if (! backConnections.Contains(this[position]))
             {

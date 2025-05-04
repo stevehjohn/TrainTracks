@@ -44,7 +44,7 @@ public class Solver
                 }
             }
 
-            var connections = Connector.Connections(currentPiece, direction.Dx, direction.Dy);
+            var connections = Connector.GetConnections(currentPiece, direction.Dx, direction.Dy);
 
             foreach (var nextPiece in connections)
             {
@@ -52,7 +52,7 @@ public class Solver
             
                 if (nextCell != Piece.Empty)
                 {
-                    var backConnections = Connector.Connections(nextCell, -direction.Dx, -direction.Dy);
+                    var backConnections = Connector.GetConnections(nextCell, -direction.Dx, -direction.Dy);
                 
                     if (! backConnections.Contains(nextPiece))
                     {
