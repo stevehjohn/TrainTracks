@@ -55,7 +55,8 @@ public class Grid
             Entry = new Point(Entry),
             Exit = new Point(Exit),
             RowConstraints = new int[Height],
-            ColumnConstraints = new int[Width]
+            ColumnConstraints = new int[Width],
+            TotalPieces = TotalPieces
         };
 
         Array.Copy(RowConstraints, copy.RowConstraints, Height);
@@ -215,7 +216,12 @@ public class Grid
 
         Traverse(Entry, visited, null);
 
-        return visited.Contains(Exit) && visited.Count == TotalPieces;
+        // Console.WriteLine($"V:{visited.Count}, T: {TotalPieces}");
+        //
+        // Console.ReadLine();
+
+        // return visited.Contains(Exit) && visited.Count == TotalPieces;
+        return visited.Count == TotalPieces;
     }
 
     private void Traverse(Point position, HashSet<Point> visited, (int Dx, int Dy)? fromDirection)
