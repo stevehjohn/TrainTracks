@@ -82,8 +82,6 @@ public class Solver
                 }
 
                 Grid[newPosition] = Piece.Empty;
-
-                StepCallback?.Invoke(Grid);
             }
         }
 
