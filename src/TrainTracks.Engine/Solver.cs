@@ -35,10 +35,10 @@ public class Solver
                 continue;
             }
 
-            if (Grid[newPosition] != Piece.Empty)
+            if (Grid[newPosition] == Piece.Empty)
             {
-                if (Grid.GetRowCount(newPosition.Y) > Grid.RowConstraints[newPosition.Y]
-                    || Grid.GetColumnCount(newPosition.X) > Grid.ColumnConstraints[newPosition.X])
+                if (Grid.GetRowCount(newPosition.Y) + 1 > Grid.RowConstraints[newPosition.Y]
+                    || Grid.GetColumnCount(newPosition.X) + 1 > Grid.ColumnConstraints[newPosition.X])
                 {
                     continue;
                 }
