@@ -26,8 +26,6 @@ public class Grid
     public int Bottom => Height - 1;
 
     public int Right => Width - 1;
-    
-    public int TotalPieces { get; private set; }
 
     public int[] RowConstraints { get; private set; }
 
@@ -92,18 +90,6 @@ public class Grid
         RowConstraints = puzzle.Data.HorizontalClues;
 
         ColumnConstraints = puzzle.Data.VerticalClues;
-
-        TotalPieces = 0;
-
-        for (var x = 0; x < Width; x++)
-        {
-            TotalPieces += ColumnConstraints[x];
-        }
-
-        for (var y = 0; y < Width; y++)
-        {
-            TotalPieces += RowConstraints[y];
-        }
 
         FindEntryAndExit();
     }
