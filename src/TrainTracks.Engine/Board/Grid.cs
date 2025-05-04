@@ -7,6 +7,10 @@ public class Grid
 {
     private Piece[,] _pieces;
 
+    private int[] _rowCounts;
+    
+    private int[] _columnCounts;
+    
     public Piece this[int x, int y]
     {
         get => _pieces[x, y];
@@ -81,12 +85,23 @@ public class Grid
         Height = puzzle.GridHeight;
 
         _pieces = new Piece[Width, Height];
+        
+        _rowCounts = new int[Height];
+
+        _columnCounts = new int[Width];
 
         for (var x = 0; x < Width; x++)
         {
             for (var y = 0; y < Height; y++)
             {
                 _pieces[x, y] = puzzle.Data.StartingGrid[y * Width + x];
+
+                if (_pieces[x, y] != Piece.Empty)
+                {
+                    _columnCounts[x]++;
+                    
+                    _rowCounts[y]++;
+                }
             }
         }
 
