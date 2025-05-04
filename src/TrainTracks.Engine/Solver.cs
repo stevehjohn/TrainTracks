@@ -76,7 +76,7 @@ public class Solver
                     return true;
                 }
 
-                if (Grid.IsValid && PlaceNextMove(newPosition, (direction.Dx, direction.Dy)))
+                if (PlaceNextMove(newPosition, (direction.Dx, direction.Dy)))
                 {
                     return true;
                 }
