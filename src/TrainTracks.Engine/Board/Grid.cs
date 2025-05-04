@@ -37,7 +37,7 @@ public class Grid
 
     public Point Exit { get; private set; }
     
-    public bool IsComplete => ConstraintsAreMet() && PathIsContinuous(Entry, null);
+    public bool IsComplete => ConstraintsAreMet() && PathIsContinuous();
 
     public bool IsValid => ConstraintsAreNotExceeded();
 
@@ -208,9 +208,23 @@ public class Grid
 
         return true;
     }
-
-    private bool PathIsContinuous(Point position, (int Dx, int Dy)? fromDirection, int count = 0)
+    
+    private bool PathIsContinuous()
     {
+        var visited = new HashSet<Point>();
+
+        Traverse(Entry, visited, null);
+        
+        return visited.Contains(Exit) && visited.Count == TotalPieces;
+    }
+
+    private void Traverse(Point position, HashSet<Point> visited, (int Dx, int Dy)? fromDirection)
+    {
+        if (! visited.Add(position))
+        {
+            return;
+        }
+
         var directions = Connector.Directions(this[position]);
 
         if (fromDirection != null)
@@ -241,13 +255,8 @@ public class Grid
                 continue;
             }
 
-            if (PathIsContinuous(nextPosition, direction, count + 1))
-            {
-                return true;
-            }
+            Traverse(nextPosition, visited, direction);
         }
-        
-        return position.X == Exit.X && position.Y == Exit.Y && TotalPieces == count;
     }
 
     private bool ConstraintsAreNotExceeded()
