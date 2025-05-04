@@ -295,40 +295,20 @@ public class Grid
     {
         for (var x = 0; x < Width; x++)
         {
-            var sum = 0;
-
-            for (var y = 0; y < Height; y++)
-            {
-                if (this[x, y] != Piece.Empty)
-                {
-                    sum++;
-                }
-            }
-
-            if (sum > ColumnConstraints[x])
+            if (_columnCounts[x] > ColumnConstraints[x])
             {
                 return false;
             }
         }
-
+        
         for (var y = 0; y < Height; y++)
         {
-            var sum = 0;
-
-            for (var x = 0; x < Width; x++)
-            {
-                if (this[x, y] != Piece.Empty)
-                {
-                    sum++;
-                }
-            }
-
-            if (sum > RowConstraints[y])
+            if (_rowCounts[y] > RowConstraints[y])
             {
                 return false;
             }
         }
-
+        
         return true;
     }
 
