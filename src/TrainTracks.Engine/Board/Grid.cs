@@ -103,6 +103,10 @@ public class Grid
     {
     }
 
+    public int GetColumnCount(int x) => _columnCounts[x];
+    
+    public int GetRowCount(int y) => _rowCounts[y];
+    
     private void Initialise(Puzzle puzzle)
     {
         Width = puzzle.GridWidth;

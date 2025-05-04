@@ -35,6 +35,13 @@ public class Solver
                 continue;
             }
 
+            // This isn't correct.
+            if (Grid.GetRowCount(newPosition.Y) >= Grid.RowConstraints[newPosition.Y]
+                || Grid.GetColumnCount(newPosition.X) >= Grid.ColumnConstraints[newPosition.X])
+            {
+                continue;
+            }
+
             var connections = Connector.Connections(currentPiece, direction.Dx, direction.Dy);
 
             foreach (var nextPiece in connections)
