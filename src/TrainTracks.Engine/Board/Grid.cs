@@ -216,11 +216,6 @@ public class Grid
 
         Traverse(Entry, visited, null);
 
-        // Console.WriteLine($"V:{visited.Count}, T: {TotalPieces}");
-        //
-        // Console.ReadLine();
-
-        // return visited.Contains(Exit) && visited.Count == TotalPieces;
         return visited.Count == TotalPieces;
     }
 
