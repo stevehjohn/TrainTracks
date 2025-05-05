@@ -16,7 +16,23 @@ public class Solver
 
         PrefillKnownPieces();
 
-        return PlaceNextMove(Grid.Entry, null);
+        var result = PlaceNextMove(Grid.Entry, null);
+
+        if (result)
+        {
+            for (var x = 0; x < Grid.Width; x++)
+            {
+                for (var y = 0; y < Grid.Height; y++)
+                {
+                    if (Grid[x, y] == Piece.Cross)
+                    {
+                        Grid[x, y] = Piece.Empty;
+                    }
+                }
+            }
+        }
+        
+        return result;
     }
 
     private bool PlaceNextMove(Point position, (int Dx, int Dy)? fromDirection)
