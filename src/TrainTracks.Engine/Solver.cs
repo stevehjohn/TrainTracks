@@ -130,13 +130,21 @@ public class Solver
 
     private void PrefillCrosses()
     {
+        for (var x = 0; x < Grid.Width; x++)
+        {
+            if (Grid.ColumnConstraints[x] == 1)
+            {
+                PlaceColumnExclusions(x);
+            }
+        }
+
         if (Grid.GetRowRemaining(0) == 2)
         {
             for (var x = 0; x < Grid.Width; x++)
             {
                 if (Grid[x, 1] is Piece.Vertical or Piece.NorthWest or Piece.NorthEast)
                 {
-                    PlaceRowCrosses(0, x);
+                    PlaceRowImpliedExclusions(0, x);
                 }
             }
         }
@@ -147,17 +155,28 @@ public class Solver
             {
                 if (Grid[x, Grid.Bottom - 1] is Piece.Vertical or Piece.SouthEast or Piece.SouthWest)
                 {
-                    PlaceRowCrosses(Grid.Bottom, x);
+                    PlaceRowImpliedExclusions(Grid.Bottom, x);
                 }
             }
         }
     }
 
-    private void PlaceRowCrosses(int y, int candidate)
+    private void PlaceRowImpliedExclusions(int y, int candidate)
     {
         for (var x = 0; x < Grid.Width; x++)
         {
             if (Grid[x, y] == Piece.Empty && Math.Abs(x - candidate) > 1)
+            {
+                Grid[x, y] = Piece.Cross;
+            }
+        }
+    }
+
+    private void PlaceColumnExclusions(int x)
+    {
+        for (var y = 0; y < Grid.Height; y++)
+        {
+            if (Grid[x, y] == Piece.Empty)
             {
                 Grid[x, y] = Piece.Cross;
             }
