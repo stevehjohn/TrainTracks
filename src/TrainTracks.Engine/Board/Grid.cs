@@ -351,6 +351,10 @@ public class Grid
                     case Piece.SouthWest:
                         builder.Append('┐');
                         break;
+                    
+                    case Piece.Cross:
+                        builder.Append('⨉');
+                        break;
 
                     case Piece.Empty:
                     default:

@@ -25,3 +25,4 @@ An engine based around the Train Track puzzle games.
 ## Ideas
 
 - Prefill 2s, 3s and 4s on the edges where possible.
+- Prefill Xs where possible.

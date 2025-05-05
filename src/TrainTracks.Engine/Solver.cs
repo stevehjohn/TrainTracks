@@ -46,10 +46,15 @@ public class Solver
 
             var connections = Connector.GetConnections(currentPiece, direction.Dx, direction.Dy);
 
+            var nextCell = Grid[newPosition];
+
+            if (nextCell == Piece.Cross)
+            {
+                continue;
+            }
+
             foreach (var nextPiece in connections)
             {
-                var nextCell = Grid[newPosition];
-            
                 if (nextCell != Piece.Empty)
                 {
                     var backConnections = Connector.GetConnections(nextCell, -direction.Dx, -direction.Dy);
