@@ -12,6 +12,10 @@ public class Solver
     {
         Grid = grid;
         
+        PrefillCrosses();
+        
+        PrefillKnownPieces();
+        
         return PlaceNextMove(Grid.Entry, null);
     }
 
@@ -122,5 +126,13 @@ public class Solver
         }
 
         return false;
+    }
+
+    private void PrefillCrosses()
+    {
+    }
+    
+    private void PrefillKnownPieces()
+    {
     }
 }
