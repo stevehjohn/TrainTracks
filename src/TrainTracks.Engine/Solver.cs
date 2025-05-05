@@ -66,6 +66,26 @@ public class Solver
 
                     continue;                
                 }
+                
+                if (newPosition.Y == Grid.Bottom && nextPiece is Piece.Vertical or Piece.SouthEast or Piece.SouthWest)
+                {
+                    continue;
+                }
+                
+                if (newPosition.Y == 0 && nextPiece is Piece.Vertical or Piece.NorthEast or Piece.NorthWest)
+                {
+                    continue;
+                }
+                
+                if (newPosition.X == Grid.Right && nextPiece is Piece.Horizontal or Piece.NorthEast or Piece.SouthEast)
+                {
+                    continue;
+                }
+                
+                if (newPosition.X == 0 && nextPiece is Piece.Horizontal or Piece.NorthWest or Piece.SouthWest)
+                {
+                    continue;
+                }
 
                 Grid[newPosition] = nextPiece;
 
