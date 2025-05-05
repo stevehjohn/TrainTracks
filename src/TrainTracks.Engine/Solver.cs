@@ -7,15 +7,15 @@ public class Solver
     public Grid Grid { get; private set; }
 
     public Action<Grid> StepCallback { get; init; }
-    
+
     public bool Solve(Grid grid)
     {
         Grid = grid;
-        
+
         PrefillCrosses();
-        
+
         PrefillKnownPieces();
-        
+
         return PlaceNextMove(Grid.Entry, null);
     }
 
@@ -62,7 +62,7 @@ public class Solver
                 if (nextCell != Piece.Empty)
                 {
                     var backConnections = Connector.GetConnections(nextCell, -direction.Dx, -direction.Dy);
-                
+
                     if (! backConnections.Contains(nextPiece))
                     {
                         continue;
@@ -73,7 +73,7 @@ public class Solver
                         return true;
                     }
 
-                    continue;                
+                    continue;
                 }
 
                 if (WouldExitBoard(newPosition, nextPiece))
@@ -104,22 +104,21 @@ public class Solver
 
     private bool WouldExitBoard(Point position, Piece piece)
     {
-                
         if (position.Y == Grid.Bottom && piece is Piece.Vertical or Piece.SouthEast or Piece.SouthWest)
         {
             return true;
         }
-                
+
         if (position.Y == 0 && piece is Piece.Vertical or Piece.NorthEast or Piece.NorthWest)
         {
             return true;
         }
-                
+
         if (position.X == Grid.Right && piece is Piece.Horizontal or Piece.NorthEast or Piece.SouthEast)
         {
             return true;
         }
-                
+
         if (position.X == 0 && piece is Piece.Horizontal or Piece.NorthWest or Piece.SouthWest)
         {
             return true;
@@ -136,6 +135,11 @@ public class Solver
             {
                 PlaceColumnExclusions(x);
             }
+
+            if (Grid.ColumnConstraints[x] == 3)
+            {
+                PlaceColumnImplicitExclusions(x);
+            }
         }
 
         if (Grid.GetRowRemaining(0) == 2)
@@ -148,7 +152,7 @@ public class Solver
                 }
             }
         }
-        
+
         if (Grid.GetRowRemaining(Grid.Bottom) == 2)
         {
             for (var x = 0; x < Grid.Width; x++)
@@ -183,6 +187,27 @@ public class Solver
         }
     }
 
+    private void PlaceColumnImplicitExclusions(int x)
+    {
+        var candidate = 0;
+
+        for (var y = 0; y < Grid.Height; y++)
+        {
+            if (Grid[x, y] != Piece.Empty)
+            {
+                candidate = y;
+            }
+        }
+
+        for (var y = 0; y < Grid.Height; y++)
+        {
+            if (Grid[x, y] == Piece.Empty && Math.Abs(y - candidate) > 1)
+            {
+                Grid[x, y] = Piece.Cross;
+            }
+        }
+    }
+
     private void PrefillKnownPieces()
     {
         for (var y = 0; y < Grid.Height; y++)
@@ -191,7 +216,7 @@ public class Solver
             {
                 Grid[0, y - 1] = Piece.SouthEast;
             }
-            
+
             if (Grid[0, y] == Piece.SouthEast)
             {
                 Grid[0, y + 1] = Piece.NorthEast;
@@ -201,7 +226,7 @@ public class Solver
             {
                 Grid[Grid.Right, y - 1] = Piece.SouthWest;
             }
-            
+
             if (Grid[Grid.Right, y] == Piece.SouthWest)
             {
                 Grid[Grid.Right, y + 1] = Piece.NorthWest;
