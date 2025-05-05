@@ -130,9 +130,52 @@ public class Solver
 
     private void PrefillCrosses()
     {
+        if (Grid.GetRowRemaining(0) == 2)
+        {
+            for (var x = 0; x < Grid.Width; x++)
+            {
+                if (Grid[x, 1] is Piece.Vertical or Piece.NorthWest or Piece.NorthEast)
+                {
+                    PlaceRowCrosses(0, x);
+                }
+            }
+        }
     }
-    
+
+    private void PlaceRowCrosses(int y, int candidate)
+    {
+        for (var x = 0; x < Grid.Width; x++)
+        {
+            if (Grid[x, y] == Piece.Empty && Math.Abs(x - candidate) > 1)
+            {
+                Grid[x, y] = Piece.Cross;
+            }
+        }
+    }
+
     private void PrefillKnownPieces()
     {
+        for (var y = 0; y < Grid.Height; y++)
+        {
+            if (Grid[0, y] == Piece.NorthEast)
+            {
+                Grid[0, y - 1] = Piece.SouthEast;
+            }
+            
+            if (Grid[0, y] == Piece.SouthEast)
+            {
+                Grid[0, y + 1] = Piece.NorthEast;
+            }
+
+            if (Grid[Grid.Right, y] == Piece.NorthWest)
+            {
+                Grid[Grid.Right, y - 1] = Piece.SouthWest;
+            }
+            
+            if (Grid[Grid.Right, y] == Piece.SouthWest)
+            {
+                Grid[Grid.Right, y + 1] = Piece.NorthWest;
+            }
+        }
     }
 }

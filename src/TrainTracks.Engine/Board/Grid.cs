@@ -11,11 +11,16 @@ public class Grid
     
     private int[] _columnCounts;
 
-    private Piece this[int x, int y]
+    public Piece this[int x, int y]
     {
         get => _pieces[x, y];
         set 
         {
+            if (x < 0 || x > Right || y < 0 || y > Bottom)
+            {
+                return;
+            }
+
             if (value != Piece.Empty && value != Piece.Cross && _pieces[x, y] == Piece.Empty)
             {
                 _columnCounts[x]++;
@@ -53,7 +58,7 @@ public class Grid
     public int[] RowConstraints { get; private set; }
 
     public int[] ColumnConstraints { get; private set; }
-
+    
     public Point Entry { get; private set; }
 
     public Point Exit { get; private set; }
@@ -108,6 +113,10 @@ public class Grid
     public int GetColumnCount(int x) => _columnCounts[x];
     
     public int GetRowCount(int y) => _rowCounts[y];
+    
+    public int GetRowRemaining(int y) => RowConstraints[y] - _rowCounts[y];
+    
+    public int GetColumnRemaining(int x) => ColumnConstraints[x] - _columnCounts[x];
     
     private void Initialise(Puzzle puzzle)
     {
