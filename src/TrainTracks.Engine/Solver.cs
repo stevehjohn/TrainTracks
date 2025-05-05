@@ -228,24 +228,32 @@ public class Solver
     {
         for (var y = 0; y < Grid.Height; y++)
         {
-            if (Grid[0, y] == Piece.NorthEast)
+            if (Grid[0, y] == Piece.NorthEast && Grid.GetColumnRemaining(0) == 1)
             {
                 Grid[0, y - 1] = Piece.SouthEast;
+                
+                PlaceColumnExclusions(0);
             }
 
-            if (Grid[0, y] == Piece.SouthEast)
+            if (Grid[0, y] == Piece.SouthEast && Grid.GetColumnRemaining(0) == 1)
             {
                 Grid[0, y + 1] = Piece.NorthEast;
+                
+                PlaceColumnExclusions(0);
             }
-
-            if (Grid[Grid.Right, y] == Piece.NorthWest)
+            
+            if (Grid[Grid.Right, y] == Piece.NorthWest && Grid.GetColumnRemaining(Grid.Right) == 1)
             {
                 Grid[Grid.Right, y - 1] = Piece.SouthWest;
+                
+                PlaceColumnExclusions(Grid.Right);
             }
 
-            if (Grid[Grid.Right, y] == Piece.SouthWest)
+            if (Grid[Grid.Right, y] == Piece.SouthWest && Grid.GetColumnRemaining(Grid.Right) == 1)
             {
                 Grid[Grid.Right, y + 1] = Piece.NorthWest;
+                
+                PlaceColumnExclusions(Grid.Right);
             }
         }
     }
