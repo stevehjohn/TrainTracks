@@ -147,7 +147,7 @@ public class Solver
     {
         for (var x = 0; x < Grid.Width; x++)
         {
-            if (Grid.ColumnConstraints[x] == 1)
+            if (Grid.ColumnConstraints[x] == 1 && Grid.GetColumnRemaining(x) == 0)
             {
                 PlaceColumnExclusions(x);
             }
@@ -205,14 +205,19 @@ public class Solver
 
     private void PlaceColumnImplicitExclusions(int x)
     {
-        var candidate = 0;
+        var candidate = -1;
 
         for (var y = 0; y < Grid.Height; y++)
         {
-            if (Grid[x, y] != Piece.Empty)
+            if (Grid[x, y] == Piece.Vertical)
             {
                 candidate = y;
             }
+        }
+
+        if (candidate == -1)
+        {
+            return;
         }
 
         for (var y = 0; y < Grid.Height; y++)
