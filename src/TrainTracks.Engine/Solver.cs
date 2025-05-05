@@ -140,6 +140,17 @@ public class Solver
                 }
             }
         }
+        
+        if (Grid.GetRowRemaining(Grid.Bottom) == 2)
+        {
+            for (var x = 0; x < Grid.Width; x++)
+            {
+                if (Grid[x, Grid.Bottom - 1] is Piece.Vertical or Piece.SouthEast or Piece.SouthWest)
+                {
+                    PlaceRowCrosses(Grid.Bottom, x);
+                }
+            }
+        }
     }
 
     private void PlaceRowCrosses(int y, int candidate)
