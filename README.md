@@ -26,4 +26,4 @@ An engine based around the Train Track puzzle games.
 
 - Prefill 2s, 3s and 4s on the edges where possible.
 - Prefill Xs where possible.
-- If a row is full, leave it as is? Must be correct?
+- If a row is full with no dangling edges, leave it as is? Must be correct?
