@@ -11,7 +11,7 @@ public class Grid
     
     private int[] _columnCounts;
 
-    public Piece this[int x, int y]
+    private Piece this[int x, int y]
     {
         get => _pieces[x, y];
         set 
