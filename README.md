@@ -21,3 +21,7 @@ An engine based around the Train Track puzzle games.
  11 | (11x12) | ~15s     | ~26m       | Yes     |
  12 | (12x12) |          |            |         |
 ```
+
+## Ideas
+
+- Prefill 2s and 3s on the edges where possible.

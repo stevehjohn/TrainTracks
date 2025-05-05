@@ -66,23 +66,8 @@ public class Solver
 
                     continue;                
                 }
-                
-                if (newPosition.Y == Grid.Bottom && nextPiece is Piece.Vertical or Piece.SouthEast or Piece.SouthWest)
-                {
-                    continue;
-                }
-                
-                if (newPosition.Y == 0 && nextPiece is Piece.Vertical or Piece.NorthEast or Piece.NorthWest)
-                {
-                    continue;
-                }
-                
-                if (newPosition.X == Grid.Right && nextPiece is Piece.Horizontal or Piece.NorthEast or Piece.SouthEast)
-                {
-                    continue;
-                }
-                
-                if (newPosition.X == 0 && nextPiece is Piece.Horizontal or Piece.NorthWest or Piece.SouthWest)
+
+                if (WouldExitBoard(newPosition, nextPiece))
                 {
                     continue;
                 }
@@ -103,6 +88,32 @@ public class Solver
 
                 Grid[newPosition] = Piece.Empty;
             }
+        }
+
+        return false;
+    }
+
+    private bool WouldExitBoard(Point position, Piece piece)
+    {
+                
+        if (position.Y == Grid.Bottom && piece is Piece.Vertical or Piece.SouthEast or Piece.SouthWest)
+        {
+            return true;
+        }
+                
+        if (position.Y == 0 && piece is Piece.Vertical or Piece.NorthEast or Piece.NorthWest)
+        {
+            return true;
+        }
+                
+        if (position.X == Grid.Right && piece is Piece.Horizontal or Piece.NorthEast or Piece.SouthEast)
+        {
+            return true;
+        }
+                
+        if (position.X == 0 && piece is Piece.Horizontal or Piece.NorthWest or Piece.SouthWest)
+        {
+            return true;
         }
 
         return false;
