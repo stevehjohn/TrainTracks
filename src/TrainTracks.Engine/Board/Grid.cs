@@ -65,8 +65,6 @@ public class Grid
 
     public bool IsComplete => ConstraintsAreMet() && PathIsContinuous();
 
-    public bool IsValid => ConstraintsAreNotExceeded();
-
     public Grid(Puzzle puzzle)
     {
         Initialise(puzzle);
