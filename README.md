@@ -20,6 +20,7 @@ An engine based around the Train Track puzzle games.
  10 | (7x6)   | <0.01s   | ~1.5k      | Yes     |
  11 | (11x12) | ~15s     | ~25m       | Yes     |
  12 | (12x12) | ~9h 40m  | ~55b       | Yes     |
+ 13 | (10x7)  | <0.1s    | ~25k       | Yes     |
 ```
 
 ## Ideas
