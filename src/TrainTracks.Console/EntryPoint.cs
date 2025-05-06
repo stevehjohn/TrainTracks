@@ -11,6 +11,6 @@ public static class EntryPoint
     {
         Parser.Default.ParseArguments<LocalOptions, RemoteOptions>(arguments)
             .WithParsed<LocalOptions>(options => new Local().Run(options.PuzzleNumber))
-            .WithParsed<RemoteOptions>(_ => Debug.Fail("Remote not yet implemented."));
+            .WithParsed<RemoteOptions>(options => new Remote().Run(options));
     }
 }
