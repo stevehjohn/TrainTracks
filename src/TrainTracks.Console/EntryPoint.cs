@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using CommandLine;
+﻿using CommandLine;
 using TrainTracks.Console.Infrastructure;
 using TrainTracks.Console.Runners;
 
