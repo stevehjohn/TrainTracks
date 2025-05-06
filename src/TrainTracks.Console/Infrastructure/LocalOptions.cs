@@ -1,3 +1,5 @@
+// ReSharper disable UnusedAutoPropertyAccessor.Global
+
 using CommandLine;
 using JetBrains.Annotations;
 
