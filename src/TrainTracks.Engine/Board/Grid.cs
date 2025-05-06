@@ -304,27 +304,6 @@ public class Grid
         }
     }
 
-    private bool ConstraintsAreNotExceeded()
-    {
-        for (var x = 0; x < Width; x++)
-        {
-            if (_columnCounts[x] > ColumnConstraints[x])
-            {
-                return false;
-            }
-        }
-        
-        for (var y = 0; y < Height; y++)
-        {
-            if (_rowCounts[y] > RowConstraints[y])
-            {
-                return false;
-            }
-        }
-        
-        return true;
-    }
-
     public override string ToString()
     {
         var builder = new StringBuilder();
