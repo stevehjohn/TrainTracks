@@ -12,9 +12,9 @@ public class Solver
     {
         Grid = grid;
 
-        PrefillCrosses();
-
-        PrefillKnownPieces();
+        // PrefillCrosses();
+        //
+        // PrefillKnownPieces();
 
         var result = PlaceNextMove(Grid.Entry, null);
 
