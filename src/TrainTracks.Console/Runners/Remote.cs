@@ -99,7 +99,7 @@ public class Remote
         {
             CursorLeft = grid.Width + 3;
             
-            Write(line);
+            WriteLine(line);
         }
     }
 }
