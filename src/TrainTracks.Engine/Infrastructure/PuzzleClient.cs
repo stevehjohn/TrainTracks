@@ -39,6 +39,20 @@ public sealed class PuzzleClient : IDisposable
     
     public Grid GetNextNuzzle(Difficulty difficulty)
     {
+        var nextPuzzleDate = GetOldestIncompletePuzzle(difficulty);
+
+        if (nextPuzzleDate == null)
+        {
+            return null;
+        }
+        
+        System.Console.WriteLine(nextPuzzleDate.Value);
+        
+        return null;
+    }
+
+    private DateOnly? GetOldestIncompletePuzzle(Difficulty difficulty)
+    {
         var now = DateTime.Now;
 
         for (var year = 2005; year <= now.Year; year++)
@@ -57,13 +71,15 @@ public sealed class PuzzleClient : IDisposable
             {
                 var puzzle = puzzles[0];
                 
-                System.Console.WriteLine(puzzle.Attributes["id"].Value);
+                var id =puzzle.Attributes["id"].Value;
+
+                var parts = id.Split('-');
                 
-                break;
+                return new DateOnly(int.Parse(parts[3]), int.Parse(parts[4]), int.Parse(parts[5]));
             }
         }
 
-        return null;
+        return null;   
     }
 
     public void Dispose()
