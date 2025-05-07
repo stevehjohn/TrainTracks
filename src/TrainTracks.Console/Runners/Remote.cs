@@ -22,16 +22,18 @@ public class Remote
             StepCallback = VisualiseStep
         };
 
-        Clear();
-
-        WriteLine();
-
         var stopwatch = new Stopwatch();
 
         for (var i = 0; i < options.Quantity; i++)
         {
-            stopwatch.Restart();
+            Clear();
+            
+            WriteLine();
+            
+            WriteLine($"Fetching puzzle {i + 1} of {options.Quantity}...");
 
+            WriteLine();
+            
             var puzzle = client.GetNextPuzzle(options.Difficulty);
 
             if (puzzle == null)
@@ -41,7 +43,7 @@ public class Remote
                 break;
             }
 
-            WriteLine($"Solving puzzle for {puzzle.Value.Date:d} ({puzzle.Value.Grid.Width}x{puzzle.Value.Grid.Height})");
+            WriteLine($"Solving puzzle for {puzzle.Value.Date:R} ({puzzle.Value.Grid.Width}x{puzzle.Value.Grid.Height})");
 
             WriteLine();
 
@@ -52,6 +54,8 @@ public class Remote
             _top = CursorTop;
             
             _count = 0;
+
+            stopwatch.Restart();
 
             var result = solver.Solve(puzzle.Value.Grid);
 
@@ -64,8 +68,7 @@ public class Remote
                 WriteLine();
             }
 
-
-            WriteLine($"Solved in {stopwatch.Elapsed:c}, with {_count:N0} iterations.");
+            WriteLine($"Solved in {stopwatch.Elapsed:g}, with {_count:N0} iterations.");
 
             WriteLine();
 
