@@ -102,6 +102,8 @@ public sealed class PuzzleClient : IDisposable
             }
         }
 
+        score -= grid.FixedPieces * 5;
+
         var content = $"{{\"type\":33,\"variant\":14,\"year\":{date.Year},\"month\":{date.Month},\"day\":{date.Day},\"score\":{score},\"solution\":\"{builder}\",\"userID\":{_userId},\"status\":\"PENDING\",\"createdAt\":{timestamp}}}";
         
         System.Console.WriteLine(content);

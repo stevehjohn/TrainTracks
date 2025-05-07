@@ -54,6 +54,8 @@ public class Grid
     public int Right { get; private set; }
 
     public int TotalPieces { get; private set; }
+    
+    public int FixedPieces { get; private set; }
 
     public int[] RowConstraints { get; private set; }
 
@@ -132,6 +134,8 @@ public class Grid
 
         _columnCounts = new int[Width];
 
+        FixedPieces = 0;
+
         for (var x = 0; x < Width; x++)
         {
             for (var y = 0; y < Height; y++)
@@ -140,6 +144,8 @@ public class Grid
 
                 if (_pieces[x, y] != Piece.Empty)
                 {
+                    FixedPieces++;
+                    
                     _columnCounts[x]++;
                     
                     _rowCounts[y]++;
