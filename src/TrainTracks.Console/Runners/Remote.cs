@@ -47,12 +47,12 @@ public class Remote
 
             WriteLine();
 
-            _top = CursorTop;
-            
             WriteLine(puzzle.Value.Grid.ToString());
 
             WriteLine();
 
+            _top = CursorTop;
+            
             _count = 0;
 
             stopwatch.Restart();
@@ -78,7 +78,10 @@ public class Remote
 
             WriteLine($"Solved in {stopwatch.Elapsed:g}, with {_count:N0} iterations.");
 
-            Thread.Sleep(2_000);
+            if (i < options.Quantity - 1)
+            {
+                Thread.Sleep(2_000);
+            }
         }
 
         WriteLine();
@@ -92,14 +95,7 @@ public class Remote
         }
 
         CursorTop = _top;
-        
-        var dump = grid.ToString().Split(Environment.NewLine);
 
-        foreach (var line in dump)
-        {
-            CursorLeft = grid.Width + 3;
-            
-            WriteLine(line);
-        }
+        WriteLine(grid.ToString());
     }
 }
