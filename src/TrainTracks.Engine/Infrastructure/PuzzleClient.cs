@@ -39,7 +39,7 @@ public sealed class PuzzleClient : IDisposable
     
     public Grid GetNextNuzzle(Difficulty difficulty)
     {
-        var nextPuzzleDate = GetOldestIncompletePuzzle(difficulty);
+        var nextPuzzleDate = GetOldestIncompletePuzzleDate(difficulty);
 
         if (nextPuzzleDate == null)
         {
@@ -51,7 +51,7 @@ public sealed class PuzzleClient : IDisposable
         return null;
     }
 
-    private DateOnly? GetOldestIncompletePuzzle(Difficulty difficulty)
+    private DateOnly? GetOldestIncompletePuzzleDate(Difficulty difficulty)
     {
         var now = DateTime.Now;
 
