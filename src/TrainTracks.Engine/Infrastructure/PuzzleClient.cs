@@ -1,7 +1,9 @@
 using System.Net;
+using System.Text.Json;
 using HtmlAgilityPack;
 using TrainTracks.Console.Infrastructure;
 using TrainTracks.Engine.Board;
+using TrainTracks.Engine.Models;
 
 namespace TrainTracks.Engine.Infrastructure;
 
@@ -37,7 +39,7 @@ public sealed class PuzzleClient : IDisposable
         };
     }
     
-    public Grid GetNextPuzzle(Difficulty difficulty)
+    public (DateOnly Date, Grid Grid)? GetNextPuzzle(Difficulty difficulty)
     {
         var nextPuzzleDate = GetOldestIncompletePuzzleDate(difficulty);
 
@@ -46,9 +48,26 @@ public sealed class PuzzleClient : IDisposable
             return null;
         }
         
-        System.Console.WriteLine(nextPuzzleDate.Value);
+        var year = nextPuzzleDate.Value.Year;
         
-        return null;
+        var month = nextPuzzleDate.Value.Month;
+        
+        var day = nextPuzzleDate.Value.Day;
+        
+        using var response = _client.GetAsync($"traintracks/small/{year}/{month}/{day}").Result;
+            
+        var page = response.Content.ReadAsStringAsync().Result;
+
+        var puzzleJson = page.Substring(page.IndexOf("puzzleData = ", StringComparison.InvariantCultureIgnoreCase) + 13);
+        
+        puzzleJson = puzzleJson[..puzzleJson.IndexOf(";", StringComparison.InvariantCultureIgnoreCase)];
+        
+        var puzzle = JsonSerializer.Deserialize<Puzzle>(puzzleJson, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        });
+
+        return (nextPuzzleDate.Value, new Grid(puzzle));
     }
 
     private DateOnly? GetOldestIncompletePuzzleDate(Difficulty difficulty)
@@ -57,7 +76,7 @@ public sealed class PuzzleClient : IDisposable
 
         for (var year = 2005; year <= now.Year; year++)
         {
-            var response = _client.GetAsync($"/archive/traintracks/{difficulty.ToString().ToLower()}/{year}").Result;
+            using var response = _client.GetAsync($"/archive/traintracks/{difficulty.ToString().ToLower()}/{year}").Result;
             
             var page = response.Content.ReadAsStringAsync().Result;
 
