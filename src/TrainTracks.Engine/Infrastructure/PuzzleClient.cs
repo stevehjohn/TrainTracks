@@ -1,3 +1,4 @@
+using System.Net;
 using HtmlAgilityPack;
 using TrainTracks.Console.Infrastructure;
 using TrainTracks.Engine.Board;
@@ -8,20 +9,31 @@ public sealed class PuzzleClient : IDisposable
 {
     private const string BaseUri = "https://puzzlemadness.co.uk/";
 
-    private readonly HttpClient _client = new()
-    {
-        BaseAddress = new Uri(BaseUri)
-    };
+    private readonly HttpClientHandler _handler;
+    
+    private readonly HttpClient _client;
 
     public PuzzleClient()
     {
-        var userId = "";
+        var userId = "XXX";
 
-        var token = "";
+        var token = "XXX";
         
-        var cookie = $"userid={userId};token{token};";
+        var cookieContainer = new CookieContainer();
         
-        _client.DefaultRequestHeaders.Add("cookie", cookie);
+        _handler = new HttpClientHandler
+        {
+            CookieContainer = cookieContainer
+        };
+
+        cookieContainer.Add(new Uri(BaseUri), new Cookie("userid", userId));
+        
+        cookieContainer.Add(new Uri(BaseUri), new Cookie("token", token));
+
+        _client = new HttpClient(_handler)
+        {
+            BaseAddress = new Uri(BaseUri)
+        };
     }
     
     public Grid GetNextNuzzle(Difficulty difficulty)
@@ -42,7 +54,7 @@ public sealed class PuzzleClient : IDisposable
 
             if (puzzles != null && puzzles.Count > 0)
             {
-                
+                System.Console.WriteLine(puzzles.Count);
                 
                 break;
             }
@@ -53,6 +65,8 @@ public sealed class PuzzleClient : IDisposable
 
     public void Dispose()
     {
+        _handler?.Dispose();
+        
         _client?.Dispose();
     }
 }
