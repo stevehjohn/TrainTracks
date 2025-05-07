@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Net;
 using TrainTracks.Console.Infrastructure;
 using TrainTracks.Engine;
 using TrainTracks.Engine.Board;
@@ -30,7 +31,7 @@ public class Remote
             
             WriteLine();
             
-            WriteLine($"Fetching puzzle {i + 1} of {options.Quantity}...");
+            WriteLine($"Fetching {options.Difficulty.ToString().ToLowerInvariant()} puzzle {i + 1} of {options.Quantity}...");
 
             WriteLine();
             
@@ -77,6 +78,23 @@ public class Remote
             WriteLine(puzzle.Value.Grid.ToString());
 
             WriteLine($"Solved in {stopwatch.Elapsed:g}, with {_count:N0} iterations.");
+
+            WriteLine();
+            
+            WriteLine("Sending result...");
+            
+            WriteLine();
+            
+            var statusCode = client.SendResult(puzzle.Value.Date, puzzle.Value.Grid);
+
+            if (statusCode != HttpStatusCode.OK)
+            {
+                WriteLine($"Result not accepted. Status code: {(int) statusCode}.");
+            }
+            else
+            {
+                WriteLine("Result accepted.");
+            }
 
             if (i < options.Quantity - 1)
             {

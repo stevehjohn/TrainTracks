@@ -1,4 +1,5 @@
 using System.Net;
+using System.Text;
 using System.Text.Json;
 using HtmlAgilityPack;
 using TrainTracks.Console.Infrastructure;
@@ -15,6 +16,8 @@ public sealed class PuzzleClient : IDisposable
     
     private readonly HttpClient _client;
 
+    private int _userId;
+
     public PuzzleClient()
     {
         var cookieContainer = new CookieContainer();
@@ -29,7 +32,12 @@ public sealed class PuzzleClient : IDisposable
         foreach (var line in lines)
         {
             var parts = line.Split('=');
-        
+
+            if (parts[0].Equals("userid", StringComparison.InvariantCultureIgnoreCase))
+            {
+                _userId = int.Parse(parts[1]);
+            }
+
             cookieContainer.Add(new Uri(BaseUri), new Cookie(parts[0], parts[1]));
         }
         
@@ -70,15 +78,39 @@ public sealed class PuzzleClient : IDisposable
         return (nextPuzzleDate.Value, new Grid(puzzle));
     }
 
-    public void SendResult(DateOnly date, Grid grid)
+    public HttpStatusCode SendResult(DateOnly date, Grid grid)
     {
         // TODO: Properly use JSON.
         var timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+
+        var score = 0;
         
-        var content = new StringContent($"{{ \"type\":33,\"variant\":0,\"year\":{date.Year},\"month\":{date.Month},\"day\":{date.Day},\"score\":75,\"solution\":\"116371168053681111571111157063115381\",\"userID\":30308,\"status\":\"PENDING\",\"createdAt\":{timestamp}}}");
+        var builder = new StringBuilder();
         
-        using var response = _client.PostAsync("user/puzzlecomplete", content).Result;
-            
+        for (var x = 0; x < grid.Width; x++)
+        {
+            for (var y = 0; y < grid.Height; y++)
+            {
+                var piece = grid[x, y];
+
+                if (piece is not Piece.Empty and not Piece.Cross)
+                {
+                    score += 5;
+                }
+                
+                builder.Append((int) piece);
+            }
+        }
+
+        var content = $"{{\"type\":33,\"variant\":14,\"year\":{date.Year},\"month\":{date.Month},\"day\":{date.Day},\"score\":{score},\"solution\":\"{builder}\",\"userID\":{_userId},\"status\":\"PENDING\",\"createdAt\":{timestamp}}}";
+        
+        System.Console.WriteLine(content);
+        
+        var stringContent = new StringContent(content);
+        
+        using var response = _client.PostAsync("user/puzzlecomplete", stringContent).Result;
+        
+        return response.StatusCode;
     }
 
     private DateOnly? GetOldestIncompletePuzzleDate(Difficulty difficulty)
