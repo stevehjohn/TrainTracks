@@ -15,10 +15,6 @@ public sealed class PuzzleClient : IDisposable
 
     public PuzzleClient()
     {
-        var userId = "XXX";
-
-        var token = "XXX";
-        
         var cookieContainer = new CookieContainer();
         
         _handler = new HttpClientHandler
@@ -26,10 +22,15 @@ public sealed class PuzzleClient : IDisposable
             CookieContainer = cookieContainer
         };
 
-        cookieContainer.Add(new Uri(BaseUri), new Cookie("userid", userId));
-        
-        cookieContainer.Add(new Uri(BaseUri), new Cookie("token", token));
+        var lines = File.ReadAllLines("cookies.txt");
 
+        foreach (var line in lines)
+        {
+            var parts = line.Split('=');
+        
+            cookieContainer.Add(new Uri(BaseUri), new Cookie(parts[0], parts[1]));
+        }
+        
         _client = new HttpClient(_handler)
         {
             BaseAddress = new Uri(BaseUri)
@@ -54,7 +55,9 @@ public sealed class PuzzleClient : IDisposable
 
             if (puzzles != null && puzzles.Count > 0)
             {
-                System.Console.WriteLine(puzzles.Count);
+                var puzzle = puzzles[0];
+                
+                System.Console.WriteLine(puzzle.Attributes["id"].Value);
                 
                 break;
             }

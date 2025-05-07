@@ -300,3 +300,4 @@ lambdas/.serverless/
 
 *.key
 *.orig
+cookies.txt
