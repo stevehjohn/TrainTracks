@@ -70,6 +70,17 @@ public sealed class PuzzleClient : IDisposable
         return (nextPuzzleDate.Value, new Grid(puzzle));
     }
 
+    public void SendResult(DateOnly date, Grid grid)
+    {
+        // TODO: Properly use JSON.
+        var timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        
+        var content = new StringContent($"{{ \"type\":33,\"variant\":0,\"year\":{date.Year},\"month\":{date.Month},\"day\":{date.Day},\"score\":75,\"solution\":\"116371168053681111571111157063115381\",\"userID\":30308,\"status\":\"PENDING\",\"createdAt\":{timestamp}}}");
+        
+        using var response = _client.PostAsync("user/puzzlecomplete", content).Result;
+            
+    }
+
     private DateOnly? GetOldestIncompletePuzzleDate(Difficulty difficulty)
     {
         var now = DateTime.Now;
