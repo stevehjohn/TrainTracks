@@ -68,13 +68,13 @@ public class Remote
                 WriteLine();
             }
 
-            WriteLine($"Solved in {stopwatch.Elapsed:g}, with {_count:N0} iterations.");
-
-            WriteLine();
-
+            CursorTop = _top;
+            
             WriteLine(puzzle.Value.Grid.ToString());
 
-            Thread.Sleep(1_000);
+            WriteLine($"Solved in {stopwatch.Elapsed:g}, with {_count:N0} iterations.");
+
+            Thread.Sleep(2_000);
         }
 
         WriteLine();
