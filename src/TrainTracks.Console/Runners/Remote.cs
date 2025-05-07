@@ -47,17 +47,21 @@ public class Remote
 
             WriteLine();
 
+            _top = CursorTop;
+            
             WriteLine(puzzle.Value.Grid.ToString());
 
             WriteLine();
 
-            _top = CursorTop;
-            
             _count = 0;
 
             stopwatch.Restart();
+            
+            CursorVisible = false;
 
             var result = solver.Solve(puzzle.Value.Grid);
+            
+            CursorVisible = true;
 
             stopwatch.Stop();
 
@@ -88,7 +92,14 @@ public class Remote
         }
 
         CursorTop = _top;
+        
+        var dump = grid.ToString().Split(Environment.NewLine);
 
-        WriteLine(grid.ToString());
+        foreach (var line in dump)
+        {
+            CursorLeft = grid.Width + 3;
+            
+            Write(line);
+        }
     }
 }
