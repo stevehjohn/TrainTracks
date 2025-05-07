@@ -47,7 +47,7 @@ public sealed class PuzzleClient : IDisposable
         };
     }
     
-    public (DateOnly Date, Grid Grid)? GetNextPuzzle(Difficulty difficulty)
+    public (DateOnly Date, Grid Grid, int Variant)? GetNextPuzzle(Difficulty difficulty)
     {
         var nextPuzzleDate = GetOldestIncompletePuzzleDate(difficulty);
 
@@ -75,10 +75,10 @@ public sealed class PuzzleClient : IDisposable
             PropertyNameCaseInsensitive = true
         });
 
-        return (nextPuzzleDate.Value, new Grid(puzzle));
+        return (nextPuzzleDate.Value, new Grid(puzzle), puzzle.Source.Variant);
     }
 
-    public HttpStatusCode SendResult(DateOnly date, Grid grid)
+    public HttpStatusCode SendResult(DateOnly date, Grid grid, int variant)
     {
         // TODO: Properly use JSON.
         var timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
@@ -104,7 +104,7 @@ public sealed class PuzzleClient : IDisposable
 
         score -= grid.FixedPieces * 5;
 
-        var content = $"{{\"type\":33,\"variant\":14,\"year\":{date.Year},\"month\":{date.Month},\"day\":{date.Day},\"score\":{score},\"solution\":\"{builder}\",\"userID\":{_userId},\"status\":\"PENDING\",\"createdAt\":{timestamp}}}";
+        var content = $"{{\"type\":33,\"variant\":{variant},\"year\":{date.Year},\"month\":{date.Month},\"day\":{date.Day},\"score\":{score},\"solution\":\"{builder}\",\"userID\":{_userId},\"status\":\"PENDING\",\"createdAt\":{timestamp}}}";
         
         var stringContent = new StringContent(content);
         

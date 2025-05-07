@@ -44,7 +44,7 @@ public class Remote
                 break;
             }
 
-            WriteLine($"Solving puzzle for {puzzle.Value.Date:R} ({puzzle.Value.Grid.Width}x{puzzle.Value.Grid.Height})");
+            WriteLine($"Solving puzzle for {puzzle.Value.Date:R} ({puzzle.Value.Grid.Width}x{puzzle.Value.Grid.Height}). Variant: {puzzle.Value.Variant}.");
 
             WriteLine();
 
@@ -86,7 +86,7 @@ public class Remote
 
                 WriteLine();
 
-                var statusCode = client.SendResult(puzzle.Value.Date, puzzle.Value.Grid);
+                var statusCode = client.SendResult(puzzle.Value.Date, puzzle.Value.Grid, puzzle.Value.Variant);
 
                 if (statusCode != HttpStatusCode.OK)
                 {
