@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using TrainTracks.Console.Infrastructure;
 using TrainTracks.Engine;
 using TrainTracks.Engine.Board;
@@ -8,6 +9,10 @@ namespace TrainTracks.Console.Runners;
 
 public class Remote
 {
+    private int _top;
+
+    private int _count;
+
     public void Run(RemoteOptions options)
     {
         var client = new PuzzleClient();
@@ -17,41 +22,70 @@ public class Remote
             StepCallback = VisualiseStep
         };
 
+        Clear();
+
         WriteLine();
-        
+
+        var stopwatch = new Stopwatch();
+
         for (var i = 0; i < options.Quantity; i++)
         {
+            stopwatch.Restart();
+
             var puzzle = client.GetNextPuzzle(options.Difficulty);
 
             if (puzzle == null)
             {
                 WriteLine("No puzzles available.");
-                
+
                 break;
             }
-            
+
             WriteLine($"Solving puzzle for {puzzle.Value.Date:d} ({puzzle.Value.Grid.Width}x{puzzle.Value.Grid.Height})");
-            
+
             WriteLine();
 
+            WriteLine(puzzle.Value.Grid.ToString());
+
+            WriteLine();
+
+            _top = CursorTop;
+            
+            _count = 0;
+
             var result = solver.Solve(puzzle.Value.Grid);
+
+            stopwatch.Stop();
 
             if (! result)
             {
                 WriteLine("Unable to solve the puzzle.");
-                
+
                 WriteLine();
             }
-            
-            WriteLine("Solved in ");
+
+
+            WriteLine($"Solved in {stopwatch.Elapsed:c}, with {_count:N0} iterations.");
+
+            WriteLine();
+
+            WriteLine(puzzle.Value.Grid.ToString());
 
             Thread.Sleep(1_000);
         }
-        
+
         WriteLine();
     }
 
     private void VisualiseStep(Grid grid)
     {
+        if (_count++ % 100 != 0)
+        {
+            return;
+        }
+
+        CursorTop = _top;
+
+        WriteLine(grid.ToString());
     }
 }
