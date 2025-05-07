@@ -4,7 +4,7 @@ using TrainTracks.Engine.Board;
 
 namespace TrainTracks.Engine.Infrastructure;
 
-public class PuzzleClient
+public sealed class PuzzleClient : IDisposable
 {
     private const string BaseUri = "https://puzzlemadness.co.uk/";
 
@@ -12,6 +12,17 @@ public class PuzzleClient
     {
         BaseAddress = new Uri(BaseUri)
     };
+
+    public PuzzleClient()
+    {
+        var userId = "";
+
+        var token = "";
+        
+        var cookie = $"userid={userId};token{token};";
+        
+        _client.DefaultRequestHeaders.Add("cookie", cookie);
+    }
     
     public Grid GetNextNuzzle(Difficulty difficulty)
     {
@@ -38,5 +49,10 @@ public class PuzzleClient
         }
 
         return null;
+    }
+
+    public void Dispose()
+    {
+        _client?.Dispose();
     }
 }
