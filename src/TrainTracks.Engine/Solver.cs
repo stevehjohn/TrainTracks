@@ -14,7 +14,7 @@ public class Solver
 
         // PrefillCrosses();
         //
-        // PrefillKnownPieces();
+        PrefillKnownPieces();
 
         var result = PlaceNextMove(Grid.Entry, null);
 
