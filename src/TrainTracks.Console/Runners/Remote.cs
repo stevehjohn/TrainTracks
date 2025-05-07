@@ -9,6 +9,6 @@ public class Remote
     {
         var client = new PuzzleClient();
         
-        var puzzle = client.GetNextNuzzle(options.Difficulty);
+        var puzzle = client.GetNextPuzzle(options.Difficulty);
     }
 }

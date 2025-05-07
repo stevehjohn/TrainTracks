@@ -37,7 +37,7 @@ public sealed class PuzzleClient : IDisposable
         };
     }
     
-    public Grid GetNextNuzzle(Difficulty difficulty)
+    public Grid GetNextPuzzle(Difficulty difficulty)
     {
         var nextPuzzleDate = GetOldestIncompletePuzzleDate(difficulty);
 
