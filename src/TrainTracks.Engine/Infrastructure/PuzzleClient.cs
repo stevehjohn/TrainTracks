@@ -62,7 +62,7 @@ public sealed class PuzzleClient : IDisposable
         
         var day = nextPuzzleDate.Value.Day;
         
-        using var response = _client.GetAsync($"traintracks/small/{year}/{month}/{day}").Result;
+        using var response = _client.GetAsync($"traintracks/{difficulty}/{year}/{month}/{day}").Result;
             
         var page = response.Content.ReadAsStringAsync().Result;
 
