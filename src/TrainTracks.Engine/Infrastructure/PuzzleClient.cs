@@ -106,8 +106,6 @@ public sealed class PuzzleClient : IDisposable
 
         var content = $"{{\"type\":33,\"variant\":14,\"year\":{date.Year},\"month\":{date.Month},\"day\":{date.Day},\"score\":{score},\"solution\":\"{builder}\",\"userID\":{_userId},\"status\":\"PENDING\",\"createdAt\":{timestamp}}}";
         
-        System.Console.WriteLine(content);
-        
         var stringContent = new StringContent(content);
         
         using var response = _client.PostAsync("user/puzzlecomplete", stringContent).Result;
