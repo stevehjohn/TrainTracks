@@ -44,7 +44,7 @@ public class Remote
                 break;
             }
 
-            WriteLine($"Solving puzzle for {puzzle.Value.Date:R} ({puzzle.Value.Grid.Width}x{puzzle.Value.Grid.Height}). Variant: {puzzle.Value.Variant}.");
+            WriteLine($"Solving puzzle for {puzzle.Value.Date:R} ({puzzle.Value.Grid.Width}x{puzzle.Value.Grid.Height}).");
 
             WriteLine();
 
