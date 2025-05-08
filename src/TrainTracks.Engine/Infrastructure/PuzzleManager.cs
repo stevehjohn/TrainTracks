@@ -8,6 +8,11 @@ public class PuzzleManager
 {
     private List<Grid> _puzzles;
 
+    private static readonly JsonSerializerOptions JsonSerializerOptions = new JsonSerializerOptions
+    {
+        PropertyNameCaseInsensitive = true
+    };
+
     public Grid GetPuzzle(int puzzleNumber) => _puzzles[puzzleNumber].Clone();
         
     public static string Path { get; set; }
@@ -29,10 +34,7 @@ public class PuzzleManager
 
         var puzzleJson = File.ReadAllText(Path);
 
-        var puzzles = JsonSerializer.Deserialize<Puzzle[]>(puzzleJson, new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true
-        });
+        var puzzles = JsonSerializer.Deserialize<Puzzle[]>(puzzleJson, JsonSerializerOptions);
 
         var grids = new List<Grid>();
 
