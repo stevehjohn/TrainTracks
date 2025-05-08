@@ -11,6 +11,8 @@ public class Grid
     
     private int[] _columnCounts;
 
+    private int TotalPieces { get; set; }
+    
     public Piece this[int x, int y]
     {
         get => _pieces[x, y];
@@ -53,8 +55,6 @@ public class Grid
 
     public int Right { get; private set; }
 
-    public int TotalPieces { get; private set; }
-    
     public int FixedPieces { get; private set; }
 
     public int[] RowConstraints { get; private set; }

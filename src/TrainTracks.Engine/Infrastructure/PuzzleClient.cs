@@ -17,7 +17,7 @@ public sealed class PuzzleClient : IDisposable
 
     private readonly int _userId;
 
-    private JsonSerializerOptions _jsonSerializerOptions = new JsonSerializerOptions
+    private readonly JsonSerializerOptions _jsonSerializerOptions = new()
     {
         PropertyNameCaseInsensitive = true
     };
