@@ -114,10 +114,6 @@ public class Grid
     
     public int GetRowCount(int y) => _rowCounts[y];
     
-    public int GetRowRemaining(int y) => RowConstraints[y] - _rowCounts[y];
-    
-    public int GetColumnRemaining(int x) => ColumnConstraints[x] - _columnCounts[x];
-    
     private void Initialise(Puzzle puzzle)
     {
         Width = puzzle.GridWidth;
