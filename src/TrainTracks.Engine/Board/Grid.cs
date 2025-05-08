@@ -60,8 +60,8 @@ public class Grid
     public int[] RowConstraints { get; private set; }
 
     public int[] ColumnConstraints { get; private set; }
-    
-    public Point Entry { get; private set; }
+
+    public Point Entry { get; private set; } = new Point(-1, -1);
 
     public Point Exit { get; private set; }
 
@@ -190,7 +190,7 @@ public class Grid
 
         if (IsEndpoint(point))
         {
-            if (Entry == null)
+            if (Entry.X == -1)
             {
                 Entry = point;
             }

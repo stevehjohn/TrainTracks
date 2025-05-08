@@ -2,7 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace TrainTracks.Engine.Board;
 
-public class Point
+public readonly record struct Point
 {
     public int X { get; }
     
