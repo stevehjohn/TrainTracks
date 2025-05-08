@@ -31,7 +31,7 @@ public class Remote
 
             WriteLine();
 
-            WriteLine($"Fetching {options.Difficulty.ToString().ToLowerInvariant()} puzzle {i + 1} of {options.Quantity}...");
+            WriteLine($"Fetching {options.Difficulty.ToString().ToLowerInvariant()} puzzle {i + 1} of {options.Quantity:N0}...");
 
             WriteLine();
 
