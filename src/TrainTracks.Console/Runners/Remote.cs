@@ -100,7 +100,7 @@ public class Remote
 
             if (i < options.Quantity - 1)
             {
-                Thread.Sleep(2_000);
+                //Thread.Sleep(2_000);
             }
         }
 
