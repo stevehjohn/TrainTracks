@@ -17,6 +17,11 @@ public sealed class PuzzleClient : IDisposable
 
     private readonly int _userId;
 
+    private JsonSerializerOptions _jsonSerializerOptions = new JsonSerializerOptions
+    {
+        PropertyNameCaseInsensitive = true
+    };
+
     public PuzzleClient()
     {
         var cookieContainer = new CookieContainer();
@@ -65,14 +70,11 @@ public sealed class PuzzleClient : IDisposable
             
         var page = response.Content.ReadAsStringAsync().Result;
 
-        var puzzleJson = page.Substring(page.IndexOf("puzzleData = ", StringComparison.InvariantCultureIgnoreCase) + 13);
+        var puzzleJson = page[(page.IndexOf("puzzleData = ", StringComparison.InvariantCultureIgnoreCase) + 13)..];
         
         puzzleJson = puzzleJson[..puzzleJson.IndexOf(";", StringComparison.InvariantCultureIgnoreCase)];
         
-        var puzzle = JsonSerializer.Deserialize<Puzzle>(puzzleJson, new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true
-        });
+        var puzzle = JsonSerializer.Deserialize<Puzzle>(puzzleJson, _jsonSerializerOptions);
 
         return (nextPuzzleDate.Value, new Grid(puzzle), puzzle.Source.Variant);
     }

@@ -27,7 +27,7 @@ public static class Connector
         { 10, [Piece.Horizontal, Piece.NorthEast, Piece.SouthEast] },
         { 11, [Piece.Vertical, Piece.SouthEast, Piece.SouthWest] }
     };
-    
+
     public static IReadOnlyList<Piece> GetConnections(Piece piece, int dX, int dY)
     {
         switch (piece)
@@ -99,6 +99,7 @@ public static class Connector
                 break;
 
             case Piece.Empty:
+            case Piece.Cross:
             default:
                 throw new ArgumentOutOfRangeException(nameof(piece), piece, null);
         }

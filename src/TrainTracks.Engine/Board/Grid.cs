@@ -61,7 +61,7 @@ public class Grid
 
     public int[] ColumnConstraints { get; private set; }
 
-    public Point Entry { get; private set; } = new Point(-1, -1);
+    public Point Entry { get; private set; } = new(-1, -1);
 
     public Point Exit { get; private set; }
 
