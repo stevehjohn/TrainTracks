@@ -101,7 +101,7 @@ public class Grid
         
         copy._columnCounts = new int[Width];
         
-        Array.Copy(_columnCounts, copy._columnCounts, Width);;
+        Array.Copy(_columnCounts, copy._columnCounts, Width);
 
         return copy;
     }
