@@ -16,7 +16,7 @@ public sealed class PuzzleClient : IDisposable
     
     private readonly HttpClient _client;
 
-    private int _userId;
+    private readonly int _userId;
 
     public PuzzleClient()
     {
