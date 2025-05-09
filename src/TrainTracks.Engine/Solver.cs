@@ -339,6 +339,12 @@ public class Solver
                 {
                     Grid[x, y] = Piece.Vertical;
                 }
+
+                if (Grid[x + 1, y] is Piece.Horizontal or Piece.NorthEast or Piece.SouthEast
+                    && Grid[x, y + 1] is Piece.Vertical or Piece.NorthWest or Piece.SouthWest)
+                {
+                    Grid[x, y] = Piece.SouthEast;
+                }
             }
         }
     }
