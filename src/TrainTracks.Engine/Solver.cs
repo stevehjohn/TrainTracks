@@ -322,6 +322,13 @@ public class Solver
                     
                     break;
                 }
+
+                if (Grid[Grid.Right, y] == Piece.NorthWest)
+                {
+                    Grid[Grid.Right, y - 1] = Piece.SouthWest;
+                    
+                    break;
+                }
             }
         }
 
