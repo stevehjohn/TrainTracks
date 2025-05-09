@@ -299,6 +299,19 @@ public class Solver
             }
         }
 
+        if (Grid.ColumnConstraints[0] == 2)
+        {
+            for (var y = 0; y < Grid.Height; y++) 
+            {
+                if (Grid[0, y] == Piece.NorthWest)
+                {
+                    Grid[0, y - 1] = Piece.SouthEast;
+                    
+                    break;
+                }
+            }
+        }
+
         for (var x = 1; x < Grid.Right; x++)
         {
             for (var y = 1; y < Grid.Bottom; y++)
