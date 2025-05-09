@@ -290,6 +290,14 @@ public class Solver
                             Grid[x - 1, y] = Piece.SouthEast;
                         }
                     }
+
+                    if (Grid[x, y] == Piece.SouthEast)
+                    {
+                        if (y == 0 || Grid[x + 1, y - 1] == Piece.Cross)
+                        {
+                            Grid[x + 1, y] = Piece.SouthWest;
+                        }
+                    }
                 }
             }
         }
