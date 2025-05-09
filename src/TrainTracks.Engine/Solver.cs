@@ -12,13 +12,13 @@ public class Solver
     {
         Grid = grid;
 
-        PopulateCrosses();
-
         var copy = Grid.Clone();
 
         // TODO: Call until no changes made.
         for (var i = 0; i < 3; i++)
         {
+            PopulateCrosses();
+
             PopulateImpliedCrosses(copy);
 
             PlaceObviousPieces(copy);
