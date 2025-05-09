@@ -309,6 +309,13 @@ public class Solver
                 {
                     Grid[x, y] = Piece.Vertical;
                 }
+                
+                if (Grid[x, y] == Piece.Empty &&
+                    Grid[x - 1, y] is Piece.Horizontal or Piece.SouthEast or Piece.NorthEast &&
+                    Grid[x + 1, y] is Piece.Horizontal or Piece.NorthWest or Piece.SouthWest)
+                {
+                    Grid[x, y] = Piece.Horizontal;
+                }
 
                 if (Grid[x, y] == Piece.Empty && Grid[x, y - 1] == Piece.Cross && Grid[x, y + 1] == Piece.Cross)
                 {
