@@ -266,18 +266,6 @@ public class Preprocessor
                 {
                     _grid[x, y] = Piece.Vertical;
                 }
-
-                if (_grid[x - 1, y] is Piece.Horizontal or Piece.NorthEast or Piece.SouthEast
-                    && _grid[x, y + 1] is Piece.Vertical or Piece.NorthEast or Piece.NorthWest)
-                {
-                    _grid[x, y] = Piece.SouthWest;
-                }
-
-                if (_grid[x + 1, y] is Piece.Horizontal or Piece.NorthWest or Piece.SouthWest
-                    && _grid[x, y + 1] is Piece.Vertical or Piece.NorthEast or Piece.NorthWest)
-                {
-                    _grid[x, y] = Piece.SouthEast;
-                }
             }
         }
     }
