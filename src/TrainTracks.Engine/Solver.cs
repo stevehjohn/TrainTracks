@@ -261,7 +261,18 @@ public class Solver
             {
                 for (var y = 0; y < Grid.Height; y++)
                 {
+                    if (Grid[x, y] == Piece.NorthWest)
+                    {
+                        if (x == 0 || Grid[x - 1, y - 1] == Piece.Cross)
+                        {
+                            Grid[x, y - 1] = Piece.SouthEast;
+                        }
 
+                        if (x == Grid.Right || Grid[x + 1, y - 1] == Piece.Cross)
+                        {
+                            Grid[x, y - 1] = Piece.SouthWest;
+                        }
+                    }
                 }
             }
         }
