@@ -13,6 +13,8 @@ public class Remote
     private int _top;
 
     private int _count;
+    
+    private readonly Stopwatch _stopwatch = new Stopwatch();
 
     public void Run(RemoteOptions options)
     {
@@ -22,8 +24,6 @@ public class Remote
         {
             StepCallback = VisualiseStep
         };
-
-        var stopwatch = new Stopwatch();
 
         for (var i = 0; i < options.Quantity; i++)
         {
@@ -56,7 +56,7 @@ public class Remote
 
             _count = 0;
 
-            stopwatch.Restart();
+            _stopwatch.Restart();
 
             CursorVisible = false;
 
@@ -64,7 +64,7 @@ public class Remote
 
             CursorVisible = true;
 
-            stopwatch.Stop();
+            _stopwatch.Stop();
 
             if (! result)
             {
@@ -78,7 +78,7 @@ public class Remote
 
                 WriteLine(puzzle.Value.Grid.ToString());
 
-                WriteLine($"Solved in {stopwatch.Elapsed:g}, with {_count:N0} iterations.");
+                WriteLine($"Solved in {_stopwatch.Elapsed:g}, with {_count:N0} iterations.");
 
                 WriteLine();
 
@@ -97,11 +97,6 @@ public class Remote
                     WriteLine("Result accepted.");
                 }
             }
-
-            if (i < options.Quantity - 1)
-            {
-                //Thread.Sleep(2_000);
-            }
         }
 
         WriteLine();
@@ -117,5 +112,7 @@ public class Remote
         CursorTop = _top;
 
         WriteLine(grid.ToString());
+        
+        WriteLine($"Elapsed: {_stopwatch.Elapsed:h\\:mm\\:ss\\.fff}, Steps: {_count:N0}.    ");
     }
 }
