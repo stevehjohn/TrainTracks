@@ -71,6 +71,8 @@ public class Remote
                 WriteLine("Unable to solve the puzzle.");
 
                 WriteLine();
+                
+                Thread.Sleep(5_000);
             }
             else
             {

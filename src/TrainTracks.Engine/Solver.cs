@@ -265,18 +265,18 @@ public class Solver
             {
                 for (var y = 0; y < Grid.Height; y++)
                 {
-                    if (Grid[x, y] == Piece.NorthWest)
-                    {
-                        if (x == 0 || Grid[x - 1, y - 1] == Piece.Cross)
-                        {
-                            Grid[x, y - 1] = Piece.SouthEast;
-                        }
-
-                        if (x == Grid.Right || Grid[x + 1, y - 1] == Piece.Cross)
-                        {
-                            Grid[x, y - 1] = Piece.SouthWest;
-                        }
-                    }
+                    // if (Grid[x, y] == Piece.NorthWest)
+                    // {
+                    //     if (x == 0 || Grid[x - 1, y - 1] == Piece.Cross)
+                    //     {
+                    //         Grid[x, y - 1] = Piece.SouthEast;
+                    //     }
+                    //
+                    //     if (x == Grid.Right || Grid[x + 1, y - 1] == Piece.Cross)
+                    //     {
+                    //         Grid[x, y - 1] = Piece.SouthWest;
+                    //     }
+                    // }
                 }
             }
         }
@@ -287,42 +287,42 @@ public class Solver
             {
                 for (var x = 0; x < Grid.Width; x++)
                 {
-                    if (Grid[x, y] == Piece.SouthWest)
-                    {
-                        if (y == 0 || Grid[x - 1, y - 1] == Piece.Cross)
-                        {
-                            Grid[x - 1, y] = Piece.SouthEast;
-                        }
-                    }
-
-                    if (Grid[x, y] == Piece.SouthEast)
-                    {
-                        if (y == 0 || Grid[x + 1, y - 1] == Piece.Cross)
-                        {
-                            Grid[x + 1, y] = Piece.SouthWest;
-                        }
-                    }
+                    // if (Grid[x, y] == Piece.SouthWest)
+                    // {
+                    //     if (y == 0 || Grid[x - 1, y - 1] == Piece.Cross)
+                    //     {
+                    //         Grid[x - 1, y] = Piece.SouthEast;
+                    //     }
+                    // }
+                    //
+                    // if (Grid[x, y] == Piece.SouthEast)
+                    // {
+                    //     if (y == 0 || Grid[x + 1, y - 1] == Piece.Cross)
+                    //     {
+                    //         Grid[x + 1, y] = Piece.SouthWest;
+                    //     }
+                    // }
                 }
             }
         }
 
-        for (var x = 1; x < Grid.Right; x++)
-        {
-            for (var y = 1; y < Grid.Bottom; y++)
-            {
-                if (Grid[x, y] == Piece.Empty)
-                {
-                    if (Grid[x - 1, y] == Piece.Cross && Grid[x + 1, y] == Piece.Cross)
-                    {
-                        Grid[x, y] = Piece.Vertical;
-                    }
-
-                    if (Grid[x, y - 1] == Piece.Cross && Grid[x, y + 1] == Piece.Cross)
-                    {
-                        Grid[x, y] = Piece.Horizontal;
-                    }
-                }
-            }
-        }
+        // for (var x = 1; x < Grid.Right; x++)
+        // {
+        //     for (var y = 1; y < Grid.Bottom; y++)
+        //     {
+        //         if (Grid[x, y] == Piece.Empty)
+        //         {
+        //             if (Grid[x - 1, y] == Piece.Cross && Grid[x + 1, y] == Piece.Cross)
+        //             {
+        //                 Grid[x, y] = Piece.Vertical;
+        //             }
+        //
+        //             if (Grid[x, y - 1] == Piece.Cross && Grid[x, y + 1] == Piece.Cross)
+        //             {
+        //                 Grid[x, y] = Piece.Horizontal;
+        //             }
+        //         }
+        //     }
+        // }
     }
 }
