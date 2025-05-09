@@ -262,14 +262,14 @@ public class Solver
                 if (Grid[x, 0] == Piece.SouthEast)
                 {
                     Grid[x + 1, 0] = Piece.SouthWest;
-                    
+
                     break;
                 }
-                
+
                 if (Grid[x, 0] == Piece.SouthWest)
                 {
                     Grid[x - 1, 0] = Piece.SouthEast;
-                    
+
                     break;
                 }
             }
@@ -282,14 +282,14 @@ public class Solver
                 if (Grid[x, Grid.Bottom] == Piece.NorthEast)
                 {
                     Grid[x + 1, Grid.Bottom] = Piece.NorthWest;
-                    
+
                     break;
                 }
-                
+
                 if (Grid[x, Grid.Bottom] == Piece.NorthWest)
                 {
                     Grid[x - 1, Grid.Bottom] = Piece.NorthEast;
-                    
+
                     break;
                 }
             }
@@ -297,19 +297,19 @@ public class Solver
 
         if (Grid.ColumnConstraints[0] == 2)
         {
-            for (var y = 0; y < Grid.Height; y++) 
+            for (var y = 0; y < Grid.Height; y++)
             {
                 if (Grid[0, y] is Piece.NorthEast or Piece.NorthWest)
                 {
                     Grid[0, y - 1] = Piece.SouthEast;
-                    
+
                     break;
                 }
 
                 if (Grid[0, y] is Piece.SouthEast or Piece.SouthWest)
                 {
                     Grid[0, y + 1] = Piece.NorthEast;
-                    
+
                     break;
                 }
             }
@@ -322,14 +322,14 @@ public class Solver
                 if (Grid[Grid.Right, y] == Piece.SouthWest)
                 {
                     Grid[Grid.Right, y + 1] = Piece.NorthWest;
-                    
+
                     break;
                 }
 
                 if (Grid[Grid.Right, y] == Piece.NorthWest)
                 {
                     Grid[Grid.Right, y - 1] = Piece.SouthWest;
-                    
+
                     break;
                 }
             }
@@ -337,14 +337,14 @@ public class Solver
 
         if (Grid.ColumnConstraints[Grid.Right] == 3)
         {
-            for (var y = 0; y < Grid.Height; y++) 
+            for (var y = 0; y < Grid.Height; y++)
             {
                 if (Grid[Grid.Right, y] == Piece.Vertical)
                 {
                     Grid[Grid.Right, y - 1] = Piece.SouthWest;
 
                     Grid[Grid.Right, y + 1] = Piece.NorthWest;
-                    
+
                     break;
                 }
             }
@@ -352,14 +352,14 @@ public class Solver
 
         if (Grid.ColumnConstraints[0] == 3)
         {
-            for (var y = 0; y < Grid.Height; y++) 
+            for (var y = 0; y < Grid.Height; y++)
             {
                 if (Grid[0, y] == Piece.Vertical)
                 {
                     Grid[0, y - 1] = Piece.SouthEast;
 
                     Grid[0, y + 1] = Piece.NorthEast;
-                    
+
                     break;
                 }
             }
@@ -375,20 +375,34 @@ public class Solver
                 {
                     Grid[x, y] = Piece.Vertical;
                 }
-                
+
                 if (Grid[x, y] == Piece.Empty &&
                     Grid[x - 1, y] is Piece.Horizontal or Piece.SouthEast or Piece.NorthEast &&
                     Grid[x + 1, y] is Piece.Horizontal or Piece.NorthWest or Piece.SouthWest)
                 {
                     Grid[x, y] = Piece.Horizontal;
                 }
-                
+
+                if (Grid[x, y] == Piece.Empty && Grid[x, y - 1] == Piece.Cross && Grid[x, y + 1] == Piece.Cross
+                    && Grid[x - 1, y] is Piece.NorthEast or Piece.SouthEast
+                    && Grid[x + 1, y] is Piece.NorthWest or Piece.SouthWest)
+                {
+                    Grid[x, y] = Piece.Horizontal;
+                }
+
+                if (Grid[x, y] == Piece.Empty && Grid[x - 1, y] == Piece.Cross && Grid[x + 1, y] == Piece.Cross
+                    && Grid[x, y - 1] is Piece.Vertical or Piece.SouthEast or Piece.SouthWest
+                    && Grid[x, y + 1] is Piece.Vertical or Piece.NorthEast or Piece.NorthWest)
+                {
+                    Grid[x, y] = Piece.Vertical;
+                }
+
                 if (Grid[x - 1, y] is Piece.Horizontal or Piece.NorthEast or Piece.SouthEast
                     && Grid[x, y + 1] is Piece.Vertical or Piece.NorthEast or Piece.NorthWest)
                 {
                     Grid[x, y] = Piece.SouthWest;
                 }
-                
+
                 if (Grid[x + 1, y] is Piece.Horizontal or Piece.NorthWest or Piece.SouthWest
                     && Grid[x, y + 1] is Piece.Vertical or Piece.NorthEast or Piece.NorthWest)
                 {
