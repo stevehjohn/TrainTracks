@@ -360,12 +360,14 @@ public class Solver
                     Grid[x, y] = Piece.Horizontal;
                 }
                 
-                if (Grid[x, y] == Piece.Empty && Grid[x, y - 1] == Piece.Cross && Grid[x, y + 1] == Piece.Cross)
+                if (Grid[x, y] == Piece.Empty && Grid[x, y - 1] == Piece.Cross && Grid[x, y + 1] == Piece.Cross
+                    && Grid[x - 1, y] == Piece.Empty && Grid[x + 1, y] == Piece.Empty)
                 {
                     Grid[x, y] = Piece.Horizontal;
                 }
                 
-                if (Grid[x, y] == Piece.Empty && Grid[x - 1, y] == Piece.Cross && Grid[x + 1, y] == Piece.Cross)
+                if (Grid[x, y] == Piece.Empty && Grid[x - 1, y] == Piece.Cross && Grid[x + 1, y] == Piece.Cross
+                    && Grid[x, y - 1] == Piece.Empty && Grid[x, y + 1] == Piece.Empty)
                 {
                     Grid[x, y] = Piece.Vertical;
                 }
