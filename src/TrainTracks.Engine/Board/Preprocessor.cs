@@ -14,7 +14,7 @@ public class Preprocessor
 
         PopulateImpliedCrosses(copy);
 
-        PlaceObviousPieces();
+        //PlaceObviousPieces();
     }
 
     private void PopulateCrosses()
