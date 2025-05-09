@@ -14,8 +14,12 @@ public class Solver
 
         PopulateCrosses();
 
-        PopulateImpliedCrosses();
-        
+        var copy = Grid.Clone();
+
+        PopulateImpliedCrosses(copy);
+
+        PlaceObviousPieces(copy);
+
         var result = PlaceNextMove(Grid.Entry, null);
 
         if (result)
@@ -31,7 +35,7 @@ public class Solver
                 }
             }
         }
-        
+
         return result;
     }
 
@@ -174,16 +178,14 @@ public class Solver
         }
     }
 
-    private void PopulateImpliedCrosses()
+    private void PopulateImpliedCrosses(Grid copy)
     {
-        var copy = Grid.Clone();
-
         for (var x = 0; x < Grid.Width; x++)
         {
             for (var y = 0; y < Grid.Height; y++)
             {
                 var piece = copy[x, y];
-                
+
                 if (piece != Piece.Empty)
                 {
                     switch (piece)
@@ -192,27 +194,27 @@ public class Solver
                             copy[x - 1, y] = Piece.Placeholder;
                             copy[x + 1, y] = Piece.Placeholder;
                             break;
-                        
+
                         case Piece.Vertical:
                             copy[x, y - 1] = Piece.Placeholder;
                             copy[x, y + 1] = Piece.Placeholder;
                             break;
-                        
+
                         case Piece.NorthEast:
                             copy[x + 1, y] = Piece.Placeholder;
                             copy[x, y - 1] = Piece.Placeholder;
                             break;
-                        
+
                         case Piece.SouthEast:
                             copy[x, y + 1] = Piece.Placeholder;
                             copy[x + 1, y] = Piece.Placeholder;
                             break;
-                        
+
                         case Piece.SouthWest:
                             copy[x, y + 1] = Piece.Placeholder;
                             copy[x - 1, y] = Piece.Placeholder;
                             break;
-                        
+
                         case Piece.NorthWest:
                             copy[x, y - 1] = Piece.Placeholder;
                             copy[x - 1, y] = Piece.Placeholder;
@@ -221,7 +223,7 @@ public class Solver
                 }
             }
         }
-        
+
         for (var x = 0; x < copy.Width; x++)
         {
             if (copy.GetColumnCount(x) == copy.ColumnConstraints[x])
@@ -245,6 +247,72 @@ public class Solver
                     if (copy[x, y] == Piece.Empty)
                     {
                         Grid[x, y] = Piece.Cross;
+                    }
+                }
+            }
+        }
+    }
+
+    private void PlaceObviousPieces(Grid copy)
+    {
+        for (var x = 0; x < Grid.Width; x++)
+        {
+            if (copy.GetColumnRemaining(x) == 0)
+            {
+                for (var y = 0; y < Grid.Height; y++)
+                {
+                    if (Grid[x, y] == Piece.SouthEast)
+                    {
+                        if (x > 0 && y < Grid.Bottom)
+                        {
+                            if (x - 1 < 0 || Grid[x - 1, y + 1] != Piece.Empty)
+                            {
+                                Grid[x, y + 1] = Piece.NorthEast;
+                            }
+                        }
+
+                        if (x < Grid.Right && y < Grid.Bottom)
+                        {
+                            if (x + 1 > Grid.Right || Grid[x + 1, y + 1] != Piece.Empty)
+                            {
+                                Grid[x, y + 1] = Piece.NorthWest;
+                            }
+                        }
+                    }
+
+                    // if (Grid[x, y] == Piece.NorthEast)
+                    // {
+                    //     Grid[x, y - 1] = Piece.SouthEast;
+                    // }
+
+                    if (Grid[x, y] == Piece.NorthWest)
+                    {
+                        if (x < Grid.Right && y > 0)
+                        {
+                            if (x + 1 > Grid.Right || Grid[x + 1, y - 1] != Piece.Empty)
+                            {
+                                Grid[x, y - 1] = Piece.SouthWest;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        for (var x = 1; x < Grid.Right; x++)
+        {
+            for (var y = 1; y < Grid.Bottom; y++)
+            {
+                if (Grid[x, y] == Piece.Empty)
+                {
+                    if (Grid[x - 1, y] == Piece.Cross && Grid[x + 1, y] == Piece.Cross)
+                    {
+                        Grid[x, y] = Piece.Vertical;
+                    }
+
+                    if (Grid[x, y - 1] == Piece.Cross && Grid[x, y + 1] == Piece.Cross)
+                    {
+                        Grid[x, y] = Piece.Horizontal;
                     }
                 }
             }
