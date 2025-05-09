@@ -113,6 +113,6 @@ public class Remote
 
         WriteLine(grid.ToString());
         
-        WriteLine($"Elapsed: {_stopwatch.Elapsed:h\\:mm\\:ss\\.fff}, Steps: {_count:N0}.    ");
+        WriteLine($@"Elapsed: {_stopwatch.Elapsed:h\:mm\:ss\.fff}, Steps: {_count:N0}.    ");
     }
 }
