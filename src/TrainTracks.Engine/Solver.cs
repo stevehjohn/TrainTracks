@@ -12,6 +12,8 @@ public class Solver
     {
         Grid = grid;
 
+        PopulateCrosses();
+        
         var result = PlaceNextMove(Grid.Entry, null);
 
         if (result)
@@ -137,5 +139,36 @@ public class Solver
         }
 
         return false;
+    }
+
+    private void PopulateCrosses()
+    {
+        for (var x = 0; x < Grid.Width; x++)
+        {
+            if (Grid.GetColumnCount(x) == Grid.ColumnConstraints[x])
+            {
+                for (var y = 0; y < Grid.Height; y++)
+                {
+                    if (Grid[x, y] == Piece.Empty)
+                    {
+                        Grid[x, y] = Piece.Cross;
+                    }
+                }
+            }
+        }
+
+        for (var y = 0; y < Grid.Height; y++)
+        {
+            if (Grid.GetRowCount(y) == Grid.RowConstraints[y])
+            {
+                for (var x = 0; x < Grid.Width; x++)
+                {
+                    if (Grid[x, y] == Piece.Empty)
+                    {
+                        Grid[x, y] = Piece.Cross;
+                    }
+                }
+            }
+        }
     }
 }
