@@ -303,9 +303,22 @@ public class Solver
         {
             for (var y = 0; y < Grid.Height; y++) 
             {
-                if (Grid[0, y] == Piece.NorthWest)
+                if (Grid[0, y] == Piece.NorthEast)
                 {
                     Grid[0, y - 1] = Piece.SouthEast;
+                    
+                    break;
+                }
+            }
+        }
+
+        if (Grid.ColumnConstraints[Grid.Right] == 2)
+        {
+            for (var y = 0; y < Grid.Height; y++)
+            {
+                if (Grid[Grid.Right, y] == Piece.SouthWest)
+                {
+                    Grid[Grid.Right, y + 1] = Piece.NorthWest;
                     
                     break;
                 }
