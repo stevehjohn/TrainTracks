@@ -72,7 +72,7 @@ public class Remote
 
                 WriteLine();
 
-                ReadLine();
+                break;
             }
             else
             {

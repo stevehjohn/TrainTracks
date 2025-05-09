@@ -15,7 +15,7 @@ public class Solver
         var copy = Grid.Clone();
 
         // TODO: Call until no changes made.
-        for (var i = 0; i < 3; i++)
+        //for (var i = 0; i < 3; i++)
         {
             PopulateCrosses();
 
