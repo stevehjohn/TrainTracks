@@ -9,5 +9,6 @@ public enum Piece
     NorthEast = 5,
     SouthEast = 6,
     SouthWest = 7,
-    NorthWest = 8
+    NorthWest = 8,
+    Placeholder = 9
 }
