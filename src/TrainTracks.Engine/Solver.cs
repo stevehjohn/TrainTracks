@@ -277,6 +277,23 @@ public class Solver
             }
         }
 
+        for (var y = 0; y < Grid.Height; y++)
+        {
+            if (copy.GetRowRemaining(y) == 0)
+            {
+                for (var x = 0; x < Grid.Width; x++)
+                {
+                    if (Grid[x, y] == Piece.SouthWest)
+                    {
+                        if (y == 0 || Grid[x - 1, y - 1] == Piece.Cross)
+                        {
+                            Grid[x - 1, y] = Piece.SouthEast;
+                        }
+                    }
+                }
+            }
+        }
+
         for (var x = 1; x < Grid.Right; x++)
         {
             for (var y = 1; y < Grid.Bottom; y++)
