@@ -39,7 +39,7 @@ public class Local
         
         WriteLine(puzzle.ToString());
         
-        WriteLine($"Solve state: {result}");
+        WriteLine($"Solve state: {result}             ");
         
         WriteLine($"Steps:       {_count:N0}");
                 
