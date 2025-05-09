@@ -312,6 +312,36 @@ public class Solver
             }
         }
 
+        if (Grid.ColumnConstraints[Grid.Right] == 3)
+        {
+            for (var y = 0; y < Grid.Height; y++) 
+            {
+                if (Grid[Grid.Right, y] == Piece.Vertical)
+                {
+                    Grid[Grid.Right, y - 1] = Piece.SouthWest;
+
+                    Grid[Grid.Right, y + 1] = Piece.NorthWest;
+                    
+                    break;
+                }
+            }
+        }
+
+        if (Grid.ColumnConstraints[0] == 3)
+        {
+            for (var y = 0; y < Grid.Height; y++) 
+            {
+                if (Grid[0, y] == Piece.Vertical)
+                {
+                    Grid[0, y - 1] = Piece.SouthEast;
+
+                    Grid[0, y + 1] = Piece.NorthEast;
+                    
+                    break;
+                }
+            }
+        }
+
         for (var x = 1; x < Grid.Right; x++)
         {
             for (var y = 1; y < Grid.Bottom; y++)
