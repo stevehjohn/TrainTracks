@@ -39,9 +39,9 @@ public class Local
         
         WriteLine(puzzle.ToString());
         
-        WriteLine($"Solve state: {result}             ");
+        WriteLine($"Solve state: {result}                 ");
         
-        WriteLine($"Steps:       {_count:N0}");
+        WriteLine($"Steps:       {_count:N0}              ");
                 
         WriteLine($"Elapsed:     {_stopwatch.Elapsed:h\\:mm\\:ss\\.fff}");
 
