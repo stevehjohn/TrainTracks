@@ -16,9 +16,13 @@ public class Solver
 
         var copy = Grid.Clone();
 
-        PopulateImpliedCrosses(copy);
+        // TODO: Call until no changes made.
+        for (var i = 0; i < 3; i++)
+        {
+            PopulateImpliedCrosses(copy);
 
-        PlaceObviousPieces(copy);
+            PlaceObviousPieces(copy);
+        }
 
         var result = PlaceNextMove(Grid.Entry, null);
 
