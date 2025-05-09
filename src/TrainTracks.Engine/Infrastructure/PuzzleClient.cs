@@ -81,7 +81,6 @@ public sealed class PuzzleClient : IDisposable
 
     public HttpStatusCode SendResult(DateOnly date, Grid grid, int variant)
     {
-        // TODO: Properly use JSON.
         var timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
 
         var score = 0;
@@ -105,7 +104,21 @@ public sealed class PuzzleClient : IDisposable
 
         score -= grid.FixedPieces * 5;
 
-        var content = $"{{\"type\":33,\"variant\":{variant},\"year\":{date.Year},\"month\":{date.Month},\"day\":{date.Day},\"score\":{score},\"solution\":\"{builder}\",\"userID\":{_userId},\"status\":\"PENDING\",\"createdAt\":{timestamp}}}";
+        var solution = new PuzzleSolution
+        {
+            Type = 33,
+            Variant = variant,
+            Year = date.Year,
+            Month = date.Month,
+            Day = date.Day,
+            Score = score,
+            Solution = builder.ToString(),
+            UserId = _userId,
+            Status = "PENDING",
+            CreatedAt = timestamp
+        };
+
+        var content = JsonSerializer.Serialize(solution);
         
         var stringContent = new StringContent(content);
         
