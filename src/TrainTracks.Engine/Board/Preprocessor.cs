@@ -235,38 +235,38 @@ public class Preprocessor
             }
         }
 
-        for (var x = 1; x < _grid.Right; x++)
-        {
-            for (var y = 1; y < _grid.Bottom; y++)
-            {
-                if (_grid[x, y] == Piece.Empty &&
-                    _grid[x, y - 1] is Piece.Vertical or Piece.SouthEast or Piece.SouthWest &&
-                    _grid[x, y + 1] is Piece.Vertical or Piece.NorthEast or Piece.NorthWest)
-                {
-                    _grid[x, y] = Piece.Vertical;
-                }
-
-                if (_grid[x, y] == Piece.Empty &&
-                    _grid[x - 1, y] is Piece.Horizontal or Piece.SouthEast or Piece.NorthEast &&
-                    _grid[x + 1, y] is Piece.Horizontal or Piece.NorthWest or Piece.SouthWest)
-                {
-                    _grid[x, y] = Piece.Horizontal;
-                }
-
-                if (_grid[x, y] == Piece.Empty && _grid[x, y - 1] == Piece.Cross && _grid[x, y + 1] == Piece.Cross
-                    && (_grid[x - 1, y] is Piece.NorthEast or Piece.SouthEast or Piece.Horizontal
-                        || _grid[x + 1, y] is Piece.NorthWest or Piece.SouthWest or Piece.Horizontal))
-                {
-                    _grid[x, y] = Piece.Horizontal;
-                }
-
-                if (_grid[x, y] == Piece.Empty && _grid[x - 1, y] == Piece.Cross && _grid[x + 1, y] == Piece.Cross
-                    && (_grid[x, y - 1] is Piece.Vertical or Piece.SouthEast or Piece.SouthWest
-                        || _grid[x, y + 1] is Piece.Vertical or Piece.NorthEast or Piece.NorthWest))
-                {
-                    _grid[x, y] = Piece.Vertical;
-                }
-            }
-        }
+        // for (var x = 1; x < _grid.Right; x++)
+        // {
+        //     for (var y = 1; y < _grid.Bottom; y++)
+        //     {
+        //         if (_grid[x, y] == Piece.Empty &&
+        //             _grid[x, y - 1] is Piece.Vertical or Piece.SouthEast or Piece.SouthWest &&
+        //             _grid[x, y + 1] is Piece.Vertical or Piece.NorthEast or Piece.NorthWest)
+        //         {
+        //             _grid[x, y] = Piece.Vertical;
+        //         }
+        //
+        //         if (_grid[x, y] == Piece.Empty &&
+        //             _grid[x - 1, y] is Piece.Horizontal or Piece.SouthEast or Piece.NorthEast &&
+        //             _grid[x + 1, y] is Piece.Horizontal or Piece.NorthWest or Piece.SouthWest)
+        //         {
+        //             _grid[x, y] = Piece.Horizontal;
+        //         }
+        //
+        //         if (_grid[x, y] == Piece.Empty && _grid[x, y - 1] == Piece.Cross && _grid[x, y + 1] == Piece.Cross
+        //             && (_grid[x - 1, y] is Piece.NorthEast or Piece.SouthEast or Piece.Horizontal
+        //                 || _grid[x + 1, y] is Piece.NorthWest or Piece.SouthWest or Piece.Horizontal))
+        //         {
+        //             _grid[x, y] = Piece.Horizontal;
+        //         }
+        //
+        //         if (_grid[x, y] == Piece.Empty && _grid[x - 1, y] == Piece.Cross && _grid[x + 1, y] == Piece.Cross
+        //             && (_grid[x, y - 1] is Piece.Vertical or Piece.SouthEast or Piece.SouthWest
+        //                 || _grid[x, y + 1] is Piece.Vertical or Piece.NorthEast or Piece.NorthWest))
+        //         {
+        //             _grid[x, y] = Piece.Vertical;
+        //         }
+        //     }
+        // }
     }
 }
