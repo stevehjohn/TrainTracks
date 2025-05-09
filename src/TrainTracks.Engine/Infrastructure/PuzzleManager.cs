@@ -8,7 +8,7 @@ public class PuzzleManager
 {
     private List<Grid> _puzzles;
 
-    private static readonly JsonSerializerOptions JsonSerializerOptions = new JsonSerializerOptions
+    private static readonly JsonSerializerOptions JsonSerializerOptions = new()
     {
         PropertyNameCaseInsensitive = true
     };
