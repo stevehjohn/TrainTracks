@@ -15,7 +15,7 @@ public class Solver
         var copy = Grid.Clone();
 
         // TODO: Call until no changes made.
-        for (var i = 0; i < 3; i++)
+        //for (var i = 0; i < 3; i++)
         {
             PopulateCrosses();
 
@@ -263,15 +263,15 @@ public class Solver
         {
             for (var x = 0; x < Grid.Width; x++)
             {
-                if (Grid[x, 0] == Piece.SouthEast)
-                {
-                    Grid[x + 1, 0] = Piece.SouthWest;
-                }
-
-                if (Grid[x, 0] == Piece.SouthWest)
-                {
-                    Grid[x + 1, 0] = Piece.SouthEast;
-                }
+                // if (Grid[x, 0] == Piece.SouthEast)
+                // {
+                //     Grid[x + 1, 0] = Piece.SouthWest;
+                // }
+                //
+                // if (Grid[x, 0] == Piece.SouthWest)
+                // {
+                //     Grid[x + 1, 0] = Piece.SouthEast;
+                // }
             }
         }
 
@@ -282,11 +282,27 @@ public class Solver
                 if (Grid[x, Grid.Bottom] == Piece.NorthEast)
                 {
                     Grid[x + 1, Grid.Bottom] = Piece.NorthWest;
+                    
+                    break;
                 }
-
+                
                 if (Grid[x, Grid.Bottom] == Piece.NorthWest)
                 {
                     Grid[x + 1, Grid.Bottom] = Piece.NorthEast;
+                    
+                    break;
+                }
+            }
+        }
+
+        for (var x = 1; x < Grid.Right; x++)
+        {
+            for (var y = 1; y < Grid.Bottom; y++)
+            {
+                if (Grid[x, y - 1] is Piece.Vertical or Piece.SouthEast or Piece.SouthWest &&
+                    Grid[x, y + 1] is Piece.Vertical or Piece.NorthEast or Piece.NorthWest)
+                {
+                    Grid[x, y] = Piece.Vertical;
                 }
             }
         }
