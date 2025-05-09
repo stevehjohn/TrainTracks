@@ -14,14 +14,11 @@ public class Solver
 
         var copy = Grid.Clone();
 
-        for (var i = 0; i < 2; i++)
-        {
-            PopulateCrosses();
+        PopulateCrosses();
 
-            PopulateImpliedCrosses(copy);
+        PopulateImpliedCrosses(copy);
 
-            PlaceObviousPieces();
-        }
+        PlaceObviousPieces();
 
         var result = PlaceNextMove(Grid.Entry, null);
 
@@ -399,7 +396,7 @@ public class Solver
                 {
                     Grid[x, y] = Piece.Vertical;
                 }
-
+                
                 if (Grid[x - 1, y] is Piece.Horizontal or Piece.NorthEast or Piece.SouthEast
                     && Grid[x, y + 1] is Piece.Vertical or Piece.NorthEast or Piece.NorthWest)
                 {
