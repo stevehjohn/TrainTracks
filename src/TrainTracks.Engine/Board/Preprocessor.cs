@@ -14,7 +14,7 @@ public class Preprocessor
 
         PopulateImpliedCrosses(copy);
 
-        //PlaceObviousPieces();
+        PlaceObviousPieces();
     }
 
     private void PopulateCrosses()
@@ -214,6 +214,21 @@ public class Preprocessor
                     _grid[_grid.Right, y - 1] = Piece.SouthWest;
 
                     _grid[_grid.Right, y + 1] = Piece.NorthWest;
+
+                    break;
+                }
+            }
+        }
+
+        if (_grid.ColumnConstraints[0] == 3)
+        {
+            for (var y = 0; y < _grid.Height; y++)
+            {
+                if (_grid[0, y] == Piece.Vertical)
+                {
+                    _grid[0, y - 1] = Piece.SouthEast;
+
+                    _grid[0, y + 1] = Piece.NorthEast;
 
                     break;
                 }
