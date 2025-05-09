@@ -384,15 +384,15 @@ public class Solver
                 }
 
                 if (Grid[x, y] == Piece.Empty && Grid[x, y - 1] == Piece.Cross && Grid[x, y + 1] == Piece.Cross
-                    && Grid[x - 1, y] is Piece.NorthEast or Piece.SouthEast
-                    && Grid[x + 1, y] is Piece.NorthWest or Piece.SouthWest)
+                    && (Grid[x - 1, y] is Piece.NorthEast or Piece.SouthEast or Piece.Horizontal
+                        || Grid[x + 1, y] is Piece.NorthWest or Piece.SouthWest or Piece.Horizontal))
                 {
                     Grid[x, y] = Piece.Horizontal;
                 }
 
                 if (Grid[x, y] == Piece.Empty && Grid[x - 1, y] == Piece.Cross && Grid[x + 1, y] == Piece.Cross
-                    && Grid[x, y - 1] is Piece.Vertical or Piece.SouthEast or Piece.SouthWest
-                    && Grid[x, y + 1] is Piece.Vertical or Piece.NorthEast or Piece.NorthWest)
+                    && (Grid[x, y - 1] is Piece.Vertical or Piece.SouthEast or Piece.SouthWest
+                        || Grid[x, y + 1] is Piece.Vertical or Piece.NorthEast or Piece.NorthWest))
                 {
                     Grid[x, y] = Piece.Vertical;
                 }
