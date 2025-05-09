@@ -35,11 +35,7 @@ public class Local
         
         var result = solver.Solve(puzzle);
 
-        Clear();
-                
-        WriteLine($"Puzzle number: {puzzleNumber} ({puzzle.Width}x{puzzle.Height})");
-        
-        WriteLine();
+        CursorTop = puzzle.Height + 3;
         
         WriteLine(puzzle.ToString());
         
@@ -61,7 +57,7 @@ public class Local
             return;
         }
 
-        CursorTop = 2;
+        CursorTop = grid.Height + 3;
         
         WriteLine(grid.ToString());
         
