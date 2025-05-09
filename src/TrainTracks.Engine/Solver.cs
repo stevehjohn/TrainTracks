@@ -263,15 +263,19 @@ public class Solver
         {
             for (var x = 0; x < Grid.Width; x++)
             {
-                // if (Grid[x, 0] == Piece.SouthEast)
-                // {
-                //     Grid[x + 1, 0] = Piece.SouthWest;
-                // }
-                //
-                // if (Grid[x, 0] == Piece.SouthWest)
-                // {
-                //     Grid[x + 1, 0] = Piece.SouthEast;
-                // }
+                if (Grid[x, 0] == Piece.SouthEast)
+                {
+                    Grid[x + 1, 0] = Piece.SouthWest;
+                    
+                    break;
+                }
+                
+                if (Grid[x, 0] == Piece.SouthWest)
+                {
+                    Grid[x + 1, 0] = Piece.SouthEast;
+                    
+                    break;
+                }
             }
         }
 
