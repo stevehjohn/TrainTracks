@@ -189,14 +189,14 @@ public class Preprocessor
         {
             for (var y = 0; y < _grid.Height; y++)
             {
-                if (_grid[_grid.Right, y] == Piece.SouthWest)
+                if (_grid[_grid.Right, y] is Piece.SouthWest or Piece.SouthEast)
                 {
                     _grid[_grid.Right, y + 1] = Piece.NorthWest;
 
                     break;
                 }
 
-                if (_grid[_grid.Right, y] == Piece.NorthWest)
+                if (_grid[_grid.Right, y] is Piece.NorthWest or Piece.NorthEast)
                 {
                     _grid[_grid.Right, y - 1] = Piece.SouthWest;
 
