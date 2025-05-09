@@ -14,8 +14,7 @@ public class Solver
 
         var copy = Grid.Clone();
 
-        // TODO: Call until no changes made.
-        //for (var i = 0; i < 3; i++)
+        for (var i = 0; i < 2; i++)
         {
             PopulateCrosses();
 
@@ -303,9 +302,16 @@ public class Solver
         {
             for (var y = 0; y < Grid.Height; y++) 
             {
-                if (Grid[0, y] == Piece.NorthEast)
+                if (Grid[0, y] is Piece.NorthEast or Piece.NorthWest)
                 {
                     Grid[0, y - 1] = Piece.SouthEast;
+                    
+                    break;
+                }
+
+                if (Grid[0, y] is Piece.SouthEast or Piece.SouthWest)
+                {
+                    Grid[0, y + 1] = Piece.NorthEast;
                     
                     break;
                 }
