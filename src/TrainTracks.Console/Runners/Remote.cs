@@ -74,30 +74,28 @@ public class Remote
 
                 break;
             }
+
+            CursorTop = _top;
+
+            WriteLine(puzzle.Value.Grid.ToString());
+
+            WriteLine($"Solved in {_stopwatch.Elapsed:g}, with {_count:N0} iterations.");
+
+            WriteLine();
+
+            WriteLine("Sending result...");
+
+            WriteLine();
+
+            var statusCode = client.SendResult(puzzle.Value.Date, puzzle.Value.Grid, puzzle.Value.Variant);
+
+            if (statusCode != HttpStatusCode.OK)
+            {
+                WriteLine($"Result not accepted. Status code: {(int) statusCode}.");
+            }
             else
             {
-                CursorTop = _top;
-
-                WriteLine(puzzle.Value.Grid.ToString());
-
-                WriteLine($"Solved in {_stopwatch.Elapsed:g}, with {_count:N0} iterations.");
-
-                WriteLine();
-
-                WriteLine("Sending result...");
-
-                WriteLine();
-
-                var statusCode = client.SendResult(puzzle.Value.Date, puzzle.Value.Grid, puzzle.Value.Variant);
-
-                if (statusCode != HttpStatusCode.OK)
-                {
-                    WriteLine($"Result not accepted. Status code: {(int) statusCode}.");
-                }
-                else
-                {
-                    WriteLine("Result accepted.");
-                }
+                WriteLine("Result accepted.");
             }
         }
 
