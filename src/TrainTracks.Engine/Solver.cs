@@ -4,7 +4,7 @@ namespace TrainTracks.Engine;
 
 public class Solver
 {
-    private Preprocessor _preprocessor = new Preprocessor();
+    private readonly Preprocessor _preprocessor = new();
     
     public Grid Grid { get; private set; }
 
