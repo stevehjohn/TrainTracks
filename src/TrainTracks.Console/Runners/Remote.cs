@@ -14,7 +14,7 @@ public class Remote
 
     private int _count;
     
-    private readonly Stopwatch _stopwatch = new Stopwatch();
+    private readonly Stopwatch _stopwatch = new();
 
     public void Run(RemoteOptions options)
     {
@@ -25,10 +25,10 @@ public class Remote
             StepCallback = VisualiseStep
         };
 
+        Clear();
+
         for (var i = 0; i < options.Quantity; i++)
         {
-            Clear();
-
             WriteLine();
 
             WriteLine($"Fetching {options.Difficulty.ToString().ToLowerInvariant()} puzzle {i + 1:N0} of {options.Quantity:N0}...");
@@ -36,6 +36,8 @@ public class Remote
             WriteLine();
 
             var puzzle = client.GetNextPuzzle(options.Difficulty);
+
+            Clear();
 
             if (puzzle == null)
             {
