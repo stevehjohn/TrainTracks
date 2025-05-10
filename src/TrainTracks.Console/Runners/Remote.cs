@@ -67,6 +67,12 @@ public class Remote
                     WriteLine();
 
                     Thread.Sleep(1_000);
+
+                    CursorTop -= 2;
+                    
+                    WriteLine("Retrying...                         ");
+                    
+                    WriteLine();
                 }
             }
 
@@ -146,6 +152,12 @@ public class Remote
                         WriteLine();
 
                         Thread.Sleep(1_000);
+
+                        CursorTop -= 2;
+                    
+                        WriteLine("Retrying...                         ");
+                    
+                        WriteLine();
                     }
                 }
                 else
