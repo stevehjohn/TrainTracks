@@ -145,26 +145,26 @@ public class Preprocessor
             }
         }
 
-        // if (_grid.RowConstraints[_grid.Bottom] == 2)
-        // {
-        //     for (var x = 0; x < _grid.Width; x++)
-        //     {
-        //         if (_grid[x, _grid.Bottom] is Piece.NorthEast or Piece.SouthEast)
-        //         {
-        //             _grid[x + 1, _grid.Bottom] = Piece.NorthWest;
-        //
-        //             break;
-        //         }
-        //
-        //         if (_grid[x, _grid.Bottom] is Piece.NorthWest or Piece.SouthWest)
-        //         {
-        //             _grid[x - 1, _grid.Bottom] = Piece.NorthEast;
-        //
-        //             break;
-        //         }
-        //     }
-        // }
-        //
+        if (_grid.RowConstraints[_grid.Bottom] == 2)
+        {
+            for (var x = 0; x < _grid.Width; x++)
+            {
+                if (_grid[x, _grid.Bottom] is Piece.NorthEast or Piece.SouthEast)
+                {
+                    _grid[x + 1, _grid.Bottom] = Piece.NorthWest;
+        
+                    break;
+                }
+        
+                if (_grid[x, _grid.Bottom] is Piece.NorthWest or Piece.SouthWest)
+                {
+                    _grid[x - 1, _grid.Bottom] = Piece.NorthEast;
+        
+                    break;
+                }
+            }
+        }
+        
         // if (_grid.ColumnConstraints[0] == 2)
         // {
         //     for (var y = 0; y < _grid.Height; y++)
