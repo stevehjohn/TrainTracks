@@ -59,7 +59,7 @@ public class Remote
 
                 var sleep = retry * 2 * 1_000;
 
-                WriteLine($"Waiting for  {retry / 1_000}s.");
+                WriteLine($"Waiting for {retry / 1_000:N0}s.");
 
                 WriteLine();
 
