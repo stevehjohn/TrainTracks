@@ -89,8 +89,12 @@ public class Remote
 
             WriteLine();
 
+            Thread.Sleep(1_000);
+
             var statusCode = client.SendResult(puzzle.Value.Date, puzzle.Value.Grid, puzzle.Value.Variant);
 
+            Thread.Sleep(1_000);
+            
             if (statusCode != HttpStatusCode.OK)
             {
                 WriteLine($"Result not accepted. Status code: {(int) statusCode}.");
