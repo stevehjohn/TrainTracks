@@ -1,4 +1,6 @@
-namespace TrainTracks.Engine.Board;
+using TrainTracks.Engine.Board;
+
+namespace TrainTracks.Engine.Logic;
 
 public class Preprocessor
 {
