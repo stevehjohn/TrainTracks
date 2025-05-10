@@ -37,7 +37,7 @@ public class Remote
 
             (DateOnly Date, Grid Grid, int Variant)? puzzle = null;
 
-            for (var retry = 1; retry < 6; retry++)
+            for (var retry = 1; retry < 11; retry++)
             {
                 WriteLine($"Attempt {retry}.");
 
@@ -57,7 +57,14 @@ public class Remote
                     break;
                 }
 
-                Thread.Sleep(retry * 2 * 1_000);
+                var sleep = retry * 2 * 1_000;
+
+                WriteLine($"Waiting for  {retry / 1_000}s.");
+
+                WriteLine();
+
+
+                Thread.Sleep(sleep);
             }
 
             Clear();
