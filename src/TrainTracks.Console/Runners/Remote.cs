@@ -37,7 +37,7 @@ public class Remote
 
             (DateOnly Date, Grid Grid, int Variant)? puzzle = null;
 
-            for (var retry = 1; retry < 11; retry++)
+            for (var retry = 1; retry < 21; retry++)
             {
                 WriteLine($"Attempt {retry}.");
 
