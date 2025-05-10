@@ -104,7 +104,7 @@ public class Remote
 
     private void VisualiseStep(Grid grid)
     {
-        if (_count++ % 100 != 0)
+        if (_count++ % 10_000 != 0)
         {
             return;
         }
