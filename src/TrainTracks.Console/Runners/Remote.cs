@@ -53,18 +53,21 @@ public class Remote
                     break;
                 }
 
-                if (retry > 1)
-                {
-                    CursorTop -= 2;
-                }
-
                 var sleep = (int) Math.Pow(retry, 2);
 
-                WriteLine($"Waiting for {sleep:N0}s before attempt {retry}.");
+                for (var timer = 0; timer < sleep; timer++)
+                {
+                    if (retry > 1)
+                    {
+                        CursorTop -= 2;
+                    }
 
-                WriteLine();
+                    WriteLine($"Waiting for {sleep - timer:N0}s before attempt {retry}.");
 
-                Thread.Sleep(sleep * 1_000);
+                    WriteLine();
+
+                    Thread.Sleep(1_000);
+                }
             }
 
             Clear();
@@ -129,18 +132,21 @@ public class Remote
                     
                     WriteLine();
 
-                    if (retry > 1)
-                    {
-                        CursorTop -= 2;
-                    }
-
                     var sleep = (int) Math.Pow(retry, 2);
 
-                    WriteLine($"Waiting for {sleep:N0}s before attempt {retry}.");
+                    for (var timer = 0; timer < sleep; timer++)
+                    {
+                        if (retry > 1)
+                        {
+                            CursorTop -= 2;
+                        }
 
-                    WriteLine();
+                        WriteLine($"Waiting for {sleep - timer:N0}s before attempt {retry}.");
 
-                    Thread.Sleep(sleep * 1_000);
+                        WriteLine();
+
+                        Thread.Sleep(1_000);
+                    }
                 }
                 else
                 {
