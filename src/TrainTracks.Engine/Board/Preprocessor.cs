@@ -129,14 +129,14 @@ public class Preprocessor
         {
             for (var x = 0; x < _grid.Width; x++)
             {
-                if (_grid[x, 0] is Piece.SouthEast or Piece.NorthEast or Piece.Horizontal)
+                if (_grid[x, 0] is Piece.SouthEast or Piece.NorthEast)
                 {
                     _grid[x + 1, 0] = Piece.SouthWest;
 
                     break;
                 }
 
-                if (_grid[x, 0] is Piece.SouthWest or Piece.NorthEast or Piece.Horizontal)
+                if (_grid[x, 0] is Piece.SouthWest or Piece.NorthEast)
                 {
                     _grid[x - 1, 0] = Piece.SouthEast;
 
@@ -145,125 +145,125 @@ public class Preprocessor
             }
         }
 
-        // if (_grid.RowConstraints[_grid.Bottom] == 2)
-        // {
-        //     for (var x = 0; x < _grid.Width; x++)
-        //     {
-        //         if (_grid[x, _grid.Bottom] is Piece.NorthEast or Piece.SouthEast or Piece.Horizontal)
-        //         {
-        //             _grid[x + 1, _grid.Bottom] = Piece.NorthWest;
-        //
-        //             break;
-        //         }
-        //
-        //         if (_grid[x, _grid.Bottom] is Piece.NorthWest or Piece.SouthEast or Piece.Horizontal)
-        //         {
-        //             _grid[x - 1, _grid.Bottom] = Piece.NorthEast;
-        //
-        //             break;
-        //         }
-        //     }
-        // }
-        //
-        // if (_grid.ColumnConstraints[0] == 2)
-        // {
-        //     for (var y = 0; y < _grid.Height; y++)
-        //     {
-        //         if (_grid[0, y] is Piece.NorthEast or Piece.NorthWest or Piece.Vertical)
-        //         {
-        //             _grid[0, y - 1] = Piece.SouthEast;
-        //
-        //             break;
-        //         }
-        //
-        //         if (_grid[0, y] is Piece.SouthEast or Piece.SouthWest or Piece.Vertical)
-        //         {
-        //             _grid[0, y + 1] = Piece.NorthEast;
-        //
-        //             break;
-        //         }
-        //     }
-        // }
-        //
-        // if (_grid.ColumnConstraints[_grid.Right] == 2)
-        // {
-        //     for (var y = 0; y < _grid.Height; y++)
-        //     {
-        //         if (_grid[_grid.Right, y] is Piece.SouthWest or Piece.SouthEast or Piece.Vertical)
-        //         {
-        //             _grid[_grid.Right, y + 1] = Piece.NorthWest;
-        //
-        //             break;
-        //         }
-        //
-        //         if (_grid[_grid.Right, y] is Piece.NorthWest or Piece.NorthEast or Piece.Vertical)
-        //         {
-        //             _grid[_grid.Right, y - 1] = Piece.SouthWest;
-        //
-        //             break;
-        //         }
-        //     }
-        // }
-        //
-        // if (_grid.ColumnConstraints[_grid.Right] == 3)
-        // {
-        //     for (var y = 1; y < _grid.Bottom; y++)
-        //     {
-        //         if (_grid[_grid.Right, y] == Piece.Vertical)
-        //         {
-        //             _grid[_grid.Right, y - 1] = Piece.SouthWest;
-        //
-        //             _grid[_grid.Right, y + 1] = Piece.NorthWest;
-        //
-        //             break;
-        //         }
-        //     }
-        // }
-        //
-        // if (_grid.ColumnConstraints[0] == 3)
-        // {
-        //     for (var y = 1; y < _grid.Bottom; y++)
-        //     {
-        //         if (_grid[0, y] == Piece.Vertical)
-        //         {
-        //             _grid[0, y - 1] = Piece.SouthEast;
-        //
-        //             _grid[0, y + 1] = Piece.NorthEast;
-        //
-        //             break;
-        //         }
-        //     }
-        // }
-        //
-        // if (_grid.RowConstraints[0] == 3)
-        // {
-        //     for (var x = 1; x < _grid.Right; x++)
-        //     {
-        //         if (_grid[x, 0] == Piece.Horizontal)
-        //         {
-        //             _grid[x - 1, 0] = Piece.SouthEast;
-        //
-        //             _grid[x + 1, 0] = Piece.SouthWest;
-        //
-        //             break;
-        //         }
-        //     }
-        // }
-        //
-        // if (_grid.RowConstraints[_grid.Bottom] == 3)
-        // {
-        //     for (var x = 1; x < _grid.Right; x++)
-        //     {
-        //         if (_grid[x, _grid.Bottom] == Piece.Horizontal)
-        //         {
-        //             _grid[x - 1, _grid.Bottom] = Piece.NorthEast;
-        //
-        //             _grid[x + 1, _grid.Bottom] = Piece.NorthWest;
-        //
-        //             break;
-        //         }
-        //     }
-        // }
+        if (_grid.RowConstraints[_grid.Bottom] == 2)
+        {
+            for (var x = 0; x < _grid.Width; x++)
+            {
+                if (_grid[x, _grid.Bottom] is Piece.NorthEast or Piece.SouthEast)
+                {
+                    _grid[x + 1, _grid.Bottom] = Piece.NorthWest;
+        
+                    break;
+                }
+        
+                if (_grid[x, _grid.Bottom] is Piece.NorthWest or Piece.SouthEast)
+                {
+                    _grid[x - 1, _grid.Bottom] = Piece.NorthEast;
+        
+                    break;
+                }
+            }
+        }
+        
+        if (_grid.ColumnConstraints[0] == 2)
+        {
+            for (var y = 0; y < _grid.Height; y++)
+            {
+                if (_grid[0, y] is Piece.NorthEast or Piece.NorthWest)
+                {
+                    _grid[0, y - 1] = Piece.SouthEast;
+        
+                    break;
+                }
+        
+                if (_grid[0, y] is Piece.SouthEast or Piece.SouthWest)
+                {
+                    _grid[0, y + 1] = Piece.NorthEast;
+        
+                    break;
+                }
+            }
+        }
+        
+        if (_grid.ColumnConstraints[_grid.Right] == 2)
+        {
+            for (var y = 0; y < _grid.Height; y++)
+            {
+                if (_grid[_grid.Right, y] is Piece.SouthWest or Piece.SouthEast)
+                {
+                    _grid[_grid.Right, y + 1] = Piece.NorthWest;
+        
+                    break;
+                }
+        
+                if (_grid[_grid.Right, y] is Piece.NorthWest or Piece.NorthEast)
+                {
+                    _grid[_grid.Right, y - 1] = Piece.SouthWest;
+        
+                    break;
+                }
+            }
+        }
+        
+        if (_grid.ColumnConstraints[_grid.Right] == 3)
+        {
+            for (var y = 1; y < _grid.Bottom; y++)
+            {
+                if (_grid[_grid.Right, y] == Piece.Vertical)
+                {
+                    _grid[_grid.Right, y - 1] = Piece.SouthWest;
+        
+                    _grid[_grid.Right, y + 1] = Piece.NorthWest;
+        
+                    break;
+                }
+            }
+        }
+        
+        if (_grid.ColumnConstraints[0] == 3)
+        {
+            for (var y = 1; y < _grid.Bottom; y++)
+            {
+                if (_grid[0, y] == Piece.Vertical)
+                {
+                    _grid[0, y - 1] = Piece.SouthEast;
+        
+                    _grid[0, y + 1] = Piece.NorthEast;
+        
+                    break;
+                }
+            }
+        }
+        
+        if (_grid.RowConstraints[0] == 3)
+        {
+            for (var x = 1; x < _grid.Right; x++)
+            {
+                if (_grid[x, 0] == Piece.Horizontal)
+                {
+                    _grid[x - 1, 0] = Piece.SouthEast;
+        
+                    _grid[x + 1, 0] = Piece.SouthWest;
+        
+                    break;
+                }
+            }
+        }
+        
+        if (_grid.RowConstraints[_grid.Bottom] == 3)
+        {
+            for (var x = 1; x < _grid.Right; x++)
+            {
+                if (_grid[x, _grid.Bottom] == Piece.Horizontal)
+                {
+                    _grid[x - 1, _grid.Bottom] = Piece.NorthEast;
+        
+                    _grid[x + 1, _grid.Bottom] = Piece.NorthWest;
+        
+                    break;
+                }
+            }
+        }
 
         // for (var x = 1; x < _grid.Right; x++)
         // {
