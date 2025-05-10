@@ -13,7 +13,7 @@ public class Remote
     private int _top;
 
     private int _count;
-    
+
     private readonly Stopwatch _stopwatch = new();
 
     public void Run(RemoteOptions options)
@@ -35,7 +35,30 @@ public class Remote
 
             WriteLine();
 
-            var puzzle = client.GetNextPuzzle(options.Difficulty);
+            (DateOnly Date, Grid Grid, int Variant)? puzzle = null;
+
+            for (var retry = 1; retry < 6; retry++)
+            {
+                WriteLine($"Attempt {retry}.");
+
+                WriteLine();
+
+                try
+                {
+                    puzzle = client.GetNextPuzzle(options.Difficulty);
+                }
+                catch
+                {
+                    //
+                }
+
+                if (puzzle != null)
+                {
+                    break;
+                }
+
+                Thread.Sleep(retry * 2 * 1_000);
+            }
 
             Clear();
 
@@ -90,7 +113,7 @@ public class Remote
             WriteLine();
 
             var statusCode = client.SendResult(puzzle.Value.Date, puzzle.Value.Grid, puzzle.Value.Variant);
-            
+
             if (statusCode != HttpStatusCode.OK)
             {
                 WriteLine($"Result not accepted. Status code: {(int) statusCode}.");
@@ -114,7 +137,7 @@ public class Remote
         CursorTop = _top;
 
         WriteLine(grid.ToString());
-        
+
         WriteLine($@"Elapsed: {_stopwatch.Elapsed:h\:mm\:ss\.fff}, Steps: {_count:N0}.    ");
     }
 }
