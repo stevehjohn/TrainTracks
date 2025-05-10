@@ -14,7 +14,7 @@ public class Preprocessor
 
         PopulateImpliedCrosses(copy);
 
-        // PlaceObviousPieces();
+        PlaceObviousPieces();
     }
 
     private void PopulateCrosses()
@@ -136,7 +136,7 @@ public class Preprocessor
                     break;
                 }
 
-                if (_grid[x, 0] is Piece.SouthWest or Piece.NorthEast)
+                if (_grid[x, 0] is Piece.SouthWest or Piece.NorthWest)
                 {
                     _grid[x - 1, 0] = Piece.SouthEast;
 
@@ -156,7 +156,7 @@ public class Preprocessor
                     break;
                 }
         
-                if (_grid[x, _grid.Bottom] is Piece.NorthWest or Piece.SouthEast)
+                if (_grid[x, _grid.Bottom] is Piece.NorthWest or Piece.SouthWest)
                 {
                     _grid[x - 1, _grid.Bottom] = Piece.NorthEast;
         
