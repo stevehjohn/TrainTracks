@@ -126,6 +126,8 @@ public class Remote
                 if (statusCode != HttpStatusCode.OK)
                 {
                     WriteLine($"Result not accepted. Status code: {(int) statusCode}.");
+                    
+                    WriteLine();
 
                     if (retry > 1)
                     {
