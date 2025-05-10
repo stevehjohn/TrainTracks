@@ -59,6 +59,8 @@ public class Remote
 
                 var sleep = (int) Math.Pow(retry, 2);
 
+                CursorTop -= 2;
+
                 WriteLine($"Waiting for {sleep:N0}s.");
 
                 WriteLine();
