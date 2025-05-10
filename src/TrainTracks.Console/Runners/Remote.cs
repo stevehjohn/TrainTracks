@@ -39,10 +39,6 @@ public class Remote
 
             for (var retry = 1; retry < 21; retry++)
             {
-                WriteLine($"Attempt {retry}.");
-
-                WriteLine();
-
                 try
                 {
                     puzzle = client.GetNextPuzzle(options.Difficulty);
@@ -57,14 +53,16 @@ public class Remote
                     break;
                 }
 
+                if (retry > 1)
+                {
+                    CursorTop -= 2;
+                }
+
                 var sleep = (int) Math.Pow(retry, 2);
 
-                CursorTop -= 2;
-
-                WriteLine($"Waiting for {sleep:N0}s.");
+                WriteLine($"Waiting for {sleep:N0}s before attempt {retry}.");
 
                 WriteLine();
-
 
                 Thread.Sleep(sleep * 1_000);
             }
