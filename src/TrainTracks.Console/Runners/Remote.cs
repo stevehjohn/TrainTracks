@@ -62,7 +62,7 @@ public class Remote
                         CursorTop -= 2;
                     }
 
-                    WriteLine($"Waiting for {sleep - timer:N0}s before attempt {retry}.");
+                    WriteLine($"Waiting for {sleep - timer:N0}s before attempt {retry}.  ");
 
                     WriteLine();
 
@@ -147,7 +147,7 @@ public class Remote
                             CursorTop -= 2;
                         }
 
-                        WriteLine($"Waiting for {sleep - timer:N0}s before attempt {retry}.");
+                        WriteLine($"Waiting for {sleep - timer:N0}s before attempt {retry}.  ");
 
                         WriteLine();
 
