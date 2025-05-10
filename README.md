@@ -8,7 +8,7 @@ An engine based around the Train Track puzzle games.
  #  | Size    | Time     | Iterations | Correct |
 ----+---------+----------+------------+---------+
  0  | (12x12) | ~4m      | ~400m      | Yes     |
- 1  | (12x11) | ~11   s  | ~20m       | Yes     |
+ 1  | (12x11) | ~11s     | ~20m       | Yes     |
  2  | (11x11) | ~1.3s    | ~2.5m      | Yes     |
  3  | (11x12) | ~1m      | ~106m      | Yes     |
  4  | (6x6)   | <0.01s   | ~100       | Yes     |
