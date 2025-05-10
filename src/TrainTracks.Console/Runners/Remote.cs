@@ -119,15 +119,33 @@ public class Remote
 
             WriteLine();
 
-            var statusCode = client.SendResult(puzzle.Value.Date, puzzle.Value.Grid, puzzle.Value.Variant);
+            for (var retry = 1; retry < 21; retry++)
+            {
+                var statusCode = client.SendResult(puzzle.Value.Date, puzzle.Value.Grid, puzzle.Value.Variant);
 
-            if (statusCode != HttpStatusCode.OK)
-            {
-                WriteLine($"Result not accepted. Status code: {(int) statusCode}.");
-            }
-            else
-            {
-                WriteLine("Result accepted.");
+                if (statusCode != HttpStatusCode.OK)
+                {
+                    WriteLine($"Result not accepted. Status code: {(int) statusCode}.");
+
+                    if (retry > 1)
+                    {
+                        CursorTop -= 2;
+                    }
+
+                    var sleep = (int) Math.Pow(retry, 2);
+
+                    WriteLine($"Waiting for {sleep:N0}s before attempt {retry}.");
+
+                    WriteLine();
+
+                    Thread.Sleep(sleep * 1_000);
+                }
+                else
+                {
+                    WriteLine("Result accepted.");
+                    
+                    break;
+                }
             }
         }
 
