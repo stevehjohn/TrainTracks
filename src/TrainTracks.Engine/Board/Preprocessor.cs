@@ -207,7 +207,7 @@ public class Preprocessor
 
         if (_grid.ColumnConstraints[_grid.Right] == 3)
         {
-            for (var y = 0; y < _grid.Height; y++)
+            for (var y = 1; y < _grid.Bottom; y++)
             {
                 if (_grid[_grid.Right, y] == Piece.Vertical)
                 {
@@ -222,7 +222,7 @@ public class Preprocessor
 
         if (_grid.ColumnConstraints[0] == 3)
         {
-            for (var y = 0; y < _grid.Height; y++)
+            for (var y = 1; y < _grid.Bottom; y++)
             {
                 if (_grid[0, y] == Piece.Vertical)
                 {
@@ -237,7 +237,7 @@ public class Preprocessor
         
         if (_grid.RowConstraints[0] == 3)
         {
-            for (var x = 0; x < _grid.Height; x++)
+            for (var x = 1; x < _grid.Right; x++)
             {
                 if (_grid[x, 0] == Piece.Horizontal)
                 {
@@ -252,7 +252,7 @@ public class Preprocessor
         
         if (_grid.RowConstraints[_grid.Bottom] == 3)
         {
-            for (var x = 0; x < _grid.Height; x++)
+            for (var x = 1; x < _grid.Right; x++)
             {
                 if (_grid[x, _grid.Bottom] == Piece.Horizontal)
                 {
