@@ -57,14 +57,14 @@ public class Remote
                     break;
                 }
 
-                var sleep = retry * 2 * 1_000;
+                var sleep = (int) Math.Pow(retry, 2);
 
-                WriteLine($"Waiting for {retry / 1_000:N0}s.");
+                WriteLine($"Waiting for {retry:N0}s.");
 
                 WriteLine();
 
 
-                Thread.Sleep(sleep);
+                Thread.Sleep(sleep * 1_000);
             }
 
             Clear();
