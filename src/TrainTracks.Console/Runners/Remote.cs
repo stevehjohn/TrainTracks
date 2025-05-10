@@ -81,7 +81,7 @@ public class Remote
 
             WriteLine(puzzle.Value.Grid.ToString());
 
-            WriteLine($"Solved in {_stopwatch.Elapsed:g}, with {_count:N0} iterations.");
+            WriteLine(@$"Solved in {_stopwatch.Elapsed:h\:mm\:ss\.fff}, with {_count:N0} iterations.");
 
             WriteLine();
 
