@@ -7,8 +7,6 @@ public class Solver
 {
     private readonly Preprocessor _preprocessor = new();
     
-    private readonly DeterministicPlacer _placer = new();
-    
     public Grid Grid { get; private set; }
 
     public Action<Grid> StepCallback { get; init; }
