@@ -43,7 +43,7 @@ public class Local
         
         WriteLine($"Steps:       {_count:N0}              ");
                 
-        WriteLine($"Elapsed:     {_stopwatch.Elapsed:h\\:mm\\:ss\\.fff}");
+        WriteLine($@"Elapsed:     {_stopwatch.Elapsed:h\:mm\:ss\.fff}");
 
         WriteLine();
     }
@@ -63,6 +63,6 @@ public class Local
         
         WriteLine($"Steps:       {_count:N0}");
         
-        WriteLine($"Elapsed:     {_stopwatch.Elapsed:h\\:mm\\:ss\\.fff}");
+        WriteLine($@"Elapsed:     {_stopwatch.Elapsed:h\:mm\:ss\.fff}");
     }
 }
