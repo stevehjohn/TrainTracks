@@ -32,7 +32,7 @@ public class Grid
                 _rowCounts[y]++;
             }
             
-            if ((value == Piece.Empty || value != Piece.Cross) && _pieces[x, y] != Piece.Empty)
+            if ((value == Piece.Empty || value != Piece.Cross) && _pieces[x, y] != Piece.Empty && _pieces[x, y] != Piece.Cross)
             {
                 _columnCounts[x]--;
                 

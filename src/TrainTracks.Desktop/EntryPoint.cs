@@ -13,7 +13,7 @@ public class EntryPoint
         
         var renderer = new PuzzleRenderer();
 
-        renderer.Grid = PuzzleManager.Instance.GetPuzzle(7);
+        renderer.Grid = PuzzleManager.Instance.GetPuzzle(8);
         
         renderer.Run();
     }
