@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using TrainTracks.Desktop.Infrastructure;
@@ -16,8 +17,10 @@ public class PuzzleRenderer : Game
     private SpriteBatch _spriteBatch;
 
     private readonly int _width;
-    
-    private readonly Solver _solver = new();
+
+    private readonly Solver _solver;
+
+    private bool _isSolving;
     
     private bool _isSolved;
     
@@ -40,6 +43,11 @@ public class PuzzleRenderer : Game
         _tileMapper = new TileMapper();
         
         IsMouseVisible = true;
+        
+        _solver = new Solver
+        {
+            StepCallback = VisualiseStep
+        };
     }
 
     protected override void LoadContent()
@@ -51,9 +59,18 @@ public class PuzzleRenderer : Game
 
     protected override void Update(GameTime gameTime)
     {
-        if (! _isSolved)
+        if (! _isSolved && ! _isSolving)
         {
-            _solver.Solve(Grid);
+            Task.Factory.StartNew(() =>
+            {
+                _isSolving = true;
+                
+                _solver.Solve(Grid);
+
+                _isSolved = true;
+                
+                _isSolving = false;
+            });
         }
 
         base.Update(gameTime);
@@ -81,5 +98,9 @@ public class PuzzleRenderer : Game
         _spriteBatch.End();
         
         base.Draw(gameTime);
+    }
+    
+    private void VisualiseStep(Grid grid)
+    {
     }
 }
