@@ -69,11 +69,6 @@ public class PuzzleRenderer : Game
         {
             for (var x = 0; x < Grid.Width; x++)
             {
-                if (Grid[x, y] is Piece.Empty or Piece.Cross or Piece.Placeholder)
-                {
-                    continue;
-                }
-
                 var isometricX = (x - y) * Constants.TileWidth / 2 + _width / 2 - (Constants.PuzzleMaxWidth - Grid.Width) * Constants.TileWidth / 2;
 
                 var isometricY = (x + y) * Constants.TileCentre;
