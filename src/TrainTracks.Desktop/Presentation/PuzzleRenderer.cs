@@ -150,15 +150,23 @@ public class PuzzleRenderer : Game
             
             var target = Grid.ColumnConstraints[x];
             
-            var text = $"{count}/{target}";
+            var text = $"{target}";
 
-            var color = count == target ? Color.Green : Color.White;
+            var color = Color.Green;
 
-            var isometricX = (x - -1) * Constants.TileWidth / 2 + originX;
+            var isometricX = (x - -1) * Constants.TileWidth / 2f + originX + Constants.TileWidth *.25;
 
-            var isometricY = (x + -1) * Constants.TileCentre + originY - Constants.TileHeight / 4;
+            var isometricY = (x + -1) * Constants.TileCentre + originY - Constants.TileHeight * .5;
 
-            _spriteBatch.DrawString(_font, text, new Vector2(isometricX, isometricY), color);
+            _spriteBatch.DrawString(_font, text, new Vector2((int) isometricX, (int) isometricY), color);
+
+            color = count == target ? Color.Green : Color.White;
+            
+            isometricY += (int) _font.MeasureString(text).Y;
+            
+            text = $"{count}";
+
+            _spriteBatch.DrawString(_font, text, new Vector2((int) isometricX, (int) isometricY), color);
         }
 
 
