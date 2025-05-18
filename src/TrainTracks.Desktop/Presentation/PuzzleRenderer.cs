@@ -11,7 +11,7 @@ public class PuzzleRenderer : Game
     // ReSharper disable once NotAccessedField.Local
     private GraphicsDeviceManager _graphics;
 
-    private Solver _solver;
+    private Solver _solve = new();
     
     public PuzzleRenderer()
     {
