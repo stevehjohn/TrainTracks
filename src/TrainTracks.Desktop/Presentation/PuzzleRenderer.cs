@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
@@ -22,10 +23,8 @@ public class PuzzleRenderer : Game
     private readonly int _width;
 
     private readonly Solver _solver;
-
-    private bool _isSolving;
     
-    private bool _isSolved;
+    private bool _isSolving;
 
     private readonly Queue<Piece[,]> _stepQueue = [];
     
@@ -64,20 +63,18 @@ public class PuzzleRenderer : Game
 
     protected override void Update(GameTime gameTime)
     {
-        if (! _isSolved && ! _isSolving)
+        if (! _isSolving)
         {
-            Task.Factory.StartNew(() =>
+            var task = new Task(() =>
             {
                 Thread.Sleep(1_000);
-                
-                _isSolving = true;
-                
-                _solver.Solve(Grid);
 
-                _isSolved = true;
-                
-                _isSolving = false;
+                _solver.Solve(Grid);
             });
+
+            _isSolving = true;
+            
+            task.Start();
         }
 
         base.Update(gameTime);
