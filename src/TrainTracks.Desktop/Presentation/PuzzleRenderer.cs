@@ -129,11 +129,11 @@ public class PuzzleRenderer : Game
 
             var color = count == target ? Color.Green : Color.White;
 
-            var x = (Grid.Width - y) * Constants.TileWidth / 2 + originX + Constants.TileWidth;
-            
-            var yPos = (y + y) * Constants.TileCentre + originY;
+            var isometricX = (-1 - y) * Constants.TileWidth / 2 + originX + Constants.TileWidth / 2;
 
-            _spriteBatch.DrawString(_font, text, new Vector2(x, yPos), color);
+            var isometricY = (-1 + y) * Constants.TileCentre + originY - Constants.TileHeight / 4;
+
+            _spriteBatch.DrawString(_font, text, new Vector2(isometricX, isometricY), color);
         }
 
         for (var x = 0; x < Grid.Width; x++)
@@ -146,11 +146,11 @@ public class PuzzleRenderer : Game
 
             var color = count == target ? Color.Green : Color.White;
 
-            var xPos = (x - Grid.Height) * Constants.TileWidth / 2 + originX + Constants.TileWidth;
-            
-            var y = (x + Grid.Height) * Constants.TileCentre + originY;
+            var isometricX = (x - -1) * Constants.TileWidth / 2 + originX;
 
-            _spriteBatch.DrawString(_font, text, new Vector2(xPos, y), color);
+            var isometricY = (x + -1) * Constants.TileCentre + originY - Constants.TileHeight / 4;
+
+            _spriteBatch.DrawString(_font, text, new Vector2(isometricX, isometricY), color);
         }
 
 
