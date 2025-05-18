@@ -8,18 +8,13 @@ namespace TrainTracks.Desktop.Infrastructure;
 public class TileMapper
 {
     private readonly Dictionary<Piece, Texture2D> _tiles = new();
-    
-    public TileMapper(ContentManager contentManager)
-    {
-        LoadContent(contentManager);
-    }
 
     public Texture2D GetTile(Piece piece)
     {
         return _tiles[piece];
     }
 
-    private void LoadContent(ContentManager contentManager)
+    public void LoadContent(ContentManager contentManager)
     {
         _tiles.Add(Piece.NorthEast, contentManager.Load<Texture2D>("roadNE"));
         

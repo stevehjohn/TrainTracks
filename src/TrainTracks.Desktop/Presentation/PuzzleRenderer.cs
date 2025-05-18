@@ -5,7 +5,7 @@ namespace TrainTracks.Desktop.Presentation;
 
 public class PuzzleRenderer : Game
 {
-    private TileMapper _tileMapper;
+    private readonly TileMapper _tileMapper;
 
     // ReSharper disable once NotAccessedField.Local
     private GraphicsDeviceManager _graphics;
@@ -14,12 +14,17 @@ public class PuzzleRenderer : Game
     {
         _graphics = new GraphicsDeviceManager(this)
         {
-            PreferredBackBufferWidth = 100,
-            PreferredBackBufferHeight = 100
+            PreferredBackBufferWidth = 400,
+            PreferredBackBufferHeight = 400
         };
 
         Content.RootDirectory = "_Content";
 
-        _tileMapper = new TileMapper(Content);
+        _tileMapper = new TileMapper();
+    }
+
+    protected override void LoadContent()
+    {
+        _tileMapper.LoadContent(Content);
     }
 }
