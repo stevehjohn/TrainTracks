@@ -12,7 +12,7 @@ public class PuzzleRenderer : Game
     private GraphicsDeviceManager _graphics;
 
     private Solver _solver;
-
+    
     public PuzzleRenderer()
     {
         _graphics = new GraphicsDeviceManager(this)
