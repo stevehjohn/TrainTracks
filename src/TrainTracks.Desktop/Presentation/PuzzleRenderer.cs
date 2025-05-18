@@ -103,9 +103,11 @@ public class PuzzleRenderer : Game
 
                 var isometricX = (x - y) * Constants.TileWidth / 2 + _width / 2 - (Constants.PuzzleMaxWidth - Grid.Width) * Constants.TileWidth / 2;
 
+                isometricX += Constants.TileWidth / 2;
+                
                 if (Grid.Width % 2 == 1)
                 {
-                    isometricX += Constants.TileWidth;
+                    isometricX += Constants.TileWidth / 2;
                 }
 
                 var isometricY = (x + y) * Constants.TileCentre + Constants.TileHeight;
