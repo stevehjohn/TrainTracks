@@ -86,31 +86,35 @@ public class PuzzleRenderer : Game
         _spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
 
         Piece[,] grid = null;
-        
+
         if (_stepQueue.Count > 0)
         {
             grid = _stepQueue.Dequeue();
         }
 
+        var originX = _width / 2 - (Grid.Width - Grid.Height) * Constants.TileWidth / 2 / 2 - Constants.TileWidth / 2;
+
+        var originY = Constants.TileHeight; // padding from top
+
         for (var y = 0; y < Grid.Height; y++)
         {
             for (var x = 0; x < Grid.Width; x++)
             {
-                var tile = _tileMapper.GetTile(grid == null ? Grid[x,y] : grid[x, y]);
+                var tile = _tileMapper.GetTile(grid == null ? Grid[x, y] : grid[x, y]);
 
-                var isometricX = (x - y) * Constants.TileWidth / 2 + _width / 2 - (Constants.PuzzleMaxWidth - Grid.Width) * Constants.TileWidth / 2;
+                var isometricX = (x - y) * Constants.TileWidth / 2 + originX;
 
-                isometricX += Constants.TileWidth / 2;
+                // isometricX += Constants.TileWidth / 2;
                 
-                if (Grid.Width % 2 == 1)
-                {
-                    isometricX += Constants.TileWidth / 2;
-                }
+                // if (Grid.Width % 2 == 1)
+                // {
+                //     isometricX -= Constants.TileWidth / 2;
+                // }
 
-                var isometricY = (x + y) * Constants.TileCentre + Constants.TileHeight;
+                var isometricY = (x + y) * Constants.TileCentre + originY;
 
                 var colour = Grid.IsFixed(new Point(x, y)) ? Color.Gray : Color.White;
-                
+
                 _spriteBatch.Draw(tile, new Rectangle(isometricX, isometricY, Constants.TileWidth, Constants.TileHeight),
                     new Rectangle(0, 0, Constants.TileWidth, Constants.TileHeight), colour, 0, Vector2.Zero, SpriteEffects.None, (x + y) / 100f);
             }
