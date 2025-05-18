@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -23,6 +24,8 @@ public class PuzzleRenderer : Game
     private bool _isSolving;
     
     private bool _isSolved;
+
+    private readonly Queue<Piece[,]> _stepQueue = [];
     
     public Grid Grid { get; set; }
     
@@ -46,7 +49,7 @@ public class PuzzleRenderer : Game
         
         _solver = new Solver
         {
-            StepCallback = VisualiseStep
+            StepCallback = EnqueueStep
         };
     }
 
@@ -81,17 +84,24 @@ public class PuzzleRenderer : Game
         GraphicsDevice.Clear(Color.Black);
 
         _spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
-        
-        for (var y = 0; y < Grid.Height; y++)
+
+        if (_stepQueue.Count > 0)
         {
-            for (var x = 0; x < Grid.Width; x++)
+            var grid = _stepQueue.Dequeue();
+
+            for (var y = 0; y < Grid.Height; y++)
             {
-                var isometricX = (x - y) * Constants.TileWidth / 2 + _width / 2 - (Constants.PuzzleMaxWidth - Grid.Width) * Constants.TileWidth / 2;
+                for (var x = 0; x < Grid.Width; x++)
+                {
+                    var tile = _tileMapper.GetTile(grid[x, y]);
 
-                var isometricY = (x + y) * Constants.TileCentre;
+                    var isometricX = (x - y) * Constants.TileWidth / 2 + _width / 2 - (Constants.PuzzleMaxWidth - Grid.Width) * Constants.TileWidth / 2;
 
-                _spriteBatch.Draw(_tileMapper.GetTile(Grid[x, y]), new Rectangle(isometricX, isometricY, Constants.TileWidth, Constants.TileHeight),
-                    new Rectangle(0, 0, Constants.TileWidth, Constants.TileHeight), Color.White, 0, Vector2.Zero, SpriteEffects.None, (x + y) / 100f);
+                    var isometricY = (x + y) * Constants.TileCentre;
+
+                    _spriteBatch.Draw(tile, new Rectangle(isometricX, isometricY, Constants.TileWidth, Constants.TileHeight),
+                        new Rectangle(0, 0, Constants.TileWidth, Constants.TileHeight), Color.White, 0, Vector2.Zero, SpriteEffects.None, (x + y) / 100f);
+                }
             }
         }
 
@@ -100,7 +110,8 @@ public class PuzzleRenderer : Game
         base.Draw(gameTime);
     }
     
-    private void VisualiseStep(Grid grid)
+    private void EnqueueStep(Grid grid)
     {
+        _stepQueue.Enqueue(grid.ShallowClone());
     }
 }

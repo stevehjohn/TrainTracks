@@ -106,6 +106,15 @@ public class Grid
         return copy;
     }
 
+    public Piece[,] ShallowClone()
+    {
+        var clone = new Piece[Width, Height];
+        
+        Array.Copy(_pieces, clone, Width * Height);
+
+        return clone;
+    }
+
     private Grid()
     {
     }
