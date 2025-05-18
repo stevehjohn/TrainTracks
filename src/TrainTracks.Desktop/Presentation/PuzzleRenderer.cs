@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -66,6 +67,8 @@ public class PuzzleRenderer : Game
         {
             Task.Factory.StartNew(() =>
             {
+                Thread.Sleep(1_000);
+                
                 _isSolving = true;
                 
                 _solver.Solve(Grid);
@@ -85,31 +88,38 @@ public class PuzzleRenderer : Game
 
         _spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
 
+        Piece[,] grid = null;
+        
         if (_stepQueue.Count > 0)
         {
-            var grid = _stepQueue.Dequeue();
+            grid = _stepQueue.Dequeue();
+        }
 
-            for (var y = 0; y < Grid.Height; y++)
+        for (var y = 0; y < Grid.Height; y++)
+        {
+            for (var x = 0; x < Grid.Width; x++)
             {
-                for (var x = 0; x < Grid.Width; x++)
+                var tile = _tileMapper.GetTile(grid == null ? Grid[x,y] : grid[x, y]);
+
+                var isometricX = (x - y) * Constants.TileWidth / 2 + _width / 2 - (Constants.PuzzleMaxWidth - Grid.Width) * Constants.TileWidth / 2;
+
+                if (Grid.Width % 2 == 1)
                 {
-                    var tile = _tileMapper.GetTile(grid[x, y]);
-
-                    var isometricX = (x - y) * Constants.TileWidth / 2 + _width / 2 - (Constants.PuzzleMaxWidth - Grid.Width) * Constants.TileWidth / 2;
-
-                    var isometricY = (x + y) * Constants.TileCentre;
-
-                    _spriteBatch.Draw(tile, new Rectangle(isometricX, isometricY, Constants.TileWidth, Constants.TileHeight),
-                        new Rectangle(0, 0, Constants.TileWidth, Constants.TileHeight), Color.White, 0, Vector2.Zero, SpriteEffects.None, (x + y) / 100f);
+                    isometricX += Constants.TileWidth;
                 }
+
+                var isometricY = (x + y) * Constants.TileCentre + Constants.TileHeight;
+
+                _spriteBatch.Draw(tile, new Rectangle(isometricX, isometricY, Constants.TileWidth, Constants.TileHeight),
+                    new Rectangle(0, 0, Constants.TileWidth, Constants.TileHeight), Color.White, 0, Vector2.Zero, SpriteEffects.None, (x + y) / 100f);
             }
         }
 
         _spriteBatch.End();
-        
+
         base.Draw(gameTime);
     }
-    
+
     private void EnqueueStep(Grid grid)
     {
         _stepQueue.Enqueue(grid.ShallowClone());
