@@ -104,7 +104,7 @@ public sealed class PuzzleClient : IDisposable
             }
         }
 
-        score -= grid.FixedPieces * 5;
+        score -= grid.FixedPieceCount * 5;
 
         var solution = new PuzzleSolution
         {

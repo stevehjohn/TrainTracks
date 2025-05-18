@@ -6,6 +6,8 @@ namespace TrainTracks.Engine.Board;
 public class Grid
 {
     private Piece[,] _pieces;
+    
+    private bool[,] _fixedPieces;
 
     private int[] _rowCounts;
     
@@ -55,7 +57,7 @@ public class Grid
 
     public int Right { get; private set; }
 
-    public int FixedPieces { get; private set; }
+    public int FixedPieceCount { get; private set; }
 
     public int[] RowConstraints { get; private set; }
 
@@ -95,6 +97,10 @@ public class Grid
 
         Array.Copy(_pieces, copy._pieces, Width * Height);
         
+        copy._fixedPieces = new bool[Width, Height];
+        
+        Array.Copy(_fixedPieces, copy._fixedPieces, Width * Height);
+        
         copy._rowCounts = new int[Height];
         
         Array.Copy(_rowCounts, copy._rowCounts, Height);
@@ -114,6 +120,8 @@ public class Grid
 
         return clone;
     }
+    
+    public bool IsFixed(Point position) => _fixedPieces[position.X, position.Y];
 
     private Grid()
     {
@@ -135,11 +143,13 @@ public class Grid
 
         _pieces = new Piece[Width, Height];
         
+        _fixedPieces = new bool[Width, Height];
+        
         _rowCounts = new int[Height];
 
         _columnCounts = new int[Width];
 
-        FixedPieces = 0;
+        FixedPieceCount = 0;
 
         for (var x = 0; x < Width; x++)
         {
@@ -149,11 +159,13 @@ public class Grid
 
                 if (_pieces[x, y] != Piece.Empty)
                 {
-                    FixedPieces++;
+                    FixedPieceCount++;
                     
                     _columnCounts[x]++;
                     
                     _rowCounts[y]++;
+                    
+                    _fixedPieces[x, y] = true;
                 }
             }
         }

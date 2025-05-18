@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using TrainTracks.Desktop.Infrastructure;
 using TrainTracks.Engine;
 using TrainTracks.Engine.Board;
+using Point = TrainTracks.Engine.Board.Point;
 
 namespace TrainTracks.Desktop.Presentation;
 
@@ -112,8 +113,10 @@ public class PuzzleRenderer : Game
 
                 var isometricY = (x + y) * Constants.TileCentre + Constants.TileHeight;
 
+                var colour = Grid.IsFixed(new Point(x, y)) ? Color.Gray : Color.White;
+                
                 _spriteBatch.Draw(tile, new Rectangle(isometricX, isometricY, Constants.TileWidth, Constants.TileHeight),
-                    new Rectangle(0, 0, Constants.TileWidth, Constants.TileHeight), Color.White, 0, Vector2.Zero, SpriteEffects.None, (x + y) / 100f);
+                    new Rectangle(0, 0, Constants.TileWidth, Constants.TileHeight), colour, 0, Vector2.Zero, SpriteEffects.None, (x + y) / 100f);
             }
         }
 
