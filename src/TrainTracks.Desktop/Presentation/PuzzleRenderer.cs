@@ -94,7 +94,7 @@ public class PuzzleRenderer : Game
 
         var originX = _width / 2 - (Grid.Width - Grid.Height) * Constants.TileWidth / 2 / 2 - Constants.TileWidth / 2;
 
-        var originY = Constants.TileHeight; // padding from top
+        var originY = Constants.TileHeight;
 
         for (var y = 0; y < Grid.Height; y++)
         {
@@ -103,13 +103,6 @@ public class PuzzleRenderer : Game
                 var tile = _tileMapper.GetTile(grid == null ? Grid[x, y] : grid[x, y]);
 
                 var isometricX = (x - y) * Constants.TileWidth / 2 + originX;
-
-                // isometricX += Constants.TileWidth / 2;
-                
-                // if (Grid.Width % 2 == 1)
-                // {
-                //     isometricX -= Constants.TileWidth / 2;
-                // }
 
                 var isometricY = (x + y) * Constants.TileCentre + originY;
 
