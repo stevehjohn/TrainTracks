@@ -125,15 +125,23 @@ public class PuzzleRenderer : Game
             
             var target = Grid.RowConstraints[y];
             
-            var text = $"{count}/{target}";
+            var text = $"{target}";
 
-            var color = count == target ? Color.Green : Color.White;
+            var color = Color.Green;
 
-            var isometricX = (-1 - y) * Constants.TileWidth / 2 + originX + Constants.TileWidth / 2;
+            var isometricX = (-1 - y) * Constants.TileWidth / 2f + originX + Constants.TileWidth *.65;
 
-            var isometricY = (-1 + y) * Constants.TileCentre + originY - Constants.TileHeight / 4;
+            var isometricY = (-1 + y) * Constants.TileCentre + originY - Constants.TileHeight * .5;
 
-            _spriteBatch.DrawString(_font, text, new Vector2(isometricX, isometricY), color);
+            _spriteBatch.DrawString(_font, text, new Vector2((int) isometricX, (int) isometricY), color);
+
+            color = count == target ? Color.Green : Color.White;
+            
+            isometricY += (int) _font.MeasureString(text).Y;
+            
+            text = $"{count}";
+
+            _spriteBatch.DrawString(_font, text, new Vector2((int) isometricX, (int) isometricY), color);
         }
 
         for (var x = 0; x < Grid.Width; x++)
