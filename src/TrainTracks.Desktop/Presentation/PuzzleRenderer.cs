@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using TrainTracks.Desktop.Infrastructure;
 using TrainTracks.Engine;
+using TrainTracks.Engine.Board;
 
 namespace TrainTracks.Desktop.Presentation;
 
@@ -12,6 +13,8 @@ public class PuzzleRenderer : Game
     private GraphicsDeviceManager _graphics;
 
     private Solver _solve = new();
+    
+    public Grid Grid { get; set; }
     
     public PuzzleRenderer()
     {
