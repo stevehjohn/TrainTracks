@@ -25,7 +25,9 @@ public class PuzzleRenderer : Game
     
     private bool _isSolving;
 
-    private readonly Queue<Piece[,]> _stepQueue = [];
+    private readonly Queue<Grid> _stepQueue = [];
+    
+    private SpriteFont _font;
     
     public Grid Grid { get; set; }
     
@@ -58,6 +60,8 @@ public class PuzzleRenderer : Game
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
         _tileMapper.LoadContent(Content);
+        
+        _font = Content.Load<SpriteFont>("font");
     }
 
     protected override void Update(GameTime gameTime)
@@ -85,12 +89,14 @@ public class PuzzleRenderer : Game
 
         _spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
 
-        Piece[,] grid = null;
+        Grid grid = null;
 
         if (_stepQueue.Count > 0)
         {
             grid = _stepQueue.Dequeue();
         }
+        
+        grid = grid ?? Grid;
 
         var originX = _width / 2 - (Grid.Width - Grid.Height) * Constants.TileWidth / 2 / 2 - Constants.TileWidth / 2;
 
@@ -100,7 +106,7 @@ public class PuzzleRenderer : Game
         {
             for (var x = 0; x < Grid.Width; x++)
             {
-                var tile = _tileMapper.GetTile(grid == null ? Grid[x, y] : grid[x, y]);
+                var tile = _tileMapper.GetTile(grid[x, y]);
 
                 var isometricX = (x - y) * Constants.TileWidth / 2 + originX;
 
@@ -112,6 +118,41 @@ public class PuzzleRenderer : Game
                     new Rectangle(0, 0, Constants.TileWidth, Constants.TileHeight), colour, 0, Vector2.Zero, SpriteEffects.None, (x + y) / 100f);
             }
         }
+        
+        for (var y = 0; y < Grid.Height; y++)
+        {
+            var count = grid.GetRowCount(y);
+            
+            var target = Grid.RowConstraints[y];
+            
+            var text = $"{count}/{target}";
+
+            var color = count == target ? Color.Green : Color.White;
+
+            var x = (Grid.Width - y) * Constants.TileWidth / 2 + originX + Constants.TileWidth;
+            
+            var yPos = (y + y) * Constants.TileCentre + originY;
+
+            _spriteBatch.DrawString(_font, text, new Vector2(x, yPos), color);
+        }
+
+        for (var x = 0; x < Grid.Width; x++)
+        {
+            var count = grid.GetColumnCount(x);
+            
+            var target = Grid.ColumnConstraints[x];
+            
+            var text = $"{count}/{target}";
+
+            var color = count == target ? Color.Green : Color.White;
+
+            var xPos = (x - Grid.Height) * Constants.TileWidth / 2 + originX + Constants.TileWidth;
+            
+            var y = (x + Grid.Height) * Constants.TileCentre + originY;
+
+            _spriteBatch.DrawString(_font, text, new Vector2(xPos, y), color);
+        }
+
 
         _spriteBatch.End();
 
@@ -120,6 +161,6 @@ public class PuzzleRenderer : Game
 
     private void EnqueueStep(Grid grid)
     {
-        _stepQueue.Enqueue(grid.ShallowClone());
+        _stepQueue.Enqueue(grid.Clone());
     }
 }

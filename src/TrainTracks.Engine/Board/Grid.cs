@@ -112,15 +112,6 @@ public class Grid
         return copy;
     }
 
-    public Piece[,] ShallowClone()
-    {
-        var clone = new Piece[Width, Height];
-        
-        Array.Copy(_pieces, clone, Width * Height);
-
-        return clone;
-    }
-    
     public bool IsFixed(Point position) => _fixedPieces[position.X, position.Y];
 
     private Grid()
