@@ -127,7 +127,7 @@ public class PuzzleRenderer : Game
             
             var text = $"{target}";
 
-            var color = Color.Green;
+            var color = Color.White;
 
             var isometricX = (-1 - y) * Constants.TileWidth / 2f + originX + Constants.TileWidth *.65;
 
@@ -135,7 +135,7 @@ public class PuzzleRenderer : Game
 
             _spriteBatch.DrawString(_font, text, new Vector2((int) isometricX, (int) isometricY), color);
 
-            color = count == target ? Color.Green : Color.White;
+            color = count == target ? Color.Green : Color.Gray;
             
             isometricY += (int) _font.MeasureString(text).Y;
             
@@ -152,7 +152,7 @@ public class PuzzleRenderer : Game
             
             var text = $"{target}";
 
-            var color = Color.Green;
+            var color = Color.White;
 
             var isometricX = (x - -1) * Constants.TileWidth / 2f + originX + Constants.TileWidth *.25;
 
@@ -160,7 +160,7 @@ public class PuzzleRenderer : Game
 
             _spriteBatch.DrawString(_font, text, new Vector2((int) isometricX, (int) isometricY), color);
 
-            color = count == target ? Color.Green : Color.White;
+            color = count == target ? Color.Green : Color.Gray;
             
             isometricY += (int) _font.MeasureString(text).Y;
             
