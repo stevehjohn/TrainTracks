@@ -9,4 +9,6 @@ public static class Constants
     public const int TileWidth = 100;
 
     public const int TileHeight = 65;
+
+    public const int TileCentre = 25;
 }

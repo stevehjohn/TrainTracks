@@ -17,7 +17,9 @@ public class PuzzleRenderer : Game
 
     private readonly int _width;
     
-    private Solver _solver = new();
+    private readonly Solver _solver = new();
+    
+    private bool _isSolved;
     
     public Grid Grid { get; set; }
     
@@ -36,6 +38,8 @@ public class PuzzleRenderer : Game
         Content.RootDirectory = "_Content";
 
         _tileMapper = new TileMapper();
+        
+        IsMouseVisible = true;
     }
 
     protected override void LoadContent()
@@ -47,6 +51,11 @@ public class PuzzleRenderer : Game
 
     protected override void Update(GameTime gameTime)
     {
+        if (! _isSolved)
+        {
+            _solver.Solve(Grid);
+        }
+
         base.Update(gameTime);
     }
 
@@ -65,9 +74,9 @@ public class PuzzleRenderer : Game
                     continue;
                 }
 
-                var isometricX = (x - y) * Constants.TileWidth / 2 + _width / 2;
-                
-                var isometricY = (x + y) * Constants.TileHeight / 2;
+                var isometricX = (x - y) * Constants.TileWidth / 2 + _width / 2 - (Constants.PuzzleMaxWidth - Grid.Width) * Constants.TileWidth / 2;
+
+                var isometricY = (x + y) * Constants.TileCentre;
                 
                 _spriteBatch.Draw(_tileMapper.GetTile(Grid[x, y]), new Vector2(isometricX, isometricY), Color.White);;
             }
