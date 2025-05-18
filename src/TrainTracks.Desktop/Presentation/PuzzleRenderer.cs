@@ -63,11 +63,11 @@ public class PuzzleRenderer : Game
     {
         GraphicsDevice.Clear(Color.Black);
 
-        _spriteBatch.Begin(SpriteSortMode.FrontToBack);
+        _spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
         
-        for (var x = 0; x < Grid.Width; x++)
+        for (var y = 0; y < Grid.Height; y++)
         {
-            for (var y = 0; y < Grid.Height; y++)
+            for (var x = 0; x < Grid.Width; x++)
             {
                 if (Grid[x, y] is Piece.Empty or Piece.Cross or Piece.Placeholder)
                 {
@@ -77,8 +77,9 @@ public class PuzzleRenderer : Game
                 var isometricX = (x - y) * Constants.TileWidth / 2 + _width / 2 - (Constants.PuzzleMaxWidth - Grid.Width) * Constants.TileWidth / 2;
 
                 var isometricY = (x + y) * Constants.TileCentre;
-                
-                _spriteBatch.Draw(_tileMapper.GetTile(Grid[x, y]), new Vector2(isometricX, isometricY), Color.White);;
+
+                _spriteBatch.Draw(_tileMapper.GetTile(Grid[x, y]), new Rectangle(isometricX, isometricY, Constants.TileWidth, Constants.TileHeight),
+                    new Rectangle(0, 0, Constants.TileWidth, Constants.TileHeight), Color.White, 0, Vector2.Zero, SpriteEffects.None, (x + y) / 100f);
             }
         }
 
