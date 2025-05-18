@@ -35,7 +35,7 @@ public class PuzzleRenderer : Game
     {
         _width = Constants.PuzzleMaxWidth * Constants.TileWidth;
 
-        var height = Constants.PuzzleMaxHeight * Constants.TileHeight / 2 + Constants.TileHeight * 4;
+        const int height = Constants.PuzzleMaxHeight * Constants.TileHeight / 2 + Constants.TileHeight * 6;
             
         _graphics = new GraphicsDeviceManager(this)
         {
@@ -100,7 +100,7 @@ public class PuzzleRenderer : Game
 
         var originX = _width / 2 - (Grid.Width - Grid.Height) * Constants.TileWidth / 2 / 2 - Constants.TileWidth / 2;
 
-        var originY = Constants.TileHeight;
+        var originY = Constants.TileHeight * 2;
 
         for (var y = 0; y < Grid.Height; y++)
         {
@@ -168,7 +168,6 @@ public class PuzzleRenderer : Game
 
             _spriteBatch.DrawString(_font, text, new Vector2((int) isometricX, (int) isometricY), color);
         }
-
 
         _spriteBatch.End();
 
