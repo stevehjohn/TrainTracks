@@ -25,12 +25,12 @@ public class PuzzleRenderer : Game
     {
         _width = Constants.PuzzleMaxWidth * Constants.TileWidth;
 
-        _height = Constants.PuzzleMaxHeight * Constants.TileHeight;
+        var height = Constants.PuzzleMaxHeight * Constants.TileHeight;
             
         _graphics = new GraphicsDeviceManager(this)
         {
             PreferredBackBufferWidth = _width,
-            PreferredBackBufferHeight = _height
+            PreferredBackBufferHeight = height
         };
 
         Content.RootDirectory = "_Content";
