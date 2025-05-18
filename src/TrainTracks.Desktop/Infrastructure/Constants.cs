@@ -1,6 +1,6 @@
 namespace TrainTracks.Desktop.Infrastructure;
 
-public class Constants
+public static class Constants
 {
     public const int PuzzleMaxWidth = 12;
     
