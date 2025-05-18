@@ -34,7 +34,7 @@ public class PuzzleRenderer : Game
     {
         _width = Constants.PuzzleMaxWidth * Constants.TileWidth;
 
-        var height = Constants.PuzzleMaxHeight * Constants.TileHeight;
+        var height = Constants.PuzzleMaxHeight * Constants.TileHeight / 2 + Constants.TileHeight * 4;
             
         _graphics = new GraphicsDeviceManager(this)
         {
