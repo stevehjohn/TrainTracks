@@ -39,7 +39,7 @@ public class Grid
                 _rowCounts[y]--;
             }
             
-            _pieces [x, y] = value;
+            _pieces[x, y] = value;
         }
     }
 
