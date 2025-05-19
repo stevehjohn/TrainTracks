@@ -1,5 +1,4 @@
 using TrainTracks.Engine.Infrastructure;
-using static System.Console;
 
 namespace TrainTracks.Engine.Tests;
 
@@ -16,16 +15,6 @@ public class SolverTests
 
         var result = solver.Solve(puzzle);
         
-        // ReSharper disable Xunit.XunitTestWithConsoleOutput
-        // Will fix later.
-        WriteLine();
-        
-        WriteLine($"Solved: {result}.");
-
-        WriteLine();
-        
-        WriteLine(solver.Grid.ToString());
-
-        WriteLine();
+        Assert.True(result);
     }
 }
