@@ -96,7 +96,7 @@ public class PuzzleRenderer : Game
             grid = _stepQueue.Dequeue();
         }
         
-        grid = grid ?? Grid;
+        grid ??= Grid;
 
         var originX = _width / 2 - (Grid.Width - Grid.Height) * Constants.TileWidth / 2 / 2 - Constants.TileWidth / 2;
 
