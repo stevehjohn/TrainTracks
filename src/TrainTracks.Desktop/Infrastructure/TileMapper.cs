@@ -16,17 +16,17 @@ public class TileMapper
 
     public void LoadContent(ContentManager contentManager)
     {
-        _tiles.Add(Piece.NorthEast, contentManager.Load<Texture2D>("roadES"));
+        _tiles.Add(Piece.NorthEast, contentManager.Load<Texture2D>("north-east"));
         
-        _tiles.Add(Piece.SouthEast, contentManager.Load<Texture2D>("roadSW"));
+        _tiles.Add(Piece.SouthEast, contentManager.Load<Texture2D>("south-east"));
         
-        _tiles.Add(Piece.SouthWest, contentManager.Load<Texture2D>("roadNW"));
+        _tiles.Add(Piece.SouthWest, contentManager.Load<Texture2D>("south-west"));
         
-        _tiles.Add(Piece.NorthWest, contentManager.Load<Texture2D>("roadNE"));
+        _tiles.Add(Piece.NorthWest, contentManager.Load<Texture2D>("north-west"));
         
-        _tiles.Add(Piece.Vertical, contentManager.Load<Texture2D>("roadEW"));
+        _tiles.Add(Piece.Vertical, contentManager.Load<Texture2D>("vertical"));
         
-        _tiles.Add(Piece.Horizontal, contentManager.Load<Texture2D>("roadNS"));
+        _tiles.Add(Piece.Horizontal, contentManager.Load<Texture2D>("horizontal"));
         
         _tiles.Add(Piece.Empty, contentManager.Load<Texture2D>("grass"));
         
