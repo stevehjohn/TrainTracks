@@ -52,7 +52,7 @@ public class Local
     {
         _count++;
 
-        if (_count % 100_000 != 0)
+        if (_count % 1_000_000 != 0)
         {
             return;
         }
