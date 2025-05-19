@@ -7,13 +7,13 @@ namespace TrainTracks.Desktop;
 [UsedImplicitly]
 public class EntryPoint
 {
-    public static void Main()
+    public static void Main(string[] arguments)
     {
         PuzzleManager.Path = "Data/puzzles.json";
         
         var renderer = new PuzzleRenderer();
 
-        renderer.Grid = PuzzleManager.Instance.GetPuzzle(8);
+        renderer.Grid = PuzzleManager.Instance.GetPuzzle(int.Parse(arguments[0]));
         
         renderer.Run();
     }
