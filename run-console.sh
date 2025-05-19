@@ -1,3 +1,3 @@
 cd src/TrainTracks.Console
-dotnet run $*
+dotnet run -c Release $*
 cd -
