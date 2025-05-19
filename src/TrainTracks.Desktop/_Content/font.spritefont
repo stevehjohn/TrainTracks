@@ -2,7 +2,7 @@
 <XnaContent xmlns:Graphics="Microsoft.Xna.Framework.Content.Pipeline.Graphics">
   <Asset Type="Graphics:FontDescription">
   
-    <FontName>PixelifySans</FontName>
+    <FontName>FiraCodeNerdFont-Bold</FontName>
 
     <Size>22</Size>
 
