@@ -135,7 +135,7 @@ public class PuzzleRenderer : Game
 
             _spriteBatch.DrawString(_font, text, new Vector2((int) isometricX, (int) isometricY), color);
 
-            color = count == target ? Color.Green : Color.Gray;
+            color = count == target ? Color.LightGreen : Color.Gray;
             
             isometricY += (int) _font.MeasureString(text).Y;
             
@@ -160,7 +160,7 @@ public class PuzzleRenderer : Game
 
             _spriteBatch.DrawString(_font, text, new Vector2((int) isometricX, (int) isometricY), color);
 
-            color = count == target ? Color.Green : Color.Gray;
+            color = count == target ? Color.LightGreen : Color.Gray;
             
             isometricY += (int) _font.MeasureString(text).Y;
             
