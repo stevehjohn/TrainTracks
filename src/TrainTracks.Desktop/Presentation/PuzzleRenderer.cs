@@ -100,7 +100,7 @@ public class PuzzleRenderer : Game
 
         var originX = _width / 2 - (Grid.Width - Grid.Height) * Constants.TileWidth / 2 / 2 - Constants.TileWidth / 2;
 
-        var originY = Constants.TileHeight * 2;
+        const int originY = Constants.TileHeight * 2;
 
         for (var y = 0; y < Grid.Height; y++)
         {
