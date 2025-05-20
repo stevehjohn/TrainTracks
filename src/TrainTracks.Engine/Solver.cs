@@ -74,39 +74,17 @@ public class Solver
                 continue;
             }
 
-            if (! PlaceObviousPieces(newPosition, direction))
+            connections = FilterForObviousPiece(newPosition, direction, connections);
+            
+            foreach (var nextPiece in connections)
             {
-                foreach (var nextPiece in connections)
+                if (nextCell != Piece.Empty)
                 {
-                    if (nextCell != Piece.Empty)
-                    {
-                        var backConnections = Connector.GetConnections(nextCell, -direction.Dx, -direction.Dy);
+                    var backConnections = Connector.GetConnections(nextCell, -direction.Dx, -direction.Dy);
 
-                        if (! backConnections.Contains(nextPiece))
-                        {
-                            continue;
-                        }
-
-                        if (PlaceNextMove(newPosition, (direction.Dx, direction.Dy)))
-                        {
-                            return true;
-                        }
-
-                        continue;
-                    }
-
-                    if (WouldExitBoard(newPosition, nextPiece))
+                    if (! backConnections.Contains(nextPiece))
                     {
                         continue;
-                    }
-
-                    Grid[newPosition] = nextPiece;
-
-                    StepCallback?.Invoke(Grid);
-
-                    if (Grid.IsComplete)
-                    {
-                        return true;
                     }
 
                     if (PlaceNextMove(newPosition, (direction.Dx, direction.Dy)))
@@ -114,49 +92,52 @@ public class Solver
                         return true;
                     }
 
-                    Grid[newPosition] = Piece.Empty;
+                    continue;
                 }
+
+                if (WouldExitBoard(newPosition, nextPiece))
+                {
+                    continue;
+                }
+
+                Grid[newPosition] = nextPiece;
+
+                StepCallback?.Invoke(Grid);
+
+                if (Grid.IsComplete)
+                {
+                    return true;
+                }
+
+                if (PlaceNextMove(newPosition, (direction.Dx, direction.Dy)))
+                {
+                    return true;
+                }
+
+                Grid[newPosition] = Piece.Empty;
             }
         }
 
         return false;
     }
 
-    private bool PlaceObviousPieces(Point position, (int dX, int dY) direction)
+    private IReadOnlyList<Piece> FilterForObviousPiece(Point position, (int dX, int dY) direction, IReadOnlyList<Piece> connections)
     {
-        if (Grid[position] != Piece.Empty)
-        {
-            return false;
-        }
-
-        var found = false;
+        // if (Grid[position] != Piece.Empty)
+        // {
+        //     return connections;
+        // }
 
         if (position.Y > 0 && Grid[position.X, position.Y - 1] is Piece.Vertical or Piece.SouthEast or Piece.SouthWest)
         {
             switch (direction)
             {
                 case (1, 0):
-                    Grid[position] = Piece.NorthWest;
-                    found = true;
-
-                    break;
+                    return [Piece.NorthEast];
             }
         }
 
-        if (found)
-        {
-            if (Grid.IsComplete)
-            {
-                return true;
-            }
-
-            if (PlaceNextMove(position, (direction.dX, direction.dY)))
-            {
-                return true;
-            }
-        }
-
-        return false;
+        return connections;
     }
 
     private bool WouldExitBoard(Point position, Piece piece)
