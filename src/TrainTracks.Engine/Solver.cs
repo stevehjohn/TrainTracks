@@ -123,10 +123,10 @@ public class Solver
 
     private IReadOnlyList<Piece> FilterForObviousPiece(Point position, (int dX, int dY) direction, IReadOnlyList<Piece> connections)
     {
-        // if (Grid[position] != Piece.Empty)
-        // {
-        //     return connections;
-        // }
+        if (Grid[position] != Piece.Empty)
+        {
+            return connections;
+        }
 
         if (position.Y > 0 && Grid[position.X, position.Y - 1] is Piece.Vertical or Piece.SouthEast or Piece.SouthWest)
         {
