@@ -124,16 +124,33 @@ public class Solver
 
     private bool PlaceObviousPieces(Point position, (int dX, int dY) direction)
     {
+        var found = false;
+        
         if (position.Y > 0 && Grid[position.X, position.Y - 1] is Piece.Vertical or Piece.SouthEast or Piece.SouthWest)
         {
             switch (direction)
             {
                 case (1, 0):
-                    return true;
+                    Grid[position] = Piece.NorthWest;
+                    found = true;
+                    
+                    break;
             }
         }
 
-        return false;
+        if (found)
+        {
+            if (Grid.IsComplete)
+            {
+                return true;
+            }
+
+            if (PlaceNextMove(position, (direction.dX, direction.dY)))
+            {
+                return true;
+            }        }
+
+        return found;
     }
 
     private bool WouldExitBoard(Point position, Piece piece)
