@@ -124,8 +124,13 @@ public class Solver
 
     private bool PlaceObviousPieces(Point position, (int dX, int dY) direction)
     {
+        if (Grid[position] != Piece.Empty)
+        {
+            return false;
+        }
+
         var found = false;
-        
+
         if (position.Y > 0 && Grid[position.X, position.Y - 1] is Piece.Vertical or Piece.SouthEast or Piece.SouthWest)
         {
             switch (direction)
@@ -133,7 +138,7 @@ public class Solver
                 case (1, 0):
                     Grid[position] = Piece.NorthWest;
                     found = true;
-                    
+
                     break;
             }
         }
@@ -148,9 +153,10 @@ public class Solver
             if (PlaceNextMove(position, (direction.dX, direction.dY)))
             {
                 return true;
-            }        }
+            }
+        }
 
-        return found;
+        return false;
     }
 
     private bool WouldExitBoard(Point position, Piece piece)
