@@ -6,8 +6,8 @@ namespace TrainTracks.Engine;
 public class Solver
 {
     private readonly Preprocessor _preprocessor = new();
-    
-    public Grid Grid { get; private set; }
+
+    private Grid Grid { get; set; }
 
     public Action<Grid> StepCallback { get; init; }
 
