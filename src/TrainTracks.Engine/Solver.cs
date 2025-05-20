@@ -133,7 +133,11 @@ public class Solver
             switch (direction)
             {
                 case (1, 0):
-                    return [Piece.NorthEast];
+                    if (connections.Contains(Piece.NorthEast))
+                    {
+                        return [Piece.NorthEast];
+                    }
+                    break;
             }
         }
 
