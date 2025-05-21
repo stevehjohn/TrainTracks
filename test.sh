@@ -1,3 +1,3 @@
 cd src
-dotnet test
+dotnet test -c Release
 cd -
