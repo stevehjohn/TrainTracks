@@ -135,7 +135,7 @@ public class PuzzleRenderer : Game
 
             var color = Color.White;
 
-            var isometricX = (-1 - y) * Constants.TileWidth / 2f + originX + Constants.TileWidth *.65;
+            var isometricX = (-1 - y) * Constants.TileWidth / 2f + originX + Constants.TileWidth *.65 - padding;
 
             if (target < 10)
             {
@@ -147,6 +147,13 @@ public class PuzzleRenderer : Game
             _spriteBatch.DrawString(_font, text, new Vector2((int) isometricX, (int) isometricY), color);
 
             color = count == target ? Color.LightGreen : Color.Gray;
+
+            isometricX = (-1 - y) * Constants.TileWidth / 2f + originX + Constants.TileWidth *.65 - padding;
+
+            if (count < 10)
+            {
+                isometricX += padding;
+            }
             
             isometricY += (int) _font.MeasureString(text).Y;
             
@@ -165,13 +172,25 @@ public class PuzzleRenderer : Game
 
             var color = Color.White;
 
-            var isometricX = (x - -1) * Constants.TileWidth / 2f + originX + Constants.TileWidth *.25;
+            var isometricX = (x - -1) * Constants.TileWidth / 2f + originX + Constants.TileWidth *.25 - padding;
+
+            if (target < 10)
+            {
+                isometricX += padding;
+            }
 
             var isometricY = (x + -1) * Constants.TileCentre + originY - Constants.TileHeight * .7;
 
             _spriteBatch.DrawString(_font, text, new Vector2((int) isometricX, (int) isometricY), color);
 
             color = count == target ? Color.LightGreen : Color.Gray;
+
+            isometricX = (x - -1) * Constants.TileWidth / 2f + originX + Constants.TileWidth *.25 - padding;
+
+            if (count < 10)
+            {
+                isometricX += padding;
+            }
             
             isometricY += (int) _font.MeasureString(text).Y;
             
