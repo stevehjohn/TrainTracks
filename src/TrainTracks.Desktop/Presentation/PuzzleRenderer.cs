@@ -12,7 +12,7 @@ namespace TrainTracks.Desktop.Presentation;
 
 public class PuzzleRenderer : Game
 {
-    private const int SkipFrames = 1;
+    private const int SkipFrames = 10000;
     
     private readonly TileMapper _tileMapper;
 
@@ -135,7 +135,7 @@ public class PuzzleRenderer : Game
 
             var isometricX = (-1 - y) * Constants.TileWidth / 2f + originX + Constants.TileWidth *.65;
 
-            var isometricY = (-1 + y) * Constants.TileCentre + originY - Constants.TileHeight * .5;
+            var isometricY = (-1 + y) * Constants.TileCentre + originY - Constants.TileHeight * .7;
 
             _spriteBatch.DrawString(_font, text, new Vector2((int) isometricX, (int) isometricY), color);
 
@@ -160,7 +160,7 @@ public class PuzzleRenderer : Game
 
             var isometricX = (x - -1) * Constants.TileWidth / 2f + originX + Constants.TileWidth *.25;
 
-            var isometricY = (x + -1) * Constants.TileCentre + originY - Constants.TileHeight * .5;
+            var isometricY = (x + -1) * Constants.TileCentre + originY - Constants.TileHeight * .7;
 
             _spriteBatch.DrawString(_font, text, new Vector2((int) isometricX, (int) isometricY), color);
 
