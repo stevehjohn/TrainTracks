@@ -139,6 +139,18 @@ public class Solver
                     return [Piece.NorthEast];
             }
         }
+        
+        if (position.Y < Grid.Bottom && Grid[position.X, position.Y + 1] is Piece.Vertical or Piece.NorthEast or Piece.NorthWest)
+        {
+            switch (direction)
+            {
+                case (1, 0):
+                    return [Piece.SouthWest];
+
+                case (-1, 0):
+                    return [Piece.SouthEast];
+            }
+        }
 
         return connections;
     }
