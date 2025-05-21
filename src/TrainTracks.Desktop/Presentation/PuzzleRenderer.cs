@@ -125,7 +125,6 @@ public class PuzzleRenderer : Game
                 _skipFrames *= 2;
                 
                 _skipFrames = Math.Min(_skipFrames, 1_000_000);
-                Console.WriteLine(_skipFrames);
             }
 
             if (_previousKeyboardState.Value.IsKeyDown(Keys.Left) && keyboardState.IsKeyUp(Keys.Left))
@@ -133,7 +132,6 @@ public class PuzzleRenderer : Game
                 _skipFrames /= 2;
                 
                 _skipFrames = Math.Max(_skipFrames, 1);
-                Console.WriteLine(_skipFrames);
             }
         }
 
