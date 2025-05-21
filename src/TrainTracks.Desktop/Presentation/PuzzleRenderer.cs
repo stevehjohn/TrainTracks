@@ -40,6 +40,8 @@ public class PuzzleRenderer : Game
 
     private SpriteFont _font;
 
+    private SpriteFont _smallFont;
+
     private long _stepCount;
 
     private long _frameCount;
@@ -87,6 +89,8 @@ public class PuzzleRenderer : Game
         _tileMapper.LoadContent(Content);
         
         _font = Content.Load<SpriteFont>("font");
+
+        _smallFont = Content.Load<SpriteFont>("small-font");
     }
 
     protected override void Update(GameTime gameTime)
@@ -274,6 +278,10 @@ public class PuzzleRenderer : Game
         text = @$"{_stopwatch.Elapsed:h\:mm\:ss\.fff}";
 
         _spriteBatch.DrawString(_font, text, new Vector2(padding * 4, _height - fontHeight * 3), Color.White);
+
+        text = $"{_skipFrames:N0}x";
+
+        _spriteBatch.DrawString(_smallFont, text, new Vector2(_width - padding * 4 - _smallFont.MeasureString(text).X, _height - fontHeight * 2), Color.White);
 
         _spriteBatch.End();
 
