@@ -18,5 +18,5 @@ jobs:
         cd src
         pwd
         dotnet build -c Release
-        ls TrainTracks.Engine.Tests/bin/Release/net9.0/Test \Data
+        ls TrainTracks.Engine.Tests/bin/Release/net9.0/Test\ Data
         dotnet test -l "console;verbosity=detailed" -c Release
