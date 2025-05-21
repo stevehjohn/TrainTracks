@@ -148,9 +148,12 @@ public class PuzzleRenderer : Game
 
         if (_stepQueue.Count > 0)
         {
-            if (_stepQueue.TryDequeue(out _grid))
+            for (var i = 0; i < _skipFrames; i++)
             {
-                _frameCount++;
+                if (_stepQueue.TryDequeue(out _grid))
+                {
+                    _frameCount++;
+                }
             }
         }
         else
@@ -279,10 +282,10 @@ public class PuzzleRenderer : Game
     {
         _stepCount++;
 
-        if (_stepCount % _skipFrames != 0)
-        {
-            return;
-        }
+        // if (_stepCount % _skipFrames != 0)
+        // {
+        //     return;
+        // }
 
         _stepQueue.Enqueue(grid.Clone());
     }
