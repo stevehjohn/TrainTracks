@@ -11,7 +11,7 @@ public class EntryPoint
     {
         PuzzleManager.Path = "Data/puzzles.json";
         
-        var renderer = new PuzzleRenderer();
+        using var renderer = new PuzzleRenderer();
 
         renderer.Grid = PuzzleManager.Instance.GetPuzzle(int.Parse(arguments[0]));
         
