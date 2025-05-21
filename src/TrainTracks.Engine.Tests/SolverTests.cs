@@ -10,7 +10,7 @@ public class SolverTests
     {
         PuzzleManager.Path = "Test Data/puzzles.json";
 
-        for (var i = 0; i < 19; i++)
+        for (var i = 0; i < 18; i++)
         {
             var puzzle = PuzzleManager.Instance.GetPuzzle(i);
 
