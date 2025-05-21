@@ -1,3 +1,3 @@
 cd src/TrainTracks.Desktop
-dotnet run -c Release $*
+dotnet run -c Debug $*
 cd -

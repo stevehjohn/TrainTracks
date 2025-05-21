@@ -1,4 +1,5 @@
-using System.Collections.Generic;
+using System;
+using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
@@ -28,7 +29,7 @@ public class PuzzleRenderer : Game
 
     private readonly Solver _solver;
     
-    private readonly Queue<Grid> _stepQueue = [];
+    private readonly ConcurrentQueue<Grid> _stepQueue = [];
     
     private readonly Stopwatch _stopwatch = new();
     
@@ -42,7 +43,15 @@ public class PuzzleRenderer : Game
 
     private long _frameCount;
     
-    public Grid Grid { get; set; }
+    private Task _task;
+
+    private Grid _grid;
+    
+    public Grid Grid 
+    {
+        private get => _grid;
+        set => _grid = value;
+    }
     
     public PuzzleRenderer()
     {
@@ -81,20 +90,27 @@ public class PuzzleRenderer : Game
     {
         if (! _isSolving)
         {
-            var task = new Task(() =>
+            _task = new Task(() =>
             {
                 Thread.Sleep(1_000);
                 
                 _stopwatch.Restart();
 
-                _solver.Solve(Grid);
+                try
+                {
+                    _solver.Solve(Grid);
+                }
+                catch (Exception exception)
+                {
+                    Console.WriteLine(exception);
+                }
                 
                 _isComplete = true;
             });
 
             _isSolving = true;
             
-            task.Start();
+            _task.Start();
         }
 
         base.Update(gameTime);
@@ -106,13 +122,12 @@ public class PuzzleRenderer : Game
 
         _spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
 
-        Grid grid = null;
-
         if (_stepQueue.Count > 0)
         {
-            grid = _stepQueue.Dequeue();
-
-            _frameCount++;
+            if (_stepQueue.TryDequeue(out _grid))
+            {
+                _frameCount++;
+            }
         }
         else
         {
@@ -122,8 +137,6 @@ public class PuzzleRenderer : Game
             }
         }
 
-        grid ??= Grid;
-
         var originX = _width / 2 - (Grid.Width - Grid.Height) * Constants.TileWidth / 2 / 2 - Constants.TileWidth / 2;
 
         const int originY = Constants.TileHeight * 2;
@@ -132,7 +145,7 @@ public class PuzzleRenderer : Game
         {
             for (var x = 0; x < Grid.Width; x++)
             {
-                var tile = _tileMapper.GetTile(grid[x, y]);
+                var tile = _tileMapper.GetTile(_grid[x, y]);
 
                 var isometricX = (x - y) * Constants.TileWidth / 2 + originX;
 
@@ -153,7 +166,7 @@ public class PuzzleRenderer : Game
         
         for (var y = 0; y < Grid.Height; y++)
         {
-            var count = grid.GetRowCount(y);
+            var count = _grid.GetRowCount(y);
             
             var target = Grid.RowConstraints[y];
             
@@ -190,7 +203,7 @@ public class PuzzleRenderer : Game
 
         for (var x = 0; x < Grid.Width; x++)
         {
-            var count = grid.GetColumnCount(x);
+            var count = _grid.GetColumnCount(x);
             
             var target = Grid.ColumnConstraints[x];
             
@@ -225,7 +238,7 @@ public class PuzzleRenderer : Game
             _spriteBatch.DrawString(_font, text, new Vector2((int) isometricX, (int) isometricY), color);
         }
 
-        text = $"{_frameCount:N0}";
+        text = $"{_frameCount:N0} / {_stepCount:N0}";
 
         _spriteBatch.DrawString(_font, text, new Vector2(padding * 4, _height - fontHeight * 3), Color.White);
 
