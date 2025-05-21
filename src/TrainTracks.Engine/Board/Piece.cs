@@ -1,6 +1,6 @@
 namespace TrainTracks.Engine.Board;
 
-public enum Piece
+public enum Piece : byte
 {
     Empty = 0,
     Cross = 1,

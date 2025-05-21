@@ -11,6 +11,8 @@ public class Solver
 
     public Action<Grid> StepCallback { get; init; }
 
+    public Action<(Piece Piece, int X, int Y)> DeltaStepCallback { get; init; }
+    
     public bool Solve(Grid grid)
     {
         Grid = grid;
@@ -103,6 +105,8 @@ public class Solver
                 Grid[newPosition] = nextPiece;
 
                 StepCallback?.Invoke(Grid);
+                
+                DeltaStepCallback?.Invoke((nextPiece, newPosition.X, newPosition.Y));
 
                 if (Grid.IsComplete)
                 {
@@ -115,6 +119,8 @@ public class Solver
                 }
 
                 Grid[newPosition] = Piece.Empty;
+                
+                DeltaStepCallback?.Invoke((Piece.Empty, newPosition.X, newPosition.Y));
             }
         }
 
