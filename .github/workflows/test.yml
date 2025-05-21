@@ -17,4 +17,5 @@ jobs:
       run: |
         cd src
         pwd
+        dotnet build -c Release
         dotnet test -l "console;verbosity=detailed" -c Release
