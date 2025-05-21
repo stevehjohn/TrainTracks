@@ -27,9 +27,3 @@ An engine based around the Train Track puzzle games.
  17 | (12x11) | ~1.5s    | ~15m       | Yes     |
  18 | (12x12) | ~1m      | ~900m      | Yes     |
  ```
-
-## Ideas
-
-- Prefill 2s, 3s and 4s on the edges where possible.
-- Prefill Xs where possible.
-- If a row is full with no dangling edges, leave it as is? Must be correct?
