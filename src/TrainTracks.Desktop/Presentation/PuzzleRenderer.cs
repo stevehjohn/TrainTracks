@@ -123,14 +123,18 @@ public class PuzzleRenderer : Game
             if (_previousKeyboardState.Value.IsKeyDown(Keys.Right) && keyboardState.IsKeyUp(Keys.Right))
             {
                 _skipFrames *= 2;
+                
+                _skipFrames = Math.Min(_skipFrames, 1_000_000);
+                Console.WriteLine(_skipFrames);
             }
 
-            if (_previousKeyboardState.Value.IsKeyDown(Keys.Right) && keyboardState.IsKeyUp(Keys.Right) && _skipFrames > 1)
+            if (_previousKeyboardState.Value.IsKeyDown(Keys.Left) && keyboardState.IsKeyUp(Keys.Left))
             {
                 _skipFrames /= 2;
+                
+                _skipFrames = Math.Max(_skipFrames, 1);
+                Console.WriteLine(_skipFrames);
             }
-
-            Console.WriteLine(_skipFrames);
         }
 
         _previousKeyboardState = keyboardState;
