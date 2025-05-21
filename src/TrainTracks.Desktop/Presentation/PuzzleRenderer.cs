@@ -12,6 +12,8 @@ namespace TrainTracks.Desktop.Presentation;
 
 public class PuzzleRenderer : Game
 {
+    private const int SkipFrames = 10;
+    
     private readonly TileMapper _tileMapper;
 
     // ReSharper disable once NotAccessedField.Local
@@ -28,6 +30,8 @@ public class PuzzleRenderer : Game
     private readonly Queue<Grid> _stepQueue = [];
     
     private SpriteFont _font;
+
+    private long _frameCount;
     
     public Grid Grid { get; set; }
     
@@ -176,6 +180,13 @@ public class PuzzleRenderer : Game
 
     private void EnqueueStep(Grid grid)
     {
+        if (_frameCount % SkipFrames != 0)
+        {
+            return;
+        }
+
+        _frameCount++;
+
         _stepQueue.Enqueue(grid.Clone());
     }
 }
