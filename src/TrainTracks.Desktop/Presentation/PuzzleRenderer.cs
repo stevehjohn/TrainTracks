@@ -34,6 +34,8 @@ public class PuzzleRenderer : Game
     
     private bool _isSolving;
 
+    private bool _isComplete;
+
     private SpriteFont _font;
 
     private long _stepCount;
@@ -88,6 +90,8 @@ public class PuzzleRenderer : Game
                 _solver.Solve(Grid);
                 
                 _stopwatch.Stop();
+                
+                _isComplete = true;
             });
 
             _isSolving = true;
@@ -218,11 +222,11 @@ public class PuzzleRenderer : Game
 
         text = $"{_frameCount:N0}";
 
-        _spriteBatch.DrawString(_font, text, new Vector2(padding * 2, _height - fontHeight * 3), Color.White);
+        _spriteBatch.DrawString(_font, text, new Vector2(padding * 4, _height - fontHeight * 3), Color.White);
 
         text = @$"{_stopwatch.Elapsed:h\:mm\:ss\.fff}";
 
-        _spriteBatch.DrawString(_font, text, new Vector2(padding * 2, _height - fontHeight * 2), Color.White);
+        _spriteBatch.DrawString(_font, text, new Vector2(padding * 4, _height - fontHeight * 2), Color.White);
 
         _spriteBatch.End();
 
