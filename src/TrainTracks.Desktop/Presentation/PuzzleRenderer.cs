@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
@@ -22,14 +23,20 @@ public class PuzzleRenderer : Game
     private SpriteBatch _spriteBatch;
 
     private readonly int _width;
+    
+    private readonly int _height;
 
     private readonly Solver _solver;
     
-    private bool _isSolving;
-
     private readonly Queue<Grid> _stepQueue = [];
     
+    private readonly Stopwatch _stopwatch = new();
+    
+    private bool _isSolving;
+
     private SpriteFont _font;
+
+    private long _stepCount;
 
     private long _frameCount;
     
@@ -39,12 +46,12 @@ public class PuzzleRenderer : Game
     {
         _width = Constants.PuzzleMaxWidth * Constants.TileWidth;
 
-        const int height = Constants.PuzzleMaxHeight * Constants.TileHeight / 2 + Constants.TileHeight * 6;
+        _height = Constants.PuzzleMaxHeight * Constants.TileHeight / 2 + Constants.TileHeight * 6;
             
         _graphics = new GraphicsDeviceManager(this)
         {
             PreferredBackBufferWidth = _width,
-            PreferredBackBufferHeight = height
+            PreferredBackBufferHeight = _height
         };
 
         Content.RootDirectory = "_Content";
@@ -75,8 +82,12 @@ public class PuzzleRenderer : Game
             var task = new Task(() =>
             {
                 Thread.Sleep(1_000);
+                
+                _stopwatch.Restart();
 
                 _solver.Solve(Grid);
+                
+                _stopwatch.Stop();
             });
 
             _isSolving = true;
@@ -98,6 +109,8 @@ public class PuzzleRenderer : Game
         if (_stepQueue.Count > 0)
         {
             grid = _stepQueue.Dequeue();
+
+            _frameCount++;
         }
         
         grid ??= Grid;
@@ -125,13 +138,17 @@ public class PuzzleRenderer : Game
 
         var padding = (int) _font.MeasureString("0").X / 2;
         
+        var fontHeight = (int) _font.MeasureString("0").Y;
+
+        string text;
+        
         for (var y = 0; y < Grid.Height; y++)
         {
             var count = grid.GetRowCount(y);
             
             var target = Grid.RowConstraints[y];
             
-            var text = $"{target}";
+            text = $"{target}";
 
             var color = Color.White;
 
@@ -154,8 +171,8 @@ public class PuzzleRenderer : Game
             {
                 isometricX += padding;
             }
-            
-            isometricY += (int) _font.MeasureString(text).Y;
+
+            isometricY += fontHeight;
             
             text = $"{count}";
 
@@ -168,7 +185,7 @@ public class PuzzleRenderer : Game
             
             var target = Grid.ColumnConstraints[x];
             
-            var text = $"{target}";
+            text = $"{target}";
 
             var color = Color.White;
 
@@ -191,13 +208,21 @@ public class PuzzleRenderer : Game
             {
                 isometricX += padding;
             }
-            
-            isometricY += (int) _font.MeasureString(text).Y;
+
+            isometricY += fontHeight;
             
             text = $"{count}";
 
             _spriteBatch.DrawString(_font, text, new Vector2((int) isometricX, (int) isometricY), color);
         }
+
+        text = $"{_frameCount:N0}";
+
+        _spriteBatch.DrawString(_font, text, new Vector2(padding * 2, _height - fontHeight * 3), Color.White);
+
+        text = @$"{_stopwatch:h\:mm\:ss\.fff}";
+
+        _spriteBatch.DrawString(_font, text, new Vector2(padding * 2, _height - fontHeight * 2), Color.White);
 
         _spriteBatch.End();
 
@@ -206,9 +231,9 @@ public class PuzzleRenderer : Game
 
     private void EnqueueStep(Grid grid)
     {
-        _frameCount++;
+        _stepCount++;
 
-        if (_frameCount % SkipFrames != 0)
+        if (_stepCount % SkipFrames != 0)
         {
             return;
         }
