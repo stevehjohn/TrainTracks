@@ -21,7 +21,7 @@ public class Local
             StepCallback = VisualiseStep
         };
 
-        PuzzleManager.Path = "Data/puzzles.json";
+        PuzzleManager.Path = "Data/Puzzles.json";
         
         var puzzle = PuzzleManager.Instance.GetPuzzle(puzzleNumber);
         

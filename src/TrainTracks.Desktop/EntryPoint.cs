@@ -9,7 +9,7 @@ public class EntryPoint
 {
     public static void Main(string[] arguments)
     {
-        PuzzleManager.Path = "Data/puzzles.json";
+        PuzzleManager.Path = "Data/Puzzles.json";
         
         using var renderer = new PuzzleRenderer();
 
