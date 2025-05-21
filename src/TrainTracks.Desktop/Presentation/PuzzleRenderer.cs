@@ -89,8 +89,6 @@ public class PuzzleRenderer : Game
 
                 _solver.Solve(Grid);
                 
-                _stopwatch.Stop();
-                
                 _isComplete = true;
             });
 
@@ -116,7 +114,14 @@ public class PuzzleRenderer : Game
 
             _frameCount++;
         }
-        
+        else
+        {
+            if (_isComplete)
+            {
+                _stopwatch.Stop();
+            }
+        }
+
         grid ??= Grid;
 
         var originX = _width / 2 - (Grid.Width - Grid.Height) * Constants.TileWidth / 2 / 2 - Constants.TileWidth / 2;
