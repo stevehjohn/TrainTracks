@@ -12,7 +12,7 @@ namespace TrainTracks.Desktop.Presentation;
 
 public class PuzzleRenderer : Game
 {
-    private const int SkipFrames = 10;
+    private const int SkipFrames = 1;
     
     private readonly TileMapper _tileMapper;
 
