@@ -206,7 +206,7 @@ public class PuzzleRenderer : Game
         
         for (var y = 0; y < Grid.Height; y++)
         {
-            var count = _grid!.GetRowCount(y);
+            var count = _screenGrid!.GetRowCount(y);
             
             var target = Grid.RowConstraints[y];
             
@@ -243,7 +243,7 @@ public class PuzzleRenderer : Game
 
         for (var x = 0; x < Grid.Width; x++)
         {
-            var count = _grid!.GetColumnCount(x);
+            var count = _screenGrid!.GetColumnCount(x);
             
             var target = Grid.ColumnConstraints[x];
             
