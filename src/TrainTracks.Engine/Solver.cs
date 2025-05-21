@@ -134,6 +134,9 @@ public class Solver
             {
                 case (1, 0):
                     return [Piece.NorthWest];
+
+                case (-1, 0):
+                    return [Piece.NorthEast];
             }
         }
 
