@@ -176,41 +176,41 @@ public class Solver
             }
         }
         
-        // if (position.Y > 0 && Grid[position.X, position.Y - 1] is Piece.Vertical or Piece.SouthEast or Piece.SouthWest)
-        // {
-        //     switch (direction)
-        //     {
-        //         case (0, -1):
-        //             return [Piece.Vertical];
-        //     }
-        // }
-        //
-        // if (position.Y < Grid.Bottom && Grid[position.X, position.Y + 1] is Piece.Vertical or Piece.NorthEast or Piece.NorthWest)
-        // {
-        //     switch (direction)
-        //     {
-        //         case (0, 1):
-        //             return [Piece.Vertical];
-        //     }
-        // }
-        //
-        // if (position.X < Grid.Right && Grid[position.X + 1, position.Y] is Piece.Horizontal or Piece.NorthWest or Piece.SouthWest)
-        // {
-        //     switch (direction)
-        //     {
-        //         case (1, 0):
-        //             return [Piece.Horizontal];
-        //     }
-        // }
-        //
-        // if (position.X > 0 && Grid[position.X - 1, position.Y] is Piece.Horizontal or Piece.NorthEast or Piece.SouthEast)
-        // {
-        //     switch (direction)
-        //     {
-        //         case (-1, 0):
-        //             return [Piece.Horizontal];
-        //     }
-        // }
+        if (position.Y > 0 && Grid[position.X, position.Y - 1] is Piece.Vertical or Piece.SouthEast or Piece.SouthWest)
+        {
+            switch (direction)
+            {
+                case (0, -1):
+                    return [Piece.Vertical];
+            }
+        }
+        
+        if (position.Y < Grid.Bottom && Grid[position.X, position.Y + 1] is Piece.Vertical or Piece.NorthEast or Piece.NorthWest)
+        {
+            switch (direction)
+            {
+                case (0, 1):
+                    return [Piece.Vertical];
+            }
+        }
+        
+        if (position.X < Grid.Right && Grid[position.X + 1, position.Y] is Piece.Horizontal or Piece.NorthWest or Piece.SouthWest)
+        {
+            switch (direction)
+            {
+                case (1, 0):
+                    return [Piece.Horizontal];
+            }
+        }
+        
+        if (position.X > 0 && Grid[position.X - 1, position.Y] is Piece.Horizontal or Piece.NorthEast or Piece.SouthEast)
+        {
+            switch (direction)
+            {
+                case (-1, 0):
+                    return [Piece.Horizontal];
+            }
+        }
 
         return connections;
     }
