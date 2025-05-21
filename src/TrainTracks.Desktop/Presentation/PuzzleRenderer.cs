@@ -12,7 +12,7 @@ namespace TrainTracks.Desktop.Presentation;
 
 public class PuzzleRenderer : Game
 {
-    private const int SkipFrames = 10000;
+    private const int SkipFrames = 1000;
     
     private readonly TileMapper _tileMapper;
 
@@ -122,6 +122,8 @@ public class PuzzleRenderer : Game
                     new Rectangle(0, 0, Constants.TileWidth, Constants.TileHeight), colour, 0, Vector2.Zero, SpriteEffects.None, (x + y) / 100f);
             }
         }
+
+        var padding = (int) _font.MeasureString("0").X / 2;
         
         for (var y = 0; y < Grid.Height; y++)
         {
@@ -134,6 +136,11 @@ public class PuzzleRenderer : Game
             var color = Color.White;
 
             var isometricX = (-1 - y) * Constants.TileWidth / 2f + originX + Constants.TileWidth *.65;
+
+            if (target < 10)
+            {
+                isometricX += padding;
+            }
 
             var isometricY = (-1 + y) * Constants.TileCentre + originY - Constants.TileHeight * .7;
 
