@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using TrainTracks.Desktop.Infrastructure;
 using TrainTracks.Engine;
 using TrainTracks.Engine.Board;
@@ -14,15 +15,6 @@ namespace TrainTracks.Desktop.Presentation;
 
 public class PuzzleRenderer : Game
 {
-    private const int SkipFrames = 1;
-    
-    private readonly TileMapper _tileMapper;
-
-    // ReSharper disable once NotAccessedField.Local
-    private GraphicsDeviceManager _graphics;
-
-    private SpriteBatch _spriteBatch;
-
     private readonly int _width;
     
     private readonly int _height;
@@ -33,6 +25,15 @@ public class PuzzleRenderer : Game
     
     private readonly Stopwatch _stopwatch = new();
     
+    private int _skipFrames = 1;
+    
+    private readonly TileMapper _tileMapper;
+
+    // ReSharper disable once NotAccessedField.Local
+    private GraphicsDeviceManager _graphics;
+
+    private SpriteBatch _spriteBatch;
+
     private bool _isSolving;
 
     private bool _isComplete;
@@ -46,6 +47,8 @@ public class PuzzleRenderer : Game
     private Task _task;
 
     private Grid _grid;
+    
+    private KeyboardState? _previousKeyboardState;
     
     public Grid Grid 
     {
@@ -112,6 +115,25 @@ public class PuzzleRenderer : Game
             
             _task.Start();
         }
+
+        var keyboardState = Keyboard.GetState();
+
+        if (_previousKeyboardState != null)
+        {
+            if (_previousKeyboardState.Value.IsKeyDown(Keys.Right) && keyboardState.IsKeyUp(Keys.Right))
+            {
+                _skipFrames *= 2;
+            }
+
+            if (_previousKeyboardState.Value.IsKeyDown(Keys.Right) && keyboardState.IsKeyUp(Keys.Right) && _skipFrames > 1)
+            {
+                _skipFrames /= 2;
+            }
+
+            Console.WriteLine(_skipFrames);
+        }
+
+        _previousKeyboardState = keyboardState;
 
         base.Update(gameTime);
     }
@@ -255,7 +277,7 @@ public class PuzzleRenderer : Game
     {
         _stepCount++;
 
-        if (_stepCount % SkipFrames != 0)
+        if (_stepCount % _skipFrames != 0)
         {
             return;
         }
