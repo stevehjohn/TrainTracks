@@ -12,7 +12,7 @@ namespace TrainTracks.Desktop.Presentation;
 
 public class PuzzleRenderer : Game
 {
-    private const int SkipFrames = 10;
+    private const int SkipFrames = 1;
     
     private readonly TileMapper _tileMapper;
 
@@ -180,12 +180,12 @@ public class PuzzleRenderer : Game
 
     private void EnqueueStep(Grid grid)
     {
+        _frameCount++;
+
         if (_frameCount % SkipFrames != 0)
         {
             return;
         }
-
-        _frameCount++;
 
         _stepQueue.Enqueue(grid.Clone());
     }
