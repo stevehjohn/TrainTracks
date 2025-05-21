@@ -8,7 +8,7 @@ public class SolverTests
     [Fact]
     public void CanSolvePuzzle()
     {
-        PuzzleManager.Path = "Test Data/puzzles.json";
+        PuzzleManager.Path = "Test Data/Puzzles.json";
 
         for (var i = 0; i < 19; i++)
         {

@@ -11,7 +11,7 @@ public class GridTests
     [InlineData(3, 4, 11, 0, 10)]
     public void IdentifiesEntryAndExitPoints(int puzzleIndex, int entryX, int entryY, int exitX, int exitY)
     {
-        PuzzleManager.Path = "Test Data/puzzles.json";
+        PuzzleManager.Path = "Test Data/Puzzles.json";
         
         var puzzle = PuzzleManager.Instance.GetPuzzle(puzzleIndex);
         
