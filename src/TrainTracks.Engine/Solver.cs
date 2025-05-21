@@ -11,6 +11,8 @@ public class Solver
 
     public Action<Grid> StepCallback { get; init; }
 
+    public Action<Grid> PreprocessingCompleteCallback { get; init; }
+    
     public Action<(Piece Piece, int X, int Y)> DeltaStepCallback { get; init; }
     
     public bool Solve(Grid grid)
@@ -18,6 +20,8 @@ public class Solver
         Grid = grid;
         
         _preprocessor.Preprocess(grid);
+        
+        PreprocessingCompleteCallback?.Invoke(Grid.Clone());
 
         var result = PlaceNextMove(Grid.Entry, null);
 

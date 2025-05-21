@@ -84,6 +84,7 @@ public class PuzzleRenderer : Game
         
         _solver = new Solver
         {
+            PreprocessingCompleteCallback = PreprocessingComplete,
             DeltaStepCallback = EnqueueStep
         };
     }
@@ -299,5 +300,10 @@ public class PuzzleRenderer : Game
         _stepCount++;
 
         _changeQueue.Enqueue(move);
+    }
+
+    private void PreprocessingComplete(Grid grid)
+    {
+        _screenGrid = grid;
     }
 }
