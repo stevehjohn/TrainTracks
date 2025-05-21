@@ -1,3 +1,4 @@
+// ReSharper disable Xunit.XunitTestWithConsoleOutput
 using TrainTracks.Engine.Infrastructure;
 
 namespace TrainTracks.Engine.Tests;
@@ -9,12 +10,19 @@ public class SolverTests
     {
         PuzzleManager.Path = "Test Data/puzzles.json";
 
-        var puzzle = PuzzleManager.Instance.GetPuzzle(4);
+        for (var i = 0; i < 19; i++)
+        {
+            var puzzle = PuzzleManager.Instance.GetPuzzle(i);
 
-        var solver = new Solver();
+            var solver = new Solver();
 
-        var result = solver.Solve(puzzle);
-        
-        Assert.True(result);
+            Console.WriteLine($"Solving puzzle number: {i} ({puzzle.Width}x{puzzle.Height})");
+            
+            var result = solver.Solve(puzzle);
+            
+            Console.WriteLine(puzzle.ToString());
+
+            Assert.True(result);
+        }
     }
 }
