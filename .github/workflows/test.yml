@@ -17,6 +17,6 @@ jobs:
       run: |
         cd src
         pwd
-        ls TrainTracks.Engine.Tests/bin/Release/net9.0
         dotnet build -c Release
+        ls TrainTracks.Engine.Tests/bin/Release/net9.0
         dotnet test -l "console;verbosity=detailed" -c Release
