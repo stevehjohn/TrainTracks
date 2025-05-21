@@ -175,6 +175,24 @@ public class Solver
                     return [Piece.SouthWest];
             }
         }
+        
+        if (position.X < Grid.Right && Grid[position.X + 1, position.Y] is Piece.Horizontal or Piece.NorthWest or Piece.SouthWest)
+        {
+            switch (direction)
+            {
+                case (1, 0):
+                    return [Piece.Horizontal];
+            }
+        }
+        
+        if (position.X > 0 && Grid[position.X - 1, position.Y] is Piece.Horizontal or Piece.NorthEast or Piece.SouthEast)
+        {
+            switch (direction)
+            {
+                case (-1, 0):
+                    return [Piece.Horizontal];
+            }
+        }
 
         return connections;
     }
