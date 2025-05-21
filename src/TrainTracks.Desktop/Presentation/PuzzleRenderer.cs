@@ -239,7 +239,7 @@ public class PuzzleRenderer : Game
         }
 
         text = $"{_frameCount:N0} / {_stepCount:N0}";
-
+        
         _spriteBatch.DrawString(_font, text, new Vector2(padding * 4, _height - fontHeight * 2), Color.White);
 
         text = @$"{_stopwatch.Elapsed:h\:mm\:ss\.fff}";
