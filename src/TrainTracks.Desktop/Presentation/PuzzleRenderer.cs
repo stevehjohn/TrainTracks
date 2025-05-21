@@ -145,7 +145,7 @@ public class PuzzleRenderer : Game
         {
             for (var x = 0; x < Grid.Width; x++)
             {
-                var tile = _tileMapper.GetTile(_grid[x, y]);
+                var tile = _tileMapper.GetTile(_grid![x, y]);
 
                 var isometricX = (x - y) * Constants.TileWidth / 2 + originX;
 
@@ -166,7 +166,7 @@ public class PuzzleRenderer : Game
         
         for (var y = 0; y < Grid.Height; y++)
         {
-            var count = _grid.GetRowCount(y);
+            var count = _grid!.GetRowCount(y);
             
             var target = Grid.RowConstraints[y];
             
@@ -203,7 +203,7 @@ public class PuzzleRenderer : Game
 
         for (var x = 0; x < Grid.Width; x++)
         {
-            var count = _grid.GetColumnCount(x);
+            var count = _grid!.GetColumnCount(x);
             
             var target = Grid.ColumnConstraints[x];
             
