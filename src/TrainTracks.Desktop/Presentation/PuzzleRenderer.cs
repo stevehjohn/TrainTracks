@@ -156,7 +156,7 @@ public class PuzzleRenderer : Game
 
         _spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
 
-        if (_changeQueue.Count > 0)
+        if (!_changeQueue.IsEmpty)
         {
             for (var i = 0; i < _skipFrames; i++)
             {
