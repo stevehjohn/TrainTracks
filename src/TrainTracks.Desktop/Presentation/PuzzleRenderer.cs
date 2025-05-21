@@ -220,7 +220,7 @@ public class PuzzleRenderer : Game
 
         _spriteBatch.DrawString(_font, text, new Vector2(padding * 2, _height - fontHeight * 3), Color.White);
 
-        text = @$"{_stopwatch:h\:mm\:ss\.fff}";
+        text = @$"{_stopwatch.Elapsed:h\:mm\:ss\.fff}";
 
         _spriteBatch.DrawString(_font, text, new Vector2(padding * 2, _height - fontHeight * 2), Color.White);
 
