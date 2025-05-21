@@ -166,6 +166,11 @@ public class PuzzleRenderer : Game
                     _frameCount++;
                     
                     _screenGrid[step.X, step.Y] = step.Piece;
+
+                    if (step.Piece == Piece.Empty)
+                    {
+                        i--;
+                    }
                 }
             }
         }
