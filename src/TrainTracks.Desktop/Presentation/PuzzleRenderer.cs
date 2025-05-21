@@ -184,7 +184,7 @@ public class PuzzleRenderer : Game
         {
             for (var x = 0; x < Grid.Width; x++)
             {
-                var tile = _tileMapper.GetTile(_grid![x, y]);
+                var tile = _tileMapper.GetTile(_screenGrid![x, y]);
 
                 var isometricX = (x - y) * Constants.TileWidth / 2 + originX;
 
