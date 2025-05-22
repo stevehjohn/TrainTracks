@@ -24,6 +24,8 @@ public class PuzzleRenderer : Game
     private readonly ConcurrentQueue<(Piece Piece, int X, int Y)> _changeQueue = [];
     
     private readonly Stopwatch _stopwatch = new();
+
+    private readonly FrameCounter _frameCounter = new();
     
     private int _skipFrames = 1;
     
@@ -102,6 +104,8 @@ public class PuzzleRenderer : Game
 
     protected override void Update(GameTime gameTime)
     {
+        _frameCounter.Update((float) gameTime.ElapsedGameTime.TotalSeconds);
+        
         if (! _isSolving)
         {
             _task = new Task(() =>
@@ -294,6 +298,10 @@ public class PuzzleRenderer : Game
         text = $"{_skipFrames:N0}x";
 
         _spriteBatch.DrawString(_smallFont, text, new Vector2(_width - padding * 4 - _smallFont.MeasureString(text).X, _height - fontHeight * 2), Color.White);
+
+        text = $"{_frameCounter.AverageFramesPerSecond:N0} FPS";
+
+        _spriteBatch.DrawString(_smallFont, text, new Vector2(_width - padding * 4 - _smallFont.MeasureString(text).X, (int) (_height - fontHeight * 1.5)), Color.White);
 
         _spriteBatch.End();
 
