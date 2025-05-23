@@ -80,7 +80,7 @@ public class Solver
                 continue;
             }
 
-            connections = FilterForObviousPiece(newPosition, direction, connections);
+            connections = FilterCandidates(newPosition, direction, connections);
             
             foreach (var nextPiece in connections)
             {
@@ -131,7 +131,7 @@ public class Solver
         return false;
     }
 
-    private IReadOnlyList<Piece> FilterForObviousPiece(Point position, (int dX, int dY) direction, IReadOnlyList<Piece> connections)
+    private IReadOnlyList<Piece> FilterCandidates(Point position, (int dX, int dY) direction, IReadOnlyList<Piece> connections)
     {
         if (Grid[position] != Piece.Empty)
         {
