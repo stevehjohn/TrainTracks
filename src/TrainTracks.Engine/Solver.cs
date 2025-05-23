@@ -143,10 +143,15 @@ public class Solver
         var y = position.Y;
 
         if (Grid[x - 1, y] is Piece.NorthEast or Piece.SouthEast or Piece.Horizontal && 
-            Grid[x, y - 1] is Piece.SouthEast or Piece.SouthWest or Piece.Vertical &&
-            Grid.IsFixed(x - 1, y) && Grid.IsFixed(x, y - 1))
+            Grid[x, y - 1] is Piece.SouthEast or Piece.SouthWest or Piece.Vertical)
         {
             return [Piece.NorthWest];
+        }
+
+        if (Grid[x - 1, y] is Piece.NorthEast or Piece.SouthEast or Piece.Horizontal && 
+            Grid[x, y + 1] is Piece.NorthEast or Piece.NorthWest or Piece.Vertical)
+        {
+            return [Piece.SouthWest];
         }
 
         return null;
