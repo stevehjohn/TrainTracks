@@ -71,17 +71,22 @@ public class Solver
                 }
             }
 
-            var connections = Connector.GetConnections(currentPiece, direction.Dx, direction.Dy);
-
             var nextCell = Grid[newPosition];
 
             if (nextCell == Piece.Cross)
             {
                 continue;
             }
-
-            connections = FilterCandidates(newPosition, direction, connections);
             
+            var connections = CheckForObviousPiece(newPosition);
+
+            if (connections == null)
+            {
+                connections = Connector.GetConnections(currentPiece, direction.Dx, direction.Dy);
+
+                connections = FilterCandidates(newPosition, direction, connections);
+            }
+
             foreach (var nextPiece in connections)
             {
                 if (nextCell != Piece.Empty)
@@ -129,6 +134,20 @@ public class Solver
         }
 
         return false;
+    }
+
+    private IReadOnlyList<Piece> CheckForObviousPiece(Point position)
+    {
+        var x = position.X;
+        
+        var y = position.Y;
+
+        if (Grid[x - 1, y] == Piece.NorthEast && Grid[x, y - 1] == Piece.SouthEast)
+        {
+            return [Piece.NorthWest];
+        }
+
+        return null;
     }
 
     private IReadOnlyList<Piece> FilterCandidates(Point position, (int dX, int dY) direction, IReadOnlyList<Piece> connections)
