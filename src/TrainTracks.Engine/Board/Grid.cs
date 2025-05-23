@@ -122,6 +122,8 @@ public class Grid
 
     public bool IsFixed(Point position) => _fixedPieces[position.X, position.Y];
 
+    public bool IsFixed(int x, int y) => _fixedPieces[x, y];
+
     private Grid()
     {
     }
