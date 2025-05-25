@@ -2,6 +2,7 @@
 // ReSharper disable PropertyCanBeMadeInitOnly.Global
 
 using JetBrains.Annotations;
+
 namespace TrainTracks.Engine.Models;
 
 [UsedImplicitly]
