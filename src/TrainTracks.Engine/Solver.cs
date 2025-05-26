@@ -64,7 +64,7 @@ public class Solver
                 continue;
             }
 
-            if (Grid[newPosition] == Piece.Empty)
+            if (nextCell == Piece.Empty)
             {
                 if (Grid.GetRowCount(newPosition.Y) + 1 > Grid.RowConstraints[newPosition.Y]
                     || Grid.GetColumnCount(newPosition.X) + 1 > Grid.ColumnConstraints[newPosition.X])
