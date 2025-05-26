@@ -10,5 +10,6 @@ public enum Piece : byte
     SouthEast = 6,
     SouthWest = 7,
     NorthWest = 8,
-    Placeholder = 9
+    Placeholder = 9,
+    OutOfBounds = 10
 }

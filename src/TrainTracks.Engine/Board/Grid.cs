@@ -17,7 +17,15 @@ public class Grid
     
     public Piece this[int x, int y]
     {
-        get => _pieces[x, y];
+        get
+        {
+            if (x < 0 || x > Right || y < 0 || y > Bottom)
+            {
+                return Piece.OutOfBounds;
+            }
+
+            return _pieces[x, y];
+        }
         set 
         {
             if (x < 0 || x > Right || y < 0 || y > Bottom)

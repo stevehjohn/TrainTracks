@@ -57,7 +57,9 @@ public class Solver
 
             var newPosition = new Point(position.X + direction.Dx, position.Y + direction.Dy);
 
-            if (newPosition.X < 0 || newPosition.X > Grid.Right || newPosition.Y < 0 || newPosition.Y > Grid.Bottom)
+            var nextCell = Grid[newPosition];
+
+            if (nextCell == Piece.OutOfBounds)
             {
                 continue;
             }
@@ -71,14 +73,12 @@ public class Solver
                 }
             }
 
-            var connections = Connector.GetConnections(currentPiece, direction.Dx, direction.Dy);
-
-            var nextCell = Grid[newPosition];
-
             if (nextCell == Piece.Cross)
             {
                 continue;
             }
+
+            var connections = Connector.GetConnections(currentPiece, direction.Dx, direction.Dy);
 
             connections = FilterCandidates(newPosition, direction, connections);
             
