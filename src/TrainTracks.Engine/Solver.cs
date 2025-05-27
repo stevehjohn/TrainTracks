@@ -78,7 +78,7 @@ public class Solver
                 continue;
             }
 
-            var connections = CheckForObviousPiece(newPosition);
+            var connections = CheckForObviousPiece(currentPiece, newPosition, direction);
             
             if (connections == null)
             {
@@ -136,7 +136,7 @@ public class Solver
         return false;
     }
 
-    private IReadOnlyList<Piece> CheckForObviousPiece(Point position)
+    private IReadOnlyList<Piece> CheckForObviousPiece(Piece currentPiece, Point position, (int Dx, int Dy) direction)
     {
         var x = position.X;
         
@@ -145,7 +145,12 @@ public class Solver
         if (Grid[x, y - 1] is Piece.Vertical or Piece.SouthEast or Piece.SouthWest &&
             Grid[x, y + 1] is Piece.Vertical or Piece.NorthEast or Piece.NorthWest)
         {
-            return [Piece.Vertical];
+            var backConnections = Connector.GetConnections(currentPiece, -direction.Dx, -direction.Dy);
+
+            if (backConnections.Contains(Piece.Vertical))
+            {
+                return [Piece.Vertical];
+            }
         }
 
         return null;
