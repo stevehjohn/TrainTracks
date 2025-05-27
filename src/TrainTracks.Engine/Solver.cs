@@ -86,6 +86,13 @@ public class Solver
 
                 connections = FilterCandidates(newPosition, direction, connections);
             }
+            else
+            {
+                if (connections[0] == Piece.OutOfBounds)
+                {
+                    continue;
+                }
+            }
 
             foreach (var nextPiece in connections)
             {
@@ -145,11 +152,15 @@ public class Solver
         if (Grid[x, y - 1] is Piece.Vertical or Piece.SouthEast or Piece.SouthWest &&
             Grid[x, y + 1] is Piece.Vertical or Piece.NorthEast or Piece.NorthWest)
         {
-            var backConnections = Connector.GetConnections(currentPiece, -direction.Dx, -direction.Dy);
+            var backConnections = Connector.GetConnections(currentPiece, direction.Dx, direction.Dy);
 
             if (backConnections.Contains(Piece.Vertical))
             {
                 return [Piece.Vertical];
+            }
+            else
+            {
+                return [Piece.OutOfBounds];
             }
         }
 
