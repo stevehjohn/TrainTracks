@@ -158,10 +158,8 @@ public class Solver
             {
                 return [Piece.Vertical];
             }
-            else
-            {
-                return [Piece.OutOfBounds];
-            }
+
+            return [Piece.OutOfBounds];
         }
 
         return null;
