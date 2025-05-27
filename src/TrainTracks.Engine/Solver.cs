@@ -175,19 +175,6 @@ public class Solver
             return [Piece.OutOfBounds];
         }
 
-        if (Grid[x + 1, y] is Piece.Horizontal or Piece.NorthWest or Piece.SouthWest &&
-            Grid[x, y + 1] is Piece.Vertical or Piece.NorthEast or Piece.NorthWest)
-        {
-            var backConnections = Connector.GetConnections(currentPiece, direction.Dx, direction.Dy);
-
-            if (backConnections.Contains(Piece.SouthEast))
-            {
-                return [Piece.SouthEast];
-            }
-
-            return [Piece.OutOfBounds];
-        }
-
         return null;
     }
 
