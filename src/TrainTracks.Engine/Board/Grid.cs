@@ -5,7 +5,7 @@ namespace TrainTracks.Engine.Board;
 
 public class Grid
 {
-    private Piece[,] _pieces;
+    private Piece[] _pieces;
     
     private bool[,] _fixedPieces;
 
@@ -24,7 +24,7 @@ public class Grid
                 return Piece.OutOfBounds;
             }
 
-            return _pieces[x, y];
+            return _pieces[x + y * Width];
         }
         set 
         {
@@ -33,21 +33,21 @@ public class Grid
                 return;
             }
 
-            if (value != Piece.Empty && value != Piece.Cross && _pieces[x, y] == Piece.Empty)
+            if (value != Piece.Empty && value != Piece.Cross && _pieces[x + y * Width] == Piece.Empty)
             {
                 _columnCounts[x]++;
                 
                 _rowCounts[y]++;
             }
             
-            if ((value == Piece.Empty || value != Piece.Cross) && _pieces[x, y] != Piece.Empty && _pieces[x, y] != Piece.Cross)
+            if ((value == Piece.Empty || value != Piece.Cross) && _pieces[x + y * Width] != Piece.Empty && _pieces[x + y * Width] != Piece.Cross)
             {
                 _columnCounts[x]--;
                 
                 _rowCounts[y]--;
             }
             
-            _pieces[x, y] = value;
+            _pieces[x + y * Width] = value;
         }
     }
 
@@ -101,7 +101,7 @@ public class Grid
 
         Array.Copy(ColumnConstraints, copy.ColumnConstraints, Width);
 
-        copy._pieces = new Piece[Width, Height];
+        copy._pieces = new Piece[Width * Height];
 
         Array.Copy(_pieces, copy._pieces, Width * Height);
         
@@ -140,7 +140,7 @@ public class Grid
         
         Bottom = Height - 1;
 
-        _pieces = new Piece[Width, Height];
+        _pieces = new Piece[Width * Height];
         
         _fixedPieces = new bool[Width, Height];
         
@@ -154,9 +154,9 @@ public class Grid
         {
             for (var y = 0; y < Height; y++)
             {
-                _pieces[x, y] = puzzle.Data.StartingGrid[y * Width + x];
+                _pieces[x + y * Width] = puzzle.Data.StartingGrid[y * Width + x];
 
-                if (_pieces[x, y] != Piece.Empty)
+                if (_pieces[x + y * Width] != Piece.Empty)
                 {
                     FixedPieceCount++;
                     
@@ -334,7 +334,7 @@ public class Grid
         {
             for (var x = 0; x < Width; x++)
             {
-                switch (_pieces[x, y])
+                switch (_pieces[x + y * Width])
                 {
                     case Piece.Horizontal:
                         builder.Append('─');
