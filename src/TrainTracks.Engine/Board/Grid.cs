@@ -250,7 +250,7 @@ public class Grid
 
     private bool ConstraintsAreMet()
     {
-        for (var x = 0; x < Width; x++)
+        for (var x = Right; x >= 0; x--)
         {
             if (_columnCounts[x] != ColumnConstraints[x])
             {
@@ -258,7 +258,7 @@ public class Grid
             }
         }
         
-        for (var y = 0; y < Height; y++)
+        for (var y = Bottom; y >= 0; y--)
         {
             if (_rowCounts[y] != RowConstraints[y])
             {
