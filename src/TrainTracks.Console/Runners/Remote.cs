@@ -27,6 +27,8 @@ public class Remote
 
         Clear();
 
+        var startTime = DateTime.Now;
+
         for (var i = 0; i < options.Quantity; i++)
         {
             WriteLine();
@@ -85,6 +87,12 @@ public class Remote
                 break;
             }
 
+            WriteLine();
+            
+            WriteLine($"Started: {startTime:F}, runtime: {DateTime.Now - startTime:h\\:mm\\:ss\\.fff}.");
+
+            WriteLine();
+            
             WriteLine($"Solving puzzle for {puzzle.Value.Date:R} ({puzzle.Value.Grid.Width}x{puzzle.Value.Grid.Height}).");
 
             WriteLine();
