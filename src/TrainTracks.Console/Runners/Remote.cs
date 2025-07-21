@@ -4,6 +4,7 @@ using TrainTracks.Console.Infrastructure;
 using TrainTracks.Engine;
 using TrainTracks.Engine.Board;
 using TrainTracks.Engine.Infrastructure;
+using TrainTracks.Engine.Models;
 using static System.Console;
 
 namespace TrainTracks.Console.Runners;
@@ -138,11 +139,20 @@ public class Remote
 
             for (var retry = 1; retry < 21; retry++)
             {
-                var statusCode = client.SendResult(puzzle.Value.Date, puzzle.Value.Grid, puzzle.Value.Variant);
-
-                if (statusCode != HttpStatusCode.OK)
+                (HttpStatusCode StatusCode, PuzzleSolvedResponse Response) response;
+                
+                try
                 {
-                    WriteLine($"Result not accepted. Status code: {(int) statusCode}.");
+                    response = client.SendResult(puzzle.Value.Date, puzzle.Value.Grid, puzzle.Value.Variant);
+                }
+                catch
+                {
+                    response = (HttpStatusCode.InternalServerError, null);
+                }
+                
+                if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    WriteLine($"Result not accepted. Status code: {(int) response.StatusCode}.");
                     
                     WriteLine();
 
@@ -172,6 +182,17 @@ public class Remote
                 {
                     WriteLine("Result accepted.");
                     
+                    try
+                    {
+                        var userResult = response.Response!.GlobalLeaderboard.Single(p => p.Username.Equals("StevöHJ", StringComparison.InvariantCultureIgnoreCase));
+                    
+                        WriteLine($"Position: {userResult.Position:N0}, score: {userResult.Score:N0}.");
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+
                     break;
                 }
             }

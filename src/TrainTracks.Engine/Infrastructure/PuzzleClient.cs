@@ -83,7 +83,7 @@ public sealed class PuzzleClient : IDisposable
         return (nextPuzzleDate.Value, new Grid(puzzle), puzzle.Source.Variant);
     }
 
-    public HttpStatusCode SendResult(DateOnly date, Grid grid, int variant)
+    public (HttpStatusCode StatusCode, PuzzleSolvedResponse Response) SendResult(DateOnly date, Grid grid, int variant)
     {
         var timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
 
@@ -126,9 +126,11 @@ public sealed class PuzzleClient : IDisposable
         
         var stringContent = new StringContent(content);
         
-        using var response = _client.PostAsync("user/puzzlecomplete", stringContent).Result;
+        using var responseObject = _client.PostAsync("user/puzzlecomplete", stringContent).Result;
         
-        return response.StatusCode;
+        var response = JsonSerializer.Deserialize<PuzzleSolvedResponse>(responseObject.Content.ReadAsStringAsync().Result, _jsonSerializerOptions);
+
+        return (responseObject.StatusCode, response);
     }
 
     private DateOnly? GetOldestIncompletePuzzleDate(Difficulty difficulty)
