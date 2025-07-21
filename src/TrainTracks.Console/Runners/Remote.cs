@@ -181,7 +181,9 @@ public class Remote
                 else
                 {
                     WriteLine("Result accepted.");
-                    
+                                        
+                    WriteLine();
+
                     try
                     {
                         var userResult = response.Response!.GlobalLeaderboard.Single(p => p.Username.Equals("StevöHJ", StringComparison.InvariantCultureIgnoreCase));
