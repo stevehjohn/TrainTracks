@@ -85,6 +85,8 @@ public sealed class PuzzleClient : IDisposable
 
     public (HttpStatusCode StatusCode, PuzzleSolvedResponse Response) SendResult(DateOnly date, Grid grid, int variant)
     {
+        Thread.Sleep(TimeSpan.FromMilliseconds(1_000));
+        
         var timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
 
         var score = 0;
