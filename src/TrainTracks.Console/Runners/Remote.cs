@@ -94,7 +94,7 @@ public class Remote
 
             WriteLine();
             
-            WriteLine($"Solving {options.Difficulty} puzzle for {puzzle.Value.Date:R} ({puzzle.Value.Grid.Width}x{puzzle.Value.Grid.Height}).");
+            WriteLine($"Solving {options.Difficulty.ToString().ToLowerInvariant()} puzzle for {puzzle.Value.Date:R} ({puzzle.Value.Grid.Width}x{puzzle.Value.Grid.Height}).");
 
             WriteLine();
 
