@@ -108,7 +108,7 @@ public sealed class PuzzleClient : IDisposable
             
             dom.LoadHtml(page);
             
-            var puzzles = dom.DocumentNode.SelectNodes("//td[@class='puzzleNotDone']");
+            var puzzles = dom.DocumentNode.SelectNodes("//td[@class='puzzleNotDone'] | //td[@class='puzzleSaveAvailable']");
 
             if (puzzles != null && puzzles.Count > 0)
             {
