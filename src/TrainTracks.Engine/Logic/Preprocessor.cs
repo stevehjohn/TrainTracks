@@ -205,6 +205,14 @@ public class Preprocessor
                     break;
                 }
             }
+
+            for (var y = 0; y < _grid.Height; y++)
+            {
+                if (_grid[0, y] == Piece.Empty)
+                {
+                    _grid[0, y] = Piece.Cross;
+                }
+            }
         }
 
         if (_grid.ColumnConstraints[0] == 2)
@@ -223,6 +231,14 @@ public class Preprocessor
                     _grid[0, y] = Piece.NorthEast;
 
                     _grid[0, y - 1] = Piece.SouthEast;
+                }
+            }
+
+            for (var y = 0; y < _grid.Height; y++)
+            {
+                if (_grid[^1, y] == Piece.Empty)
+                {
+                    _grid[^1, y] = Piece.Cross;
                 }
             }
         }
