@@ -246,5 +246,12 @@ public class Preprocessor
                 }
             }
         }
+
+        if (_grid[^2, ^2] == Piece.SouthEast)
+        {
+            _grid[^1, ^2] = Piece.NorthWest;
+
+            _grid[^2, ^1] = Piece.NorthWest;
+        }
     }
 }
