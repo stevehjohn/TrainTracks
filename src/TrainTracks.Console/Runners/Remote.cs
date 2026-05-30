@@ -44,7 +44,9 @@ public class Remote
             {
                 try
                 {
-                    puzzle = client.GetNextPuzzle(options.Difficulty);
+                    puzzle = options.Year > 0 
+                        ? client.GetPuzzle(options.Difficulty, new DateOnly(options.Year, options.Month, options.Day)) 
+                        : client.GetNextPuzzle(options.Difficulty);
                 }
                 catch
                 {
