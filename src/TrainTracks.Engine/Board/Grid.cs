@@ -56,6 +56,26 @@ public class Grid
         get => this[position.X, position.Y];
         set => this[position.X, position.Y] = value;
     }
+    
+    public Piece this[Index xIndex, Index yIndex]
+    {
+        get
+        {
+            var x = xIndex.IsFromEnd ? Width - xIndex.Value : xIndex.Value;
+            
+            var y = yIndex.IsFromEnd ? Height - yIndex.Value : yIndex.Value;
+            
+            return this[x, y];
+        }
+        set
+        {
+            var x = xIndex.IsFromEnd ? Width - xIndex.Value : xIndex.Value;
+            
+            var y = yIndex.IsFromEnd ? Height - yIndex.Value : yIndex.Value;
+            
+            this[x, y] = value;
+        }
+    }
 
     public int Width { get; private set; }
 
