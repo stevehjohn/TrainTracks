@@ -206,5 +206,25 @@ public class Preprocessor
                 }
             }
         }
+
+        if (_grid.ColumnConstraints[0] == 2)
+        {
+            for (var y = 0; y < _grid.Height; y++)
+            {
+                if (_grid[1, y] == Piece.NorthWest)
+                {
+                    _grid[0, y] = Piece.SouthEast;
+
+                    _grid[0, y + 1] = Piece.NorthEast;
+                }
+
+                if (_grid[1, y] == Piece.SouthWest)
+                {
+                    _grid[0, y] = Piece.NorthEast;
+
+                    _grid[0, y - 1] = Piece.SouthEast;
+                }
+            }
+        }
     }
 }
