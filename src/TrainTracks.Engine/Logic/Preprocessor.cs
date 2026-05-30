@@ -207,67 +207,67 @@ public class Preprocessor
             }
         }
 
-        if (_grid.ColumnConstraints[0] == 2)
-        {
-            for (var y = 0; y < _grid.Height; y++)
-            {
-                if (_grid[1, y] == Piece.NorthWest)
-                {
-                    _grid[0, y] = Piece.SouthEast;
-
-                    _grid[0, y + 1] = Piece.NorthEast;
-                }
-
-                if (_grid[1, y] == Piece.SouthWest)
-                {
-                    _grid[0, y] = Piece.NorthEast;
-
-                    _grid[0, y - 1] = Piece.SouthEast;
-                }
-            }
-
-            for (var y = 0; y < _grid.Height; y++)
-            {
-                if (_grid[^1, y] == Piece.Empty)
-                {
-                    _grid[^1, y] = Piece.Cross;
-                }
-            }
-        }
-
-        if (_grid.ColumnConstraints[^1] == 2)
-        {
-            for (var y = 0; y < _grid.Height; y++)
-            {
-                if (_grid[^2, y] == Piece.NorthEast)
-                {
-                    _grid[^1, y] = Piece.SouthWest;
-
-                    _grid[^1, y + 1] = Piece.NorthWest;
-                }
-
-                if (_grid[^2, y] == Piece.SouthEast)
-                {
-                    _grid[^1, y] = Piece.NorthWest;
-
-                    _grid[^1, y - 1] = Piece.SouthWest;
-                }
-            }
-
-            for (var y = 0; y < _grid.Height; y++)
-            {
-                if (_grid[0, y] == Piece.Empty)
-                {
-                    _grid[0, y] = Piece.Cross;
-                }
-            }
-        }
-
-        if (_grid[^2, ^2] == Piece.SouthEast)
-        {
-            _grid[^1, ^2] = Piece.NorthWest;
-
-            _grid[^2, ^1] = Piece.NorthWest;
-        }
+        // if (_grid.ColumnConstraints[0] == 2)
+        // {
+        //     for (var y = 0; y < _grid.Height; y++)
+        //     {
+        //         if (_grid[1, y] == Piece.NorthWest)
+        //         {
+        //             _grid[0, y] = Piece.SouthEast;
+        //
+        //             _grid[0, y + 1] = Piece.NorthEast;
+        //         }
+        //
+        //         if (_grid[1, y] == Piece.SouthWest)
+        //         {
+        //             _grid[0, y] = Piece.NorthEast;
+        //
+        //             _grid[0, y - 1] = Piece.SouthEast;
+        //         }
+        //     }
+        //
+        //     for (var y = 0; y < _grid.Height; y++)
+        //     {
+        //         if (_grid[^1, y] == Piece.Empty)
+        //         {
+        //             _grid[^1, y] = Piece.Cross;
+        //         }
+        //     }
+        // }
+        //
+        // if (_grid.ColumnConstraints[^1] == 2)
+        // {
+        //     for (var y = 0; y < _grid.Height; y++)
+        //     {
+        //         if (_grid[^2, y] == Piece.NorthEast)
+        //         {
+        //             _grid[^1, y] = Piece.SouthWest;
+        //
+        //             _grid[^1, y + 1] = Piece.NorthWest;
+        //         }
+        //
+        //         if (_grid[^2, y] == Piece.SouthEast)
+        //         {
+        //             _grid[^1, y] = Piece.NorthWest;
+        //
+        //             _grid[^1, y - 1] = Piece.SouthWest;
+        //         }
+        //     }
+        //
+        //     for (var y = 0; y < _grid.Height; y++)
+        //     {
+        //         if (_grid[0, y] == Piece.Empty)
+        //         {
+        //             _grid[0, y] = Piece.Cross;
+        //         }
+        //     }
+        // }
+        //
+        // if (_grid[^2, ^2] == Piece.SouthEast)
+        // {
+        //     _grid[^1, ^2] = Piece.NorthWest;
+        //
+        //     _grid[^2, ^1] = Piece.NorthWest;
+        // }
     }
 }
